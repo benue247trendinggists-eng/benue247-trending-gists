@@ -3,60 +3,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Benue24/7 Trending Gists</title>
+
+  <meta name="description"
+    content="Benue24/7 Trending Gists — Latest news, entertainment, sports, politics and trending stories from Benue and beyond.">
+
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      background: #f4f4f4;
       color: #111;
+      line-height: 1.6;
     }
 
     header {
       background: #111;
       color: white;
-      padding: 25px 20px;
+      padding: 25px 15px;
       text-align: center;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 28px;
+      font-size: 30px;
+      margin-bottom: 8px;
     }
 
     header p {
-      margin: 8px 0 0;
-      color: #ccc;
+      color: #ddd;
+      font-size: 15px;
     }
 
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 20px;
+    nav {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .welcome {
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background: #444;
+    }
+
+    .hero {
       background: white;
-      padding: 30px;
+      margin: 20px auto;
+      padding: 30px 20px;
+      max-width: 1100px;
       border-radius: 12px;
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
-    .welcome h2 {
-      margin-top: 0;
+    .hero h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
     }
 
-    .welcome p {
-      line-height: 1.6;
+    .hero p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 10px 15px 40px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin: 25px 0 15px;
+      border-left: 5px solid #111;
+      padding-left: 10px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .category {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #111;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+
+    .category:hover {
+      transform: translateY(-2px);
+    }
+
+    .stories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .story {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .story-image {
+      height: 170px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .story-content {
+      padding: 15px;
+    }
+
+    .story-content small {
+      color: #777;
+    }
+
+    .story-content h3 {
+      margin: 7px 0;
+      font-size: 18px;
+    }
+
+    .story-content p {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 10px;
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .about {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-top: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     }
 
     footer {
-      margin-top: 50px;
-      padding: 25px;
       background: #111;
       color: white;
       text-align: center;
+      padding: 25px 15px;
+      margin-top: 30px;
+    }
+
+    footer p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .stories {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .stories {
+        grid-template-columns: 1fr;
+      }
+
+      .categories {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
@@ -68,23 +227,205 @@
     <p>News • Entertainment • Sports • Politics • Trending Stories</p>
   </header>
 
-  <main>
-    <section class="welcome">
-      <h2>Welcome to Benue24/7 Trending Gists</h2>
-      <p>
-        Your trusted platform for the latest news, entertainment,
-        sports, politics and trending stories from Benue and beyond.
-      </p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#news">News</a>
+    <a href="#entertainment">Entertainment</a>
+    <a href="#sports">Sports</a>
+    <a href="#politics">Politics</a>
+    <a href="#trending">Trending</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Welcome to Benue24/7 Trending Gists</h2>
+
+    <p>
+      Your trusted platform for the latest news, entertainment,
+      sports, politics and trending stories from Benue and beyond.
+    </p>
+
+    <a class="button" href="#trending">Explore Trending Stories</a>
+  </section>
+
+  <main class="container">
+
+    <h2 class="section-title">Categories</h2>
+
+    <div class="categories">
+      <a class="category" href="#news">📰 Latest News</a>
+      <a class="category" href="#entertainment">🎵 Entertainment</a>
+      <a class="category" href="#sports">⚽ Sports</a>
+      <a class="category" href="#politics">🏛️ Politics</a>
+    </div>
+
+    <h2 class="section-title" id="trending">
+      🔥 Trending Stories
+    </h2>
+
+    <div class="stories">
+
+      <article class="story" id="news">
+        <div class="story-image">
+          News Image
+        </div>
+
+        <div class="story-content">
+          <small>NEWS</small>
+
+          <h3>
+            Latest News From Benue State
+          </h3>
+
+          <p>
+            Stay updated with the latest happenings,
+            breaking news and important stories across Benue.
+          </p>
+
+          <a class="read-more" href="article.html">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <article class="story" id="entertainment">
+        <div class="story-image">
+          Entertainment Image
+        </div>
+
+        <div class="story-content">
+          <small>ENTERTAINMENT</small>
+
+          <h3>
+            Entertainment & Celebrity Gists
+          </h3>
+
+          <p>
+            Get the latest entertainment stories,
+            celebrity updates and trending moments.
+          </p>
+
+          <a class="read-more" href="article.html">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <article class="story" id="sports">
+        <div class="story-image">
+          Sports Image
+        </div>
+
+        <div class="story-content">
+          <small>SPORTS</small>
+
+          <h3>
+            Sports News & Updates
+          </h3>
+
+          <p>
+            Follow the latest football, boxing and
+            other sporting stories from Benue and beyond.
+          </p>
+
+          <a class="read-more" href="article.html">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <article class="story" id="politics">
+        <div class="story-image">
+          Politics Image
+        </div>
+
+        <div class="story-content">
+          <small>POLITICS</small>
+
+          <h3>
+            Politics & Government
+          </h3>
+
+          <p>
+            Follow political developments and important
+            government stories across Benue State.
+          </p>
+
+          <a class="read-more" href="article.html">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="story-image">
+          Trending Image
+        </div>
+
+        <div class="story-content">
+          <small>TRENDING</small>
+
+          <h3>
+            What Everyone Is Talking About
+          </h3>
+
+          <p>
+            Discover the stories currently trending
+            across Benue and Nigeria.
+          </p>
+
+          <a class="read-more" href="article.html">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="story-image">
+          Benue Image
+        </div>
+
+        <div class="story-content">
+          <small>BENUE</small>
+
+          <h3>
+            Benue People & Community
+          </h3>
+
+          <p>
+            Stories, culture, people and events
+            making Benue proud.
+          </p>
+
+          <a class="read-more" href="article.html">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <section class="about">
+      <h2>About Benue24/7 Trending Gists</h2>
 
       <p>
-        Our website is currently being updated. More stories and features
-        will be added soon.
+        Benue24/7 Trending Gists is a digital news and entertainment
+        platform focused on bringing you the latest stories from
+        Benue State, Nigeria and beyond.
+      </p>
+
+      <br>
+
+      <p>
+        We cover breaking news, entertainment, sports, politics,
+        community stories and trending topics.
       </p>
     </section>
+
   </main>
 
   <footer>
-    © 2026 Benue24/7 Trending Gists
+    <p>© 2026 Benue24/7 Trending Gists</p>
+    <p>News • Entertainment • Sports • Politics • Trending Stories</p>
   </footer>
 
 </body>
