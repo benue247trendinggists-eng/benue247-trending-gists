@@ -427,6 +427,32 @@
     <p>© 2026 Benue24/7 Trending Gists</p>
     <p>News • Entertainment • Sports • Politics • Trending Stories</p>
   </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const supabaseUrl = "https://zvhbtaokljksjamkxwon.supabase.co/rest/v1/";
+const supabaseKey = "sb_publishable_YF-IQhjeGymnEDsX-X2BEQ_Ul9-st_m";
+
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+async function loadArticles() {
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .order("published_at", { ascending: false });
+
+  if (error) {
+    console.error("Could not load articles:", error);
+    return;
+  }
+
+  console.log("Articles loaded:", data);
+}
+
+loadArticles();
+</script>
 </body>
 </html>
