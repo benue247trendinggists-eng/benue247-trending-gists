@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music | Benue24/7 Trending Gists</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      color: #ccc;
+    }
+
+    nav {
+      background: #222;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 15px;
+    }
+
+    .title {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .song {
+      background: white;
+      padding: 18px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .song h2 {
+      margin: 0 0 5px;
+    }
+
+    .artist {
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .cover {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .download {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 15px;
+      background: #111;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .empty {
+      background: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      color: #666;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>BENUE24/7 TRENDING GISTS</h1>
+  <p>Music • News • Entertainment • Sports • Trending Stories</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="music.html">Music</a>
+  <a href="article.html">News</a>
+</nav>
+
+<main>
+
+  <section class="title">
+    <h2>🎵 Latest Music</h2>
+    <p>Discover music from Benue artists and beyond.</p>
+  </section>
+
+  <section id="musicList">
+    <div class="empty">Loading music...</div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Benue24/7 Trending Gists</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabaseUrl = "https://zvhbtaokljksjamkxwon.supabase.co/rest/v1/";
+const supabaseKey = "sb_publishable_YF-IQhjeGymnEDsX-X2BEQ_Ul9-st_m";
+
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+async function loadMusic() {
+
+  const musicList = document.getElementById("musicList");
+
+  const { data, error } = await supabase
+    .from("music")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    musicList.innerHTML =
+      '<div class="empty">Unable to load music.</div>';
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    musicList.innerHTML =
+      '<div class="empty">No music uploaded yet. Check back soon!</div>';
+    return;
+  }
+
+  musicList.innerHTML = "";
+
+  data.forEach(song => {
+
+    const cover = song.cover_url
+      ? `<img class="cover" src="${song.cover_url}" alt="${song.title}">`
+      : "";
+
+    const description = song.description
+      ? `<p>${song.description}</p>`
+      : "";
+
+    const genre = song.genre
+      ? `<small>Genre: ${song.genre}</small>`
+      : "";
+
+    musicList.innerHTML += `
+      <article class="song">
+
+        ${cover}
+
+        <h2>${song.title}</h2>
+
+        <div class="artist">
+          🎤 ${song.artist}
+        </div>
+
+        ${genre}
+
+        ${description}
+
+        <audio controls preload="metadata">
+          <source src="${song.audio_url}" type="audio/mpeg">
+          Your browser does not support audio playback.
+        </audio>
+
+        <a
+          class="download"
+          href="${song.audio_url}"
+          download
+        >
+          ⬇️ Download
+        </a>
+
+      </article>
+    `;
+  });
+}
+
+loadMusic();
+</script>
+
+</body>
+</html>
