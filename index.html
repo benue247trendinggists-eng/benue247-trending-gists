@@ -6,8 +6,7 @@
 
   <title>Benue24/7 Trending Gists</title>
 
-  <meta name="description"
-    content="Benue24/7 Trending Gists — Latest news, entertainment, sports, politics and trending stories from Benue and beyond.">
+  <meta name="description" content="Benue24/7 Trending Gists — latest news, trending gists, entertainment, sports, politics and music from Benue and beyond.">
 
   <style>
     * {
@@ -17,204 +16,297 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
       line-height: 1.6;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    /* HEADER */
 
     header {
       background: #111;
       color: white;
-      padding: 25px 15px;
       text-align: center;
+      padding: 35px 15px;
     }
 
     header h1 {
-      font-size: 30px;
+      font-size: 34px;
+      font-weight: 800;
       margin-bottom: 8px;
     }
 
     header p {
-      color: #ddd;
-      font-size: 15px;
+      color: #d1d5db;
+      font-size: 16px;
     }
+
+    /* NAVIGATION */
 
     nav {
       background: #222;
+      color: white;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
+      gap: 5px;
       padding: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 1000;
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 12px;
+      padding: 8px 13px;
+      border-radius: 6px;
+      font-weight: 600;
       font-size: 14px;
-      border-radius: 5px;
     }
 
     nav a:hover {
-      background: #444;
+      background: white;
+      color: #111;
     }
+
+    /* MAIN */
+
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 20px 15px;
+    }
+
+    .breaking {
+      background: #d71920;
+      color: white;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 22px;
+      font-weight: bold;
+    }
+
+    /* HERO */
 
     .hero {
       background: white;
-      margin: 20px auto;
-      padding: 30px 20px;
-      max-width: 1100px;
-      border-radius: 12px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+    }
+
+    .hero-content {
+      padding: 30px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
     .hero h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 30px;
+      margin-bottom: 12px;
     }
 
     .hero p {
-      color: #555;
-      margin-bottom: 20px;
+      color: #6b7280;
+      font-size: 17px;
     }
 
-    .button {
-      display: inline-block;
-      background: #111;
-      color: white;
-      padding: 11px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
+    /* SECTIONS */
+
+    .section {
+      margin-top: 35px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 10px 15px 40px;
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #111;
+      padding-bottom: 8px;
     }
 
-    .section-title {
-      font-size: 24px;
-      margin: 25px 0 15px;
-      border-left: 5px solid #111;
-      padding-left: 10px;
+    .section-heading h2 {
+      font-size: 23px;
     }
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
+    /* ARTICLES */
 
-    .category {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #111;
-      font-weight: bold;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      text-align: center;
-    }
-
-    .category:hover {
-      transform: translateY(-2px);
-    }
-
-    .stories {
+    .articles {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .story {
+    .card {
       background: white;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      transition: .2s;
     }
 
-    .story-image {
-      height: 170px;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 14px;
+    .card:hover {
+      transform: translateY(-3px);
     }
 
-    .story-content {
-      padding: 15px;
+    .card-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      background: #e5e7eb;
     }
 
-    .story-content small {
-      color: #777;
+    .card-body {
+      padding: 16px;
     }
 
-    .story-content h3 {
-      margin: 7px 0;
-      font-size: 18px;
-    }
-
-    .story-content p {
-      color: #555;
-      font-size: 14px;
-    }
-
-    .read-more {
+    .tag {
       display: inline-block;
-      margin-top: 10px;
-      color: #111;
+      background: #111;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
       font-weight: bold;
-      text-decoration: none;
+      text-transform: uppercase;
     }
 
-    .about {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      margin-top: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    .card h3 {
+      font-size: 18px;
+      line-height: 1.35;
+      margin: 9px 0;
     }
+
+    .card p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .date {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    /* EMPTY / LOADING */
+
+    .message {
+      background: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: 12px;
+      color: #6b7280;
+      grid-column: 1 / -1;
+    }
+
+    /* MUSIC */
+
+    .music-box {
+      background: #111;
+      color: white;
+      border-radius: 14px;
+      padding: 30px;
+      margin-top: 35px;
+      text-align: center;
+    }
+
+    .music-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .music-box p {
+      color: #d1d5db;
+      margin-bottom: 18px;
+    }
+
+    .music-button {
+      display: inline-block;
+      background: white;
+      color: #111;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    /* CATEGORY BOXES */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .category-box {
+      background: white;
+      padding: 20px 10px;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .category-box:hover {
+      background: #111;
+      color: white;
+    }
+
+    /* FOOTER */
 
     footer {
       background: #111;
       color: white;
       text-align: center;
-      padding: 25px 15px;
-      margin-top: 30px;
+      padding: 35px 15px;
+      margin-top: 50px;
     }
 
     footer p {
-      color: #ccc;
+      color: #bbb;
+      margin-top: 8px;
       font-size: 14px;
     }
 
-    @media (max-width: 800px) {
-      .stories {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+    /* MOBILE */
 
-    @media (max-width: 550px) {
+    @media (max-width: 750px) {
+
       header h1 {
         font-size: 25px;
       }
 
-      .stories {
+      header p {
+        font-size: 14px;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .hero h2 {
+        font-size: 23px;
+      }
+
+      .articles {
         grid-template-columns: 1fr;
       }
 
       .categories {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-image {
+        height: 210px;
       }
     }
   </style>
@@ -224,236 +316,557 @@
 
   <header>
     <h1>BENUE24/7 TRENDING GISTS</h1>
-    <p>News • Entertainment • Sports • Politics • Trending Stories</p>
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
   </header>
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="music.html">Music</a>
     <a href="#news">News</a>
-   <a href="#entertainment">Entertainment</a>
+    <a href="#trending">Trending</a>
+    <a href="#entertainment">Entertainment</a>
     <a href="#sports">Sports</a>
     <a href="#politics">Politics</a>
-    <a href="#trending">Trending</a>
+    <a href="music.html">Music</a>
   </nav>
 
-  <section class="hero">
-    <h2>Welcome to Benue24/7 Trending Gists</h2>
+  <main>
 
-    <p>
-      Your trusted platform for the latest news, entertainment,
-      sports, politics and trending stories from Benue and beyond.
-    </p>
-
-    <a class="button" href="#trending">Explore Trending Stories</a>
-  </section>
-
-  <main class="container">
-
-    <h2 class="section-title">Categories</h2>
-
-    <div class="categories">
-      <a class="category" href="#news">📰 Latest News</a>
-      <a class="category" href="#entertainment">🎵 Entertainment</a>
-      <a class="category" href="#sports">⚽ Sports</a>
-      <a class="category" href="#politics">🏛️ Politics</a>
+    <div class="breaking">
+      🔴 BREAKING: Welcome to Benue24/7 Trending Gists
     </div>
 
-    <h2 class="section-title" id="trending">
-      🔥 Trending Stories
-    </h2>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Welcome to Benue24/7 Trending Gists</h2>
 
-    <div class="stories">
+        <p>
+          Your trusted home for the latest news, trending stories,
+          entertainment, sports, politics and music from Benue and beyond.
+        </p>
+      </div>
+    </section>
 
-      <article class="story" id="news">
-        <div class="story-image">
-          News Image
+    <!-- NEWS -->
+
+    <section class="section" id="news">
+
+      <div class="section-heading">
+        <h2>📰 Latest News</h2>
+      </div>
+
+      <div id="latestNews" class="articles">
+        <div class="message">
+          Loading latest news...
         </div>
+      </div>
 
-        <div class="story-content">
-          <small>NEWS</small>
+    </section>
 
-          <h3>
-            Latest News From Benue State
-          </h3>
+    <!-- TRENDING -->
 
-          <p>
-            Stay updated with the latest happenings,
-            breaking news and important stories across Benue.
-          </p>
+    <section class="section" id="trending">
 
-          <a class="read-more" href="article.html">
-            Read More →
-          </a>
+      <div class="section-heading">
+        <h2>🔥 Trending Gists</h2>
+      </div>
+
+      <div id="trendingNews" class="articles">
+        <div class="message">
+          Loading trending stories...
         </div>
-      </article>
+      </div>
 
-      <article class="story" id="entertainment">
-        <div class="story-image">
-          Entertainment Image
+    </section>
+
+    <!-- ENTERTAINMENT -->
+
+    <section class="section" id="entertainment">
+
+      <div class="section-heading">
+        <h2>🎬 Entertainment</h2>
+      </div>
+
+      <div id="entertainmentNews" class="articles">
+        <div class="message">
+          Loading entertainment...
         </div>
+      </div>
 
-        <div class="story-content">
-          <small>ENTERTAINMENT</small>
+    </section>
 
-          <h3>
-            Entertainment & Celebrity Gists
-          </h3>
+    <!-- SPORTS -->
 
-          <p>
-            Get the latest entertainment stories,
-            celebrity updates and trending moments.
-          </p>
+    <section class="section" id="sports">
 
-          <a class="read-more" href="article.html">
-            Read More →
-          </a>
+      <div class="section-heading">
+        <h2>⚽ Sports</h2>
+      </div>
+
+      <div id="sportsNews" class="articles">
+        <div class="message">
+          Loading sports...
         </div>
-      </article>
+      </div>
 
-      <article class="story" id="sports">
-        <div class="story-image">
-          Sports Image
+    </section>
+
+    <!-- POLITICS -->
+
+    <section class="section" id="politics">
+
+      <div class="section-heading">
+        <h2>🏛️ Politics</h2>
+      </div>
+
+      <div id="politicsNews" class="articles">
+        <div class="message">
+          Loading politics...
         </div>
+      </div>
 
-        <div class="story-content">
-          <small>SPORTS</small>
+    </section>
 
-          <h3>
-            Sports News & Updates
-          </h3>
+    <!-- CATEGORIES -->
 
-          <p>
-            Follow the latest football, boxing and
-            other sporting stories from Benue and beyond.
-          </p>
+    <section class="section">
 
-          <a class="read-more" href="article.html">
-            Read More →
-          </a>
-        </div>
-      </article>
+      <div class="section-heading">
+        <h2>📂 Categories</h2>
+      </div>
 
-      <article class="story" id="politics">
-        <div class="story-image">
-          Politics Image
-        </div>
+      <div class="categories">
 
-        <div class="story-content">
-          <small>POLITICS</small>
+        <a href="#news" class="category-box">
+          📰 News
+        </a>
 
-          <h3>
-            Politics & Government
-          </h3>
+        <a href="#trending" class="category-box">
+          🔥 Trending
+        </a>
 
-          <p>
-            Follow political developments and important
-            government stories across Benue State.
-          </p>
+        <a href="#entertainment" class="category-box">
+          🎬 Entertainment
+        </a>
 
-          <a class="read-more" href="article.html">
-            Read More →
-          </a>
-        </div>
-      </article>
+        <a href="#sports" class="category-box">
+          ⚽ Sports
+        </a>
 
-      <article class="story">
-        <div class="story-image">
-          Trending Image
-        </div>
+        <a href="#politics" class="category-box">
+          🏛️ Politics
+        </a>
 
-        <div class="story-content">
-          <small>TRENDING</small>
+        <a href="music.html" class="category-box">
+          🎵 Music
+        </a>
 
-          <h3>
-            What Everyone Is Talking About
-          </h3>
+      </div>
 
-          <p>
-            Discover the stories currently trending
-            across Benue and Nigeria.
-          </p>
+    </section>
 
-          <a class="read-more" href="article.html">
-            Read More →
-          </a>
-        </div>
-      </article>
+    <!-- MUSIC -->
 
-      <article class="story">
-        <div class="story-image">
-          Benue Image
-        </div>
+    <section class="music-box">
 
-        <div class="story-content">
-          <small>BENUE</small>
-
-          <h3>
-            Benue People & Community
-          </h3>
-
-          <p>
-            Stories, culture, people and events
-            making Benue proud.
-          </p>
-
-          <a class="read-more" href="article.html">
-            Read More →
-          </a>
-        </div>
-      </article>
-
-    </div>
-
-    <section class="about">
-      <h2>About Benue24/7 Trending Gists</h2>
+      <h2>🎵 Latest Music</h2>
 
       <p>
-        Benue24/7 Trending Gists is a digital news and entertainment
-        platform focused on bringing you the latest stories from
-        Benue State, Nigeria and beyond.
+        Listen to the latest music from Benue artists and beyond.
       </p>
 
-      <br>
+      <a href="music.html" class="music-button">
+        Open Music →
+      </a>
 
-      <p>
-        We cover breaking news, entertainment, sports, politics,
-        community stories and trending topics.
-      </p>
     </section>
 
   </main>
 
   <footer>
-    <p>© 2026 Benue24/7 Trending Gists</p>
-    <p>News • Entertainment • Sports • Politics • Trending Stories</p>
+
+    <h3>BENUE24/7 TRENDING GISTS</h3>
+
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
+
+    <p>
+      © 2026 Benue24/7 Trending Gists
+    </p>
+
   </footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-const supabaseUrl = "https://zvhbtaokljksjamkxwon.supabase.co/rest/v1/";
-const supabaseKey = "sb_publishable_YF-IQhjeGymnEDsX-X2BEQ_Ul9-st_m";
 
-const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);
+  <!-- SUPABASE -->
 
-async function loadArticles() {
-  const { data, error } = await supabase
-    .from("articles")
-    .select("*")
-    .order("published_at", { ascending: false });
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  if (error) {
-    console.error("Could not load articles:", error);
-    return;
-  }
+  <!-- YOUR SUPABASE CONFIG -->
 
-  console.log("Articles loaded:", data);
-}
+  <script src="config.js"></script>
 
-loadArticles();
-</script>
+
+  <script>
+
+    let supabaseClient = null;
+
+    try {
+
+      if (
+        typeof supabaseUrl !== "undefined" &&
+        typeof supabaseKey !== "undefined"
+      ) {
+
+        supabaseClient = window.supabase.createClient(
+          supabaseUrl,
+          supabaseKey
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error("Supabase error:", error);
+
+    }
+
+
+    async function loadArticles() {
+
+      if (!supabaseClient) {
+
+        showMessage(
+          "latestNews",
+          "Supabase connection is not configured."
+        );
+
+        return;
+
+      }
+
+
+      /*
+        We use SELECT * so the homepage does not depend
+        on a particular column list.
+      */
+
+      const result = await supabaseClient
+        .from("article")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(30);
+
+
+      if (result.error) {
+
+        console.error(result.error);
+
+        showMessage(
+          "latestNews",
+          "No news published yet."
+        );
+
+        showMessage(
+          "trendingNews",
+          "No trending stories published yet."
+        );
+
+        showMessage(
+          "entertainmentNews",
+          "No entertainment stories published yet."
+        );
+
+        showMessage(
+          "sportsNews",
+          "No sports stories published yet."
+        );
+
+        showMessage(
+          "politicsNews",
+          "No politics stories published yet."
+        );
+
+        return;
+
+      }
+
+
+      const articles = result.data || [];
+
+
+      if (articles.length === 0) {
+
+        showMessage(
+          "latestNews",
+          "🎉 No news published yet. New stories will appear here."
+        );
+
+        showMessage(
+          "trendingNews",
+          "No trending stories yet."
+        );
+
+        showMessage(
+          "entertainmentNews",
+          "No entertainment stories yet."
+        );
+
+        showMessage(
+          "sportsNews",
+          "No sports stories yet."
+        );
+
+        showMessage(
+          "politicsNews",
+          "No politics stories yet."
+        );
+
+        return;
+
+      }
+
+
+      displayArticles(
+        "latestNews",
+        articles.slice(0, 6)
+      );
+
+
+      displayCategory(
+        "trendingNews",
+        articles,
+        "trending"
+      );
+
+
+      displayCategory(
+        "entertainmentNews",
+        articles,
+        "entertainment"
+      );
+
+
+      displayCategory(
+        "sportsNews",
+        articles,
+        "sports"
+      );
+
+
+      displayCategory(
+        "politicsNews",
+        articles,
+        "politics"
+      );
+
+    }
+
+
+    function displayCategory(
+      elementId,
+      articles,
+      category
+    ) {
+
+      const filtered = articles.filter(function(article) {
+
+        return String(
+          article.category || ""
+        ).toLowerCase() === category;
+
+      });
+
+
+      if (filtered.length === 0) {
+
+        showMessage(
+          elementId,
+          "No " + category + " stories published yet."
+        );
+
+        return;
+
+      }
+
+
+      displayArticles(
+        elementId,
+        filtered.slice(0, 3)
+      );
+
+    }
+
+
+    function displayArticles(
+      elementId,
+      articles
+    ) {
+
+      const container =
+        document.getElementById(elementId);
+
+      if (!container) return;
+
+
+      container.innerHTML = "";
+
+
+      articles.forEach(function(article) {
+
+        const title =
+          article.title ||
+          article.headline ||
+          "Untitled story";
+
+
+        const description =
+          article.description ||
+          article.excerpt ||
+          "";
+
+
+        const image =
+          article.image_url ||
+          article.cover_url ||
+          article.image ||
+          "";
+
+
+        const category =
+          article.category ||
+          "News";
+
+
+        const date =
+          article.created_at
+            ? new Date(
+                article.created_at
+              ).toLocaleDateString()
+            : "";
+
+
+        const slug =
+          article.slug || "";
+
+
+        const link =
+          slug
+            ? "article.html?slug=" +
+              encodeURIComponent(slug)
+            : "article.html";
+
+
+        const imageHTML =
+          image
+            ? `
+              <img
+                class="card-image"
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(title)}"
+              >
+            `
+            : `
+              <div
+                class="card-image"
+                style="
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:45px;
+                "
+              >
+                📰
+              </div>
+            `;
+
+
+        container.innerHTML += `
+
+          <article class="card">
+
+            ${imageHTML}
+
+            <div class="card-body">
+
+              <span class="tag">
+                ${escapeHTML(category)}
+              </span>
+
+              <h3>
+                <a href="${link}">
+                  ${escapeHTML(title)}
+                </a>
+              </h3>
+
+              ${
+                description
+                  ? `
+                    <p>
+                      ${escapeHTML(
+                        description
+                      )}
+                    </p>
+                  `
+                  : ""
+              }
+
+              ${
+                date
+                  ? `
+                    <div class="date">
+                      ${date}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </article>
+
+        `;
+
+      });
+
+    }
+
+
+    function showMessage(
+      elementId,
+      message
+    ) {
+
+      const container =
+        document.getElementById(elementId);
+
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="message">
+          ${message}
+        </div>
+      `;
+
+    }
+
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    loadArticles();
+
+  </script>
+
 </body>
 </html>
