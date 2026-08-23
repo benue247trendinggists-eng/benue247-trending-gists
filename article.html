@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Benue24/7 Trending Gists</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f5f7;
+      color: #111827;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+    }
+
+    header p {
+      font-size: 17px;
+      color: #ccc;
+      margin-top: 12px;
+    }
+
+    nav {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 18px 10px;
+      overflow-x: auto;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .article {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .category {
+      color: #d71920;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 34px;
+      line-height: 1.2;
+      margin: 10px 0 15px;
+    }
+
+    .author {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .cover {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 25px;
+    }
+
+    .story {
+      font-size: 19px;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      background: #111;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .message {
+      background: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 15px;
+      color: #666;
+    }
+
+    footer {
+      margin-top: 50px;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 27px;
+      }
+
+      .story {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>BENUE24/7 TRENDING GISTS</h1>
+  <p>News • Entertainment • Sports • Politics • Trending Stories</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="index.html">News</a>
+  <a href="index.html">Trending</a>
+  <a href="index.html">Entertainment</a>
+  <a href="index.html">Sports</a>
+  <a href="music.html">Music</a>
+</nav>
+
+<div class="container">
+
+  <div id="loading" class="message">
+    Loading story...
+  </div>
+
+  <article id="article" class="article" style="display:none;">
+
+    <div id="category" class="category"></div>
+
+    <h2 id="title"></h2>
+
+    <div id="author" class="author"></div>
+
+    <img id="cover" class="cover" style="display:none;">
+
+    <div id="story" class="story"></div>
+
+    <a href="index.html" class="back">
+      ← Back to Home
+    </a>
+
+  </article>
+
+</div>
+
+<footer>
+  © 2026 Benue24/7 Trending Gists
+</footer>
+
+<script src="config.js"></script>
+
+<script>
+
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get("id");
+
+  const loading = document.getElementById("loading");
+  const articleBox = document.getElementById("article");
+
+  async function loadArticle() {
+
+    if (!articleId) {
+      loading.innerHTML = "No article was selected.";
+      return;
+    }
+
+    try {
+
+      const url =
+        supabaseUrl +
+        "/rest/v1/article?id=eq." +
+        encodeURIComponent(articleId) +
+        "&select=*";
+
+      const response = await fetch(url, {
+        headers: {
+          "apikey": supabaseKey,
+          "Authorization": "Bearer " + supabaseKey
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to load article");
+      }
+
+      const data = await response.json();
+
+      if (!data || data.length === 0) {
+        loading.innerHTML = "This story could not be found.";
+        return;
+      }
+
+      const item = data[0];
+
+      document.getElementById("title").textContent =
+        item.title || "Untitled Story";
+
+      document.getElementById("author").textContent =
+        "By " + (item.author || "Benue24/7 Trending Gists");
+
+      document.getElementById("category").textContent =
+        item.category || "News";
+
+      document.getElementById("story").textContent =
+        item.content || item.story || item.body || "No story content available.";
+
+      if (item.image_url || item.cover_url || item.image) {
+
+        const image =
+          item.image_url ||
+          item.cover_url ||
+          item.image;
+
+        const cover = document.getElementById("cover");
+
+        cover.src = image;
+        cover.style.display = "block";
+      }
+
+      loading.style.display = "none";
+      articleBox.style.display = "block";
+
+      document.title =
+        (item.title || "Story") +
+        " | Benue24/7 Trending Gists";
+
+    } catch (error) {
+
+      console.error(error);
+
+      loading.innerHTML =
+        "Unable to load this story.";
+
+    }
+
+  }
+
+  loadArticle();
+
+</script>
+
+</body>
+</html>
