@@ -515,16 +515,16 @@
     try {
 
       if (
-        typeof supabaseUrl !== "undefined" &&
-        typeof supabaseKey !== "undefined"
-      ) {
+  typeof SUPABASE_URL !== "undefined" &&
+  typeof SUPABASE_ANON_KEY !== "undefined"
+) {
 
-        supabaseClient = window.supabase.createClient(
-          supabaseUrl,
-          supabaseKey
-        );
+  supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
 
-      }
+}
 
     } catch (error) {
 
