@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Publish | Benue24/7 Trending Gists</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Publish | Benue24/7</title>
 
   <style>
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: #f3f4f6;
       color: #111827;
       padding: 20px;
@@ -25,33 +31,52 @@
       margin: auto;
     }
 
-    .header {
+    .top {
       background: #111827;
       color: white;
-      padding: 25px;
+      padding: 22px;
       border-radius: 14px;
       margin-bottom: 20px;
     }
 
-    .header h1 {
-      font-size: 26px;
-      margin-bottom: 7px;
+    .top h1 {
+      margin: 0 0 6px;
     }
 
-    .header p {
+    .top p {
+      margin: 0;
       color: #d1d5db;
-      font-size: 14px;
     }
 
-    .back {
-      display: inline-block;
-      margin-top: 15px;
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .actions a,
+    .logout {
+      flex: 1;
+      padding: 11px;
+      text-align: center;
+      border-radius: 8px;
+      border: none;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .actions a {
+      background: white;
+      color: #111827;
+    }
+
+    .logout {
+      background: #dc2626;
       color: white;
-      text-decoration: underline;
-      font-size: 14px;
     }
 
-    .form-box {
+    .box {
       background: white;
       padding: 25px;
       border-radius: 14px;
@@ -68,18 +93,11 @@
     select,
     textarea {
       width: 100%;
+      padding: 13px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
-      padding: 13px;
       font-size: 15px;
       font-family: inherit;
-      outline: none;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #111827;
     }
 
     textarea {
@@ -87,7 +105,7 @@
       resize: vertical;
     }
 
-    .small-textarea {
+    .small {
       min-height: 100px;
     }
 
@@ -100,33 +118,27 @@
       font-size: 13px;
     }
 
-    button {
+    .publish {
       width: 100%;
+      padding: 15px;
+      margin-top: 25px;
       border: none;
+      border-radius: 8px;
       background: #111827;
       color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 25px;
       font-size: 16px;
       font-weight: bold;
-      cursor: pointer;
     }
 
-    button:hover {
-      background: #374151;
-    }
-
-    button:disabled {
+    .publish:disabled {
       opacity: .6;
-      cursor: not-allowed;
     }
 
     .status {
       display: none;
+      margin-top: 18px;
       padding: 14px;
       border-radius: 8px;
-      margin-top: 18px;
       font-weight: bold;
     }
 
@@ -142,72 +154,100 @@
       color: #991b1b;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-
-      .form-box {
-        padding: 18px;
-      }
-    }
   </style>
+
 </head>
 
 <body>
 
   <div class="container">
 
-    <div class="header">
-      <h1>📰 Publish to Benue24/7</h1>
+    <div class="top">
+
+      <h1>📰 Benue24/7 Publisher</h1>
 
       <p>
-        Publish news, trending gists, entertainment, sports and politics.
+        Publish news, trending gists and stories.
       </p>
 
-      <a class="back" href="index.html">
-        ← Back to website
-      </a>
+      <div class="actions">
+
+        <a href="index.html">
+          🏠 Website
+        </a>
+
+        <button
+          class="logout"
+          id="logoutButton"
+        >
+          Logout
+        </button>
+
+      </div>
+
     </div>
 
-    <div class="form-box">
+
+    <div class="box">
 
       <form id="publishForm">
 
-        <label for="title">
+        <label>
           Headline *
         </label>
 
         <input
           id="title"
           type="text"
-          placeholder="Enter your news headline"
+          placeholder="Enter headline"
           required
         >
 
-        <label for="category">
+
+        <label>
           Category *
         </label>
 
-        <select id="category" required>
-          <option value="news">📰 News</option>
-          <option value="trending">🔥 Trending Gists</option>
-          <option value="entertainment">🎬 Entertainment</option>
-          <option value="sports">⚽ Sports</option>
-          <option value="politics">🏛️ Politics</option>
+        <select
+          id="category"
+          required
+        >
+
+          <option value="news">
+            📰 News
+          </option>
+
+          <option value="trending">
+            🔥 Trending Gists
+          </option>
+
+          <option value="entertainment">
+            🎬 Entertainment
+          </option>
+
+          <option value="sports">
+            ⚽ Sports
+          </option>
+
+          <option value="politics">
+            🏛️ Politics
+          </option>
+
         </select>
 
-        <label for="description">
+
+        <label>
           Short Description
         </label>
 
         <textarea
           id="description"
-          class="small-textarea"
-          placeholder="Write a short summary of the story..."
+          class="small"
+          placeholder="Short summary..."
         ></textarea>
 
-        <label for="image">
+
+        <label>
           Image URL
         </label>
 
@@ -218,21 +258,22 @@
         >
 
         <div class="help">
-          Paste the public URL of the story image.
-          We can add direct image uploading later.
+          Leave empty if the story has no image.
         </div>
 
-        <label for="content">
+
+        <label>
           Full Story *
         </label>
 
         <textarea
           id="content"
-          placeholder="Write the complete story here..."
+          placeholder="Write the complete story..."
           required
         ></textarea>
 
-        <label for="author">
+
+        <label>
           Author
         </label>
 
@@ -242,7 +283,9 @@
           value="Benue24/7 Trending Gists"
         >
 
+
         <button
+          class="publish"
           id="publishButton"
           type="submit"
         >
@@ -251,40 +294,30 @@
 
       </form>
 
-      <div id="status" class="status"></div>
+
+      <div
+        id="status"
+        class="status"
+      ></div>
 
     </div>
 
   </div>
 
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script src="config.js"></script>
 
+
   <script>
 
-    let supabaseClient = null;
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
 
-    try {
-
-      if (
-        typeof SUPABASE_URL !== "undefined" &&
-        typeof SUPABASE_ANON_KEY !== "undefined"
-      ) {
-
-        supabaseClient =
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          );
-
-      }
-
-    } catch (error) {
-
-      console.error(error);
-
-    }
 
     const form =
       document.getElementById("publishForm");
@@ -292,8 +325,50 @@
     const status =
       document.getElementById("status");
 
-    const button =
+    const publishButton =
       document.getElementById("publishButton");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+
+    async function checkLogin() {
+
+      const {
+        data: { session }
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (!session) {
+
+        window.location.href =
+          "login.html";
+
+        return false;
+
+      }
+
+      return true;
+
+    }
+
+
+    checkLogin();
+
+
+    logoutButton.addEventListener(
+      "click",
+      async function() {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href =
+          "login.html";
+
+      }
+    );
+
 
     form.addEventListener(
       "submit",
@@ -301,35 +376,43 @@
 
         event.preventDefault();
 
-        if (!supabaseClient) {
 
-          showStatus(
-            "Supabase is not configured correctly.",
-            "error"
-          );
+        const loggedIn =
+          await checkLogin();
 
-          return;
+        if (!loggedIn) return;
 
-        }
 
         const title =
-          document.getElementById("title").value.trim();
+          document.getElementById("title")
+          .value.trim();
+
 
         const category =
-          document.getElementById("category").value;
+          document.getElementById("category")
+          .value;
+
 
         const description =
-          document.getElementById("description").value.trim();
+          document.getElementById("description")
+          .value.trim();
+
 
         const image =
-          document.getElementById("image").value.trim();
+          document.getElementById("image")
+          .value.trim();
+
 
         const content =
-          document.getElementById("content").value.trim();
+          document.getElementById("content")
+          .value.trim();
+
 
         const author =
-          document.getElementById("author").value.trim()
+          document.getElementById("author")
+          .value.trim()
           || "Benue24/7 Trending Gists";
+
 
         if (!title || !content) {
 
@@ -342,80 +425,83 @@
 
         }
 
-        button.disabled = true;
-        button.textContent = "Publishing...";
+
+        publishButton.disabled = true;
+
+        publishButton.textContent =
+          "Publishing...";
+
 
         const slug =
           createSlug(title);
 
-        const article = {
 
-          title: title,
-
-          slug: slug,
-
-          category: category,
-
-          description: description || null,
-
-          content: content,
-
-          image_url: image || null,
-
-          author: author
-
-        };
-
-        const result =
+        const {
+          error
+        } =
           await supabaseClient
             .from("article")
-            .insert(article)
-            .select()
-            .single();
+            .insert({
 
-        if (result.error) {
+              title: title,
 
-          console.error(result.error);
+              slug: slug,
 
-          if (result.error.code === "23505") {
+              category: category,
 
-            showStatus(
-              "This headline has already been published. Change the headline slightly and try again.",
-              "error"
-            );
+              description:
+                description || null,
 
-          } else {
+              content: content,
 
-            showStatus(
-              "Publishing failed: " +
-              result.error.message,
-              "error"
-            );
+              image_url:
+                image || null,
 
-          }
+              author: author
 
-          button.disabled = false;
-          button.textContent = "🚀 Publish Story";
+            });
+
+
+        if (error) {
+
+          showStatus(
+            "Publishing failed: " +
+            error.message,
+            "error"
+          );
+
+          publishButton.disabled = false;
+
+          publishButton.textContent =
+            "🚀 Publish Story";
 
           return;
 
         }
+
 
         showStatus(
           "✅ Story published successfully!",
           "success"
         );
 
+
         form.reset();
 
-        document.getElementById("author").value =
+
+        document.getElementById("author")
+          .value =
           "Benue24/7 Trending Gists";
 
-        button.disabled = false;
-        button.textContent = "🚀 Publish Story";
+
+        publishButton.disabled = false;
+
+        publishButton.textContent =
+          "🚀 Publish Story";
 
       }
     );
+
 
     function createSlug(text) {
 
@@ -426,13 +512,19 @@
         .replace(/\s+/g, "-")
         .replace(/-+/g, "-")
         .replace(/^-|-$/g, "")
-        + "-" + Date.now();
+        + "-" +
+        Date.now();
 
     }
 
-    function showStatus(message, type) {
 
-      status.textContent = message;
+    function showStatus(
+      message,
+      type
+    ) {
+
+      status.textContent =
+        message;
 
       status.className =
         "status " + type;
@@ -442,4 +534,5 @@
   </script>
 
 </body>
+
 </html>
