@@ -1,144 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Publish | Benue24/7</title>
+  <title>Publish Story | Benue24/7 Trending Gists</title>
 
   <style>
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f3f4f6;
       color: #111827;
-      padding: 20px;
+      line-height: 1.6;
     }
 
-    .container {
-      max-width: 760px;
-      margin: auto;
-    }
-
-    .top {
-      background: #111827;
+    header {
+      background: #111;
       color: white;
-      padding: 22px;
-      border-radius: 14px;
-      margin-bottom: 20px;
-    }
-
-    .top h1 {
-      margin: 0 0 6px;
-    }
-
-    .top p {
-      margin: 0;
-      color: #d1d5db;
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .actions a,
-    .logout {
-      flex: 1;
-      padding: 11px;
+      padding: 25px 15px;
       text-align: center;
-      border-radius: 8px;
-      border: none;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
     }
 
-    .actions a {
-      background: white;
-      color: #111827;
+    header h1 {
+      font-size: 26px;
+      margin-bottom: 5px;
     }
 
-    .logout {
-      background: #dc2626;
+    header p {
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    nav {
+      background: #222;
       color: white;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
     }
 
-    .box {
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 7px 12px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background: white;
+      color: #111;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .publish-box {
       background: white;
       padding: 25px;
-      border-radius: 14px;
+      border-radius: 15px;
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
+    }
+
+    .publish-box h2 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #6b7280;
+      margin-bottom: 25px;
     }
 
     label {
       display: block;
       font-weight: bold;
-      margin: 18px 0 7px;
+      margin-bottom: 7px;
+      margin-top: 18px;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 13px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
-      font-size: 15px;
+      padding: 13px;
+      font-size: 16px;
       font-family: inherit;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #111;
     }
 
     textarea {
-      min-height: 220px;
+      min-height: 180px;
       resize: vertical;
     }
 
-    .small {
-      min-height: 100px;
+    #description {
+      min-height: 110px;
     }
 
-    .help {
-      background: #f9fafb;
-      padding: 12px;
-      border-radius: 8px;
-      margin-top: 8px;
+    .hint {
+      font-size: 12px;
       color: #6b7280;
-      font-size: 13px;
+      margin-top: 5px;
     }
 
-    .publish {
+    .publish-button {
       width: 100%;
-      padding: 15px;
       margin-top: 25px;
       border: none;
-      border-radius: 8px;
-      background: #111827;
+      background: #111;
       color: white;
-      font-size: 16px;
+      padding: 15px;
+      border-radius: 9px;
+      font-size: 17px;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    .publish:disabled {
+    .publish-button:hover {
+      background: #333;
+    }
+
+    .publish-button:disabled {
       opacity: .6;
+      cursor: not-allowed;
     }
 
-    .status {
-      display: none;
-      margin-top: 18px;
-      padding: 14px;
+    .message {
+      margin-top: 20px;
+      padding: 15px;
       border-radius: 8px;
+      display: none;
       font-weight: bold;
     }
 
@@ -154,156 +168,259 @@
       color: #991b1b;
     }
 
-  </style>
+    .preview {
+      margin-top: 25px;
+      padding: 18px;
+      background: #f9fafb;
+      border-radius: 10px;
+      display: none;
+    }
 
+    .preview h3 {
+      margin-bottom: 10px;
+    }
+
+    .preview img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 50px;
+    }
+
+    footer p {
+      color: #bbb;
+      margin-top: 7px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+
+      .publish-box {
+        padding: 18px;
+      }
+
+      .publish-box h2 {
+        font-size: 23px;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <header>
 
-    <div class="top">
+    <h1>BENUE24/7 TRENDING GISTS</h1>
 
-      <h1>📰 Benue24/7 Publisher</h1>
+    <p>
+      Publish News • Trending Gists • Entertainment • Sports • Politics
+    </p>
 
-      <p>
-        Publish news, trending gists and stories.
+  </header>
+
+
+  <nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="index.html#news">News</a>
+
+    <a href="index.html#trending">Trending</a>
+
+    <a href="index.html#entertainment">Entertainment</a>
+
+    <a href="index.html#sports">Sports</a>
+
+    <a href="index.html#politics">Politics</a>
+
+    <a href="music.html">Music</a>
+
+  </nav>
+
+
+  <main>
+
+    <div class="publish-box">
+
+      <h2>📝 Publish New Story</h2>
+
+      <p class="intro">
+        Add a new story to Benue24/7 Trending Gists.
       </p>
 
-      <div class="actions">
 
-        <a href="index.html">
-          🏠 Website
-        </a>
+      <!-- TITLE -->
 
-        <button
-          class="logout"
-          id="logoutButton"
-        >
-          Logout
-        </button>
+      <label for="title">
+        Story Title *
+      </label>
+
+      <input
+        id="title"
+        type="text"
+        placeholder="Enter the headline of your story"
+        required
+      >
+
+
+      <!-- CATEGORY -->
+
+      <label for="category">
+        Category *
+      </label>
+
+      <select id="category">
+
+        <option value="news">
+          📰 News
+        </option>
+
+        <option value="trending">
+          🔥 Trending
+        </option>
+
+        <option value="entertainment">
+          🎬 Entertainment
+        </option>
+
+        <option value="sports">
+          ⚽ Sports
+        </option>
+
+        <option value="politics">
+          🏛️ Politics
+        </option>
+
+      </select>
+
+
+      <!-- DESCRIPTION -->
+
+      <label for="description">
+        Short Description
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Write a short summary of the story..."
+      ></textarea>
+
+
+      <!-- IMAGE -->
+
+      <label for="image_url">
+        Story Image URL
+      </label>
+
+      <input
+        id="image_url"
+        type="url"
+        placeholder="https://example.com/image.jpg"
+      >
+
+      <div class="hint">
+        Paste the public URL of the story image.
+      </div>
+
+
+      <!-- FULL STORY -->
+
+      <label for="story">
+        Full Story *
+      </label>
+
+      <textarea
+        id="story"
+        placeholder="Write the complete story here..."
+        required
+      ></textarea>
+
+
+      <!-- AUTHOR -->
+
+      <label for="author">
+        Author
+      </label>
+
+      <input
+        id="author"
+        type="text"
+        value="Benue24/7 Trending Gists"
+      >
+
+
+      <!-- PUBLISH -->
+
+      <button
+        id="publishButton"
+        class="publish-button"
+        onclick="publishStory()"
+      >
+        🚀 Publish Story
+      </button>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+
+      <!-- PREVIEW -->
+
+      <div
+        id="preview"
+        class="preview"
+      >
+
+        <h3>
+          ✅ Story Published Successfully
+        </h3>
+
+        <p>
+          Your story has been added to the website.
+        </p>
+
+        <p style="margin-top:10px;">
+          Go to the homepage and refresh it to see the story.
+        </p>
 
       </div>
 
     </div>
 
-
-    <div class="box">
-
-      <form id="publishForm">
-
-        <label>
-          Headline *
-        </label>
-
-        <input
-          id="title"
-          type="text"
-          placeholder="Enter headline"
-          required
-        >
+  </main>
 
 
-        <label>
-          Category *
-        </label>
+  <footer>
 
-        <select
-          id="category"
-          required
-        >
+    <h3>
+      BENUE24/7 TRENDING GISTS
+    </h3>
 
-          <option value="news">
-            📰 News
-          </option>
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
 
-          <option value="trending">
-            🔥 Trending Gists
-          </option>
+    <p>
+      © 2026 Benue24/7 Trending Gists
+    </p>
 
-          <option value="entertainment">
-            🎬 Entertainment
-          </option>
-
-          <option value="sports">
-            ⚽ Sports
-          </option>
-
-          <option value="politics">
-            🏛️ Politics
-          </option>
-
-        </select>
+  </footer>
 
 
-        <label>
-          Short Description
-        </label>
-
-        <textarea
-          id="description"
-          class="small"
-          placeholder="Short summary..."
-        ></textarea>
-
-
-        <label>
-          Image URL
-        </label>
-
-        <input
-          id="image"
-          type="url"
-          placeholder="https://example.com/image.jpg"
-        >
-
-        <div class="help">
-          Leave empty if the story has no image.
-        </div>
-
-
-        <label>
-          Full Story *
-        </label>
-
-        <textarea
-          id="content"
-          placeholder="Write the complete story..."
-          required
-        ></textarea>
-
-
-        <label>
-          Author
-        </label>
-
-        <input
-          id="author"
-          type="text"
-          value="Benue24/7 Trending Gists"
-        >
-
-
-        <button
-          class="publish"
-          id="publishButton"
-          type="submit"
-        >
-          🚀 Publish Story
-        </button>
-
-      </form>
-
-
-      <div
-        id="status"
-        class="status"
-      ></div>
-
-    </div>
-
-  </div>
-
+  <!-- SUPABASE -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -312,227 +429,332 @@
 
   <script>
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
+    let supabaseClient = null;
 
 
-    const form =
-      document.getElementById("publishForm");
+    /* CONNECT TO SUPABASE */
 
-    const status =
-      document.getElementById("status");
+    try {
 
-    const publishButton =
-      document.getElementById("publishButton");
+      if (
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
 
-    const logoutButton =
-      document.getElementById("logoutButton");
-
-
-    async function checkLogin() {
-
-      const {
-        data: { session }
-      } =
-        await supabaseClient.auth.getSession();
-
-
-      if (!session) {
-
-        window.location.href =
-          "login.html";
-
-        return false;
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
 
       }
 
-      return true;
+    } catch (error) {
+
+      console.error(
+        "Supabase connection error:",
+        error
+      );
 
     }
 
 
-    checkLogin();
-
-
-    logoutButton.addEventListener(
-      "click",
-      async function() {
-
-        await supabaseClient.auth.signOut();
-
-        window.location.href =
-          "login.html";
-
-      }
-    );
-
-
-    form.addEventListener(
-      "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-
-        const loggedIn =
-          await checkLogin();
-
-        if (!loggedIn) return;
-
-
-        const title =
-          document.getElementById("title")
-          .value.trim();
-
-
-        const category =
-          document.getElementById("category")
-          .value;
-
-
-        const description =
-          document.getElementById("description")
-          .value.trim();
-
-
-        const image =
-          document.getElementById("image")
-          .value.trim();
-
-
-        const content =
-          document.getElementById("content")
-          .value.trim();
-
-
-        const author =
-          document.getElementById("author")
-          .value.trim()
-          || "Benue24/7 Trending Gists";
-
-
-        if (!title || !content) {
-
-          showStatus(
-            "Please enter a headline and full story.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        publishButton.disabled = true;
-
-        publishButton.textContent =
-          "Publishing...";
-
-
-        const slug =
-          createSlug(title);
-
-
-        const {
-          error
-        } =
-          await supabaseClient
-            .from("article")
-            .insert({
-
-              title: title,
-
-              slug: slug,
-
-              category: category,
-
-              description:
-                description || null,
-
-              content: content,
-
-              image_url:
-                image || null,
-
-              author: author
-
-            });
-
-
-        if (error) {
-
-          showStatus(
-            "Publishing failed: " +
-            error.message,
-            "error"
-          );
-
-          publishButton.disabled = false;
-
-          publishButton.textContent =
-            "🚀 Publish Story";
-
-          return;
-
-        }
-
-
-        showStatus(
-          "✅ Story published successfully!",
-          "success"
-        );
-
-
-        form.reset();
-
-
-        document.getElementById("author")
-          .value =
-          "Benue24/7 Trending Gists";
-
-
-        publishButton.disabled = false;
-
-        publishButton.textContent =
-          "🚀 Publish Story";
-
-      }
-    );
-
+    /* CREATE SLUG */
 
     function createSlug(text) {
 
       return text
+
         .toLowerCase()
+
         .trim()
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "")
-        + "-" +
+
+        .replace(
+          /[^a-z0-9\s-]/g,
+          ""
+        )
+
+        .replace(
+          /\s+/g,
+          "-"
+        )
+
+        .replace(
+          /-+/g,
+          "-"
+        )
+
+        +
+        "-" +
         Date.now();
 
     }
 
 
-    function showStatus(
-      message,
+    /* ESCAPE HTML */
+
+    function escapeHTML(value) {
+
+      return String(value)
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* SHOW MESSAGE */
+
+    function showMessage(
+      text,
       type
     ) {
 
-      status.textContent =
-        message;
+      const box =
+        document.getElementById(
+          "message"
+        );
 
-      status.className =
-        "status " + type;
+      box.textContent = text;
+
+      box.className =
+        "message " + type;
+
+    }
+
+
+    /* PUBLISH STORY */
+
+    async function publishStory() {
+
+      const button =
+        document.getElementById(
+          "publishButton"
+        );
+
+
+      const title =
+        document.getElementById(
+          "title"
+        ).value.trim();
+
+
+      const category =
+        document.getElementById(
+          "category"
+        ).value;
+
+
+      const description =
+        document.getElementById(
+          "description"
+        ).value.trim();
+
+
+      const image_url =
+        document.getElementById(
+          "image_url"
+        ).value.trim();
+
+
+      const story =
+        document.getElementById(
+          "story"
+        ).value.trim();
+
+
+      const author =
+        document.getElementById(
+          "author"
+        ).value.trim();
+
+
+      /* CHECK REQUIRED FIELDS */
+
+      if (!title) {
+
+        showMessage(
+          "Please enter a story title.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (!story) {
+
+        showMessage(
+          "Please enter the full story.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (!supabaseClient) {
+
+        showMessage(
+          "Supabase connection is not configured.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /* DISABLE BUTTON */
+
+      button.disabled = true;
+
+      button.textContent =
+        "Publishing...";
+
+
+      showMessage(
+        "Publishing your story...",
+        "success"
+      );
+
+
+      /* CREATE SLUG */
+
+      const slug =
+        createSlug(title);
+
+
+      /* DATA */
+
+      const article = {
+
+        title: title,
+
+        slug: slug,
+
+        description:
+          description,
+
+        story: story,
+
+        image_url:
+          image_url || null,
+
+        category:
+          category,
+
+        author:
+          author ||
+          "Benue24/7 Trending Gists",
+
+        created_at:
+          new Date().toISOString()
+
+      };
+
+
+      /* SEND TO SUPABASE */
+
+      const result =
+        await supabaseClient
+          .from("article")
+          .insert([article]);
+
+
+      /* ERROR */
+
+      if (result.error) {
+
+        console.error(
+          "Publishing error:",
+          result.error
+        );
+
+
+        showMessage(
+          "Publishing failed: " +
+          result.error.message,
+          "error"
+        );
+
+
+        button.disabled = false;
+
+        button.textContent =
+          "🚀 Publish Story";
+
+        return;
+
+      }
+
+
+      /* SUCCESS */
+
+      showMessage(
+        "✅ Story published successfully!",
+        "success"
+      );
+
+
+      document.getElementById(
+        "preview"
+      ).style.display = "block";
+
+
+      /* CLEAR FORM */
+
+      document.getElementById(
+        "title"
+      ).value = "";
+
+      document.getElementById(
+        "description"
+      ).value = "";
+
+      document.getElementById(
+        "image_url"
+      ).value = "";
+
+      document.getElementById(
+        "story"
+      ).value = "";
+
+
+      /* BUTTON */
+
+      button.disabled = false;
+
+      button.textContent =
+        "🚀 Publish Story";
 
     }
 
   </script>
 
 </body>
-
 </html>
