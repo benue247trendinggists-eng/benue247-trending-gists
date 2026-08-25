@@ -1,503 +1,863 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Music | Benue24/7 Trending Gists</title>
 
+  <meta
+    name="description"
+    content="Listen to music from Benue artists and beyond on Benue24/7 Trending Gists."
+  >
+
   <style>
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #111;
+      color: white;
+      padding: 25px 15px;
+    }
+
+    .header-inner {
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand h1 {
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .brand p {
+      color: #d1d5db;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .publish-button {
+      background: #e11d48;
+      color: white;
+      padding: 11px 17px;
+      border-radius: 7px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      background: #222;
+      color: white;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 11px;
+      overflow-x: auto;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: white;
       color: #111;
     }
 
-    header {
+    /* MAIN */
+
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 25px 15px 60px;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .page-title h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .page-title p {
+      color: #6b7280;
+    }
+
+    /* MUSIC LIST */
+
+    #musicList {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .music-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .music-cover {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+
+    .music-cover-placeholder {
+      width: 100%;
+      height: 280px;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 75px;
+    }
+
+    .music-info {
+      padding: 22px;
+    }
+
+    .music-tag {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 5px 9px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .music-info h2 {
+      font-size: 24px;
+      margin: 10px 0 3px;
+    }
+
+    .music-info h3 {
+      color: #6b7280;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .music-info p {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .audio-player {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .music-actions {
+      margin-top: 15px;
+    }
+
+    .download-button {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 7px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .download-button:hover {
+      background: #333;
+    }
+
+    .no-audio {
+      background: #f3f4f6;
+      color: #6b7280;
+      padding: 12px;
+      border-radius: 7px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .music-date {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-top: 15px;
+    }
+
+    /* MESSAGE */
+
+    .message {
+      background: white;
+      padding: 35px 20px;
+      border-radius: 12px;
+      text-align: center;
+      color: #6b7280;
+      grid-column: 1 / -1;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    }
+
+    /* FOOTER */
+
+    footer {
       background: #111;
       color: white;
       text-align: center;
       padding: 35px 15px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 30px;
-    }
-
-    header p {
-      color: #ccc;
-      font-size: 17px;
-      line-height: 1.5;
-    }
-
-    nav {
-      background: #222;
-      text-align: center;
-      padding: 15px 10px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-size: 17px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 15px;
-    }
-
-    .intro {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      margin-bottom: 25px;
-    }
-
-    .intro h2 {
-      font-size: 32px;
-      margin: 0 0 15px;
-    }
-
-    .intro p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    .song {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
-
-    .cover {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-
-    .song h2 {
-      margin: 5px 0;
-      font-size: 25px;
-    }
-
-    .artist {
-      color: #555;
-      font-size: 17px;
-      margin: 8px 0;
-    }
-
-    .genre {
-      color: #777;
+    footer p {
+      color: #bbb;
+      margin-top: 8px;
       font-size: 14px;
-      margin-bottom: 12px;
     }
 
-    .description {
-      line-height: 1.6;
-      color: #444;
+    /* MOBILE */
+
+    @media (max-width: 750px) {
+
+      .header-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .brand h1 {
+        font-size: 25px;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      #musicList {
+        grid-template-columns: 1fr;
+      }
+
+      .page-title h2 {
+        font-size: 27px;
+      }
+
+      .music-cover,
+      .music-cover-placeholder {
+        height: 300px;
+      }
+
     }
 
-    audio {
-      width: 100%;
-      margin-top: 15px;
-    }
-
-    .download {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 18px;
-      background: #111;
-      color: white;
-      text-decoration: none;
-      border-radius: 7px;
-    }
-
-    .empty,
-    .error {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 15px;
-      text-align: center;
-      color: #666;
-    }
-
-    .error {
-      color: #b00020;
-    }
-
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-      margin-top: 50px;
-    }
   </style>
+
 </head>
 
 <body>
 
-<header>
-  <h1>BENUE24/7 TRENDING GISTS</h1>
-  <p>Music • News • Entertainment • Sports • Trending Stories</p>
-</header>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="music.html">Music</a>
-  <a href="article.html">News</a>
-</nav>
+  <!-- HEADER -->
 
-<main>
+  <header>
 
-  <section class="intro">
-    <h2>🎵 Latest Music</h2>
-    <p>
-      Discover music from Benue artists and beyond.
-    </p>
-  </section>
+    <div class="header-inner">
 
-  <section id="musicList">
-    <div class="empty">
-      Loading music...
-    </div>
-  </section>
+      <div class="brand">
 
-</main>
+        <h1>
+          BENUE24/7 TRENDING GISTS
+        </h1>
 
-<footer>
-  <p>© 2026 Benue24/7 Trending Gists</p>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script><script>
+        <p>
+          Your home for Benue news, entertainment, sports, politics & music
+        </p>
 
-let supabaseClient = null;
-
-/* SUPABASE CONNECTION */
-
-try {
-
-  if (
-    typeof SUPABASE_URL !== "undefined" &&
-    typeof SUPABASE_ANON_KEY !== "undefined"
-  ) {
-
-    supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
-
-  }
-
-} catch (error) {
-
-  console.error(
-    "Supabase error:",
-    error
-  );
-
-}
-
-
-/* ESCAPE HTML */
-
-function escapeHTML(value) {
-
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* LOAD MUSIC */
-
-async function loadMusic() {
-
-  const container =
-    document.getElementById(
-      "musicList"
-    );
-
-  if (!container) return;
-
-
-  container.innerHTML = `
-    <div class="message">
-      Loading music...
-    </div>
-  `;
-
-
-  if (!supabaseClient) {
-
-    container.innerHTML = `
-      <div class="message">
-        Supabase connection is not configured.
       </div>
-    `;
 
-    return;
+      <a
+        href="publish.html"
+        class="publish-button"
+      >
+        ✍️ Publish Story
+      </a>
 
-  }
+    </div>
 
-
-  try {
-
-    const result =
-      await supabaseClient
-        .from("music")
-        .select("*")
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        )
-        .limit(100);
+  </header>
 
 
-    if (result.error) {
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a
+      href="music.html"
+      class="active"
+    >
+      🎵 Music
+    </a>
+
+    <a href="index.html#news">
+      News
+    </a>
+
+    <a href="index.html#trending">
+      Trending
+    </a>
+
+    <a href="index.html#entertainment">
+      Entertainment
+    </a>
+
+    <a href="index.html#sports">
+      Sports
+    </a>
+
+    <a href="index.html#politics">
+      Politics
+    </a>
+
+  </nav>
+
+
+  <!-- MAIN -->
+
+  <main>
+
+    <section class="page-title">
+
+      <h2>
+        🎵 Latest Music
+      </h2>
+
+      <p>
+        Discover music from Benue artists and beyond.
+      </p>
+
+    </section>
+
+
+    <!-- MUSIC WILL APPEAR HERE -->
+
+    <div id="musicList">
+
+      <div class="message">
+        Loading music...
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <h3>
+      BENUE24/7 TRENDING GISTS
+    </h3>
+
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
+
+    <p>
+      © 2026 Benue24/7 Trending Gists
+    </p>
+
+  </footer>
+
+
+  <!-- SUPABASE LIBRARY -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <!-- SUPABASE CONFIG -->
+
+  <script src="config.js"></script>
+
+
+  <!-- MUSIC JAVASCRIPT -->
+
+  <script>
+
+    let supabaseClient = null;
+
+
+    /*
+      CONNECT TO SUPABASE
+
+      config.js contains:
+      SUPABASE_URL
+      SUPABASE_ANON_KEY
+    */
+
+    try {
+
+      if (
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
+
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
+
+      } else {
+
+        console.error(
+          "Supabase configuration variables are missing."
+        );
+
+      }
+
+    } catch (error) {
 
       console.error(
-        "Music error:",
-        result.error
+        "Supabase connection error:",
+        error
       );
 
-      container.innerHTML = `
-        <div class="message">
-          Unable to load music.
-        </div>
-      `;
+    }
 
-      return;
+
+    /* ESCAPE HTML */
+
+    function escapeHTML(value) {
+
+      return String(value || "")
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
 
     }
 
 
-    const songs =
-      result.data || [];
+    /* LOAD MUSIC */
+
+    async function loadMusic() {
+
+      const container =
+        document.getElementById(
+          "musicList"
+        );
 
 
-    if (songs.length === 0) {
+      if (!container) {
 
-      container.innerHTML = `
-        <div class="message">
-          🎵 No music uploaded yet.
-        </div>
-      `;
+        return;
 
-      return;
-
-    }
+      }
 
 
-    container.innerHTML = "";
+      if (!supabaseClient) {
 
+        container.innerHTML = `
 
-    songs.forEach(
-      function(song) {
+          <div class="message">
 
-        const title =
-          song.title ||
-          "Untitled Song";
+            ⚠️ Supabase connection is not configured.
 
-
-        const artist =
-          song.artist ||
-          "Unknown Artist";
-
-
-        const genre =
-          song.genre ||
-          "Music";
-
-
-        const description =
-          song.description ||
-          "";
-
-
-        const audio =
-          song.audio_url ||
-          "";
-
-
-        const cover =
-          song.cover_url ||
-          "";
-
-
-        const date =
-          song.created_at
-            ? new Date(
-                song.created_at
-              ).toLocaleDateString()
-            : "";
-
-
-        const coverHTML =
-          cover
-            ? `
-              <img
-                src="${escapeHTML(cover)}"
-                class="music-cover"
-                alt="${escapeHTML(title)}"
-                loading="lazy"
-              >
-            `
-            : `
-              <div class="music-cover-placeholder">
-                🎵
-              </div>
-            `;
-
-
-        const audioHTML =
-          audio
-            ? `
-              <audio
-                controls
-                preload="metadata"
-                class="audio-player"
-              >
-                <source
-                  src="${escapeHTML(audio)}"
-                >
-                Your browser does not support audio.
-              </audio>
-            `
-            : `
-              <div class="no-audio">
-                Audio unavailable
-              </div>
-            `;
-
-
-        const downloadHTML =
-          audio
-            ? `
-              <a
-                href="${escapeHTML(audio)}"
-                class="download-button"
-                download
-                target="_blank"
-                rel="noopener"
-              >
-                ⬇️ Download
-              </a>
-            `
-            : "";
-
-
-        container.innerHTML += `
-
-          <article class="music-card">
-
-            ${coverHTML}
-
-            <div class="music-info">
-
-              <span class="music-tag">
-                ${escapeHTML(genre)}
-              </span>
-
-              <h2>
-                ${escapeHTML(title)}
-              </h2>
-
-              <h3>
-                🎤 ${escapeHTML(artist)}
-              </h3>
-
-              ${
-                description
-                  ? `
-                    <p>
-                      ${escapeHTML(
-                        description
-                      )}
-                    </p>
-                  `
-                  : ""
-              }
-
-              ${audioHTML}
-
-              <div class="music-actions">
-
-                ${downloadHTML}
-
-              </div>
-
-              ${
-                date
-                  ? `
-                    <div class="music-date">
-                      Uploaded ${escapeHTML(date)}
-                    </div>
-                  `
-                  : ""
-              }
-
-            </div>
-
-          </article>
+          </div>
 
         `;
 
+        return;
+
       }
-    );
 
 
-    /* ONLY ONE SONG PLAYS AT A TIME */
+      container.innerHTML = `
 
-    const players =
-      document.querySelectorAll(
-        ".audio-player"
-      );
+        <div class="message">
+
+          🎵 Loading music...
+
+        </div>
+
+      `;
 
 
-    players.forEach(
-      function(player) {
+      try {
 
-        player.addEventListener(
-          "play",
-          function() {
+        const result =
+          await supabaseClient
 
-            players.forEach(
-              function(otherPlayer) {
+            .from("music")
 
-                if (
-                  otherPlayer !== player
-                ) {
+            .select("*")
 
-                  otherPlayer.pause();
+            .order(
+              "created_at",
+              {
+                ascending: false
+              }
+            )
 
-                }
+            .limit(100);
+
+
+        if (result.error) {
+
+          console.error(
+            "Music database error:",
+            result.error
+          );
+
+
+          container.innerHTML = `
+
+            <div class="message">
+
+              ⚠️ Unable to load music.
+
+              <br><br>
+
+              Please try refreshing the page.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        const songs =
+          result.data || [];
+
+
+        console.log(
+          "Music loaded:",
+          songs
+        );
+
+
+        if (songs.length === 0) {
+
+          container.innerHTML = `
+
+            <div class="message">
+
+              🎵 No music uploaded yet.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        container.innerHTML = "";
+
+
+        songs.forEach(
+          function(song) {
+
+
+            const title =
+              song.title ||
+              "Untitled Song";
+
+
+            const artist =
+              song.artist ||
+              "Unknown Artist";
+
+
+            const genre =
+              song.genre ||
+              "Music";
+
+
+            const description =
+              song.description ||
+              "";
+
+
+            const audio =
+              song.audio_url ||
+              "";
+
+
+            const cover =
+              song.cover_url ||
+              "";
+
+
+            const date =
+              song.created_at
+                ? new Date(
+                    song.created_at
+                  ).toLocaleDateString()
+                : "";
+
+
+            /* COVER */
+
+            const coverHTML =
+              cover
+
+                ? `
+
+                  <img
+                    src="${escapeHTML(cover)}"
+                    class="music-cover"
+                    alt="${escapeHTML(title)}"
+                    loading="lazy"
+                  >
+
+                `
+
+                : `
+
+                  <div class="music-cover-placeholder">
+
+                    🎵
+
+                  </div>
+
+                `;
+
+
+            /* AUDIO */
+
+            const audioHTML =
+              audio
+
+                ? `
+
+                  <audio
+                    controls
+                    preload="metadata"
+                    class="audio-player"
+                  >
+
+                    <source
+                      src="${escapeHTML(audio)}"
+                      type="audio/mpeg"
+                    >
+
+                    Your browser does not support audio.
+
+                  </audio>
+
+                `
+
+                : `
+
+                  <div class="no-audio">
+
+                    Audio unavailable
+
+                  </div>
+
+                `;
+
+
+            /* DOWNLOAD */
+
+            const downloadHTML =
+              audio
+
+                ? `
+
+                  <div class="music-actions">
+
+                    <a
+                      href="${escapeHTML(audio)}"
+                      class="download-button"
+                      download
+                      target="_blank"
+                      rel="noopener"
+                    >
+
+                      ⬇️ Download Song
+
+                    </a>
+
+                  </div>
+
+                `
+
+                : "";
+
+
+            container.innerHTML += `
+
+              <article class="music-card">
+
+
+                ${coverHTML}
+
+
+                <div class="music-info">
+
+
+                  <span class="music-tag">
+
+                    ${escapeHTML(genre)}
+
+                  </span>
+
+
+                  <h2>
+
+                    ${escapeHTML(title)}
+
+                  </h2>
+
+
+                  <h3>
+
+                    🎤 ${escapeHTML(artist)}
+
+                  </h3>
+
+
+                  ${
+                    description
+
+                      ? `
+
+                        <p>
+
+                          ${escapeHTML(
+                            description
+                          )}
+
+                        </p>
+
+                      `
+
+                      : ""
+
+                  }
+
+
+                  ${audioHTML}
+
+
+                  ${downloadHTML}
+
+
+                  ${
+                    date
+
+                      ? `
+
+                        <div class="music-date">
+
+                          Uploaded
+                          ${escapeHTML(date)}
+
+                        </div>
+
+                      `
+
+                      : ""
+
+                  }
+
+
+                </div>
+
+
+              </article>
+
+            `;
+
+          }
+        );
+
+
+        /*
+          PREVENT TWO SONGS
+          FROM PLAYING AT ONCE
+        */
+
+        const players =
+          document.querySelectorAll(
+            ".audio-player"
+          );
+
+
+        players.forEach(
+          function(player) {
+
+            player.addEventListener(
+              "play",
+              function() {
+
+                players.forEach(
+                  function(otherPlayer) {
+
+                    if (
+                      otherPlayer !== player
+                    ) {
+
+                      otherPlayer.pause();
+
+                    }
+
+                  }
+                );
 
               }
             );
@@ -505,32 +865,35 @@ async function loadMusic() {
           }
         );
 
+
+      } catch (error) {
+
+        console.error(
+          "Music loading error:",
+          error
+        );
+
+
+        container.innerHTML = `
+
+          <div class="message">
+
+            ⚠️ Unable to load music.
+
+          </div>
+
+        `;
+
       }
-    );
 
-  } catch (error) {
-
-    console.error(
-      "Music loading error:",
-      error
-    );
-
-    container.innerHTML = `
-      <div class="message">
-        Unable to load music.
-      </div>
-    `;
-
-  }
-
-}
+    }
 
 
-/* START */
+    /* START MUSIC */
 
-loadMusic();
+    loadMusic();
 
-</script>
+  </script>
 
 </body>
 </html>
