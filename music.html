@@ -192,129 +192,345 @@
 
 <script>
 
-  /*
-    IMPORTANT:
-    Replace the two values below with your own Supabase values.
+let supabaseClient = null;
 
-    Do NOT use the service_role/secret key.
-    Use your Supabase Project URL and Publishable key.
-  */
+/* SUPABASE CONNECTION */
 
-  const supabaseUrl = "https://zvhbtaokljksjamkxwon.supabase.co";
-  const supabaseKey = "sb_publishable_YF-IQhjeGymnEDsX-X2BEQ_Ul9-st_m";
+try {
 
-  const supabaseClient = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-  );
+  if (
+    typeof SUPABASE_URL !== "undefined" &&
+    typeof SUPABASE_ANON_KEY !== "undefined"
+  ) {
 
-  async function loadMusic() {
-
-    const musicList = document.getElementById("musicList");
-
-    try {
-
-      const { data, error } = await supabaseClient
-        .from("music")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        throw error;
-      }
-
-      if (!data || data.length === 0) {
-
-        musicList.innerHTML = `
-          <div class="empty">
-            <h3>🎵 No music uploaded yet</h3>
-            <p>New songs will appear here soon.</p>
-          </div>
-        `;
-
-        return;
-      }
-
-      musicList.innerHTML = "";
-
-      data.forEach(function(song) {
-
-        const cover = song.cover_url
-          ? `<img
-               class="cover"
-               src="${song.cover_url}"
-               alt="${song.title || "Song cover"}"
-             >`
-          : "";
-
-        const genre = song.genre
-          ? `<div class="genre">Genre: ${song.genre}</div>`
-          : "";
-
-        const description = song.description
-          ? `<p class="description">${song.description}</p>`
-          : "";
-
-        const audio = song.audio_url
-          ? `
-            <audio controls preload="metadata">
-              <source src="${song.audio_url}" type="audio/mpeg">
-              Your browser does not support audio playback.
-            </audio>
-
-            <a
-              class="download"
-              href="${song.audio_url}"
-              target="_blank"
-              rel="noopener"
-            >
-              ⬇️ Download / Open Audio
-            </a>
-          `
-          : `
-            <p class="error">
-              Audio file is not available for this song.
-            </p>
-          `;
-
-        musicList.innerHTML += `
-          <article class="song">
-
-            ${cover}
-
-            <h2>${song.title || "Untitled Song"}</h2>
-
-            <div class="artist">
-              🎤 ${song.artist || "Unknown Artist"}
-            </div>
-
-            ${genre}
-
-            ${description}
-
-            ${audio}
-
-          </article>
-        `;
-
-      });
-
-    } catch (error) {
-
-      console.error("Supabase music error:", error);
-
-      musicList.innerHTML = `
-        <div class="error">
-          <h3>Unable to load music</h3>
-          <p>${error.message}</p>
-        </div>
-      `;
-
-    }
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
 
   }
 
-  loadMusic();
+} catch (error) {
+
+  console.error(
+    "Supabase error:",
+    error
+  );
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value) {
+
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* LOAD MUSIC */
+
+async function loadMusic() {
+
+  const container =
+    document.getElementById(
+      "musicList"
+    );
+
+  if (!container) return;
+
+
+  container.innerHTML = `
+    <div class="message">
+      Loading music...
+    </div>
+  `;
+
+
+  if (!supabaseClient) {
+
+    container.innerHTML = `
+      <div class="message">
+        Supabase connection is not configured.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      await supabaseClient
+        .from("music")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        )
+        .limit(100);
+
+
+    if (result.error) {
+
+      console.error(
+        "Music error:",
+        result.error
+      );
+
+      container.innerHTML = `
+        <div class="message">
+          Unable to load music.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const songs =
+      result.data || [];
+
+
+    if (songs.length === 0) {
+
+      container.innerHTML = `
+        <div class="message">
+          🎵 No music uploaded yet.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    songs.forEach(
+      function(song) {
+
+        const title =
+          song.title ||
+          "Untitled Song";
+
+
+        const artist =
+          song.artist ||
+          "Unknown Artist";
+
+
+        const genre =
+          song.genre ||
+          "Music";
+
+
+        const description =
+          song.description ||
+          "";
+
+
+        const audio =
+          song.audio_url ||
+          "";
+
+
+        const cover =
+          song.cover_url ||
+          "";
+
+
+        const date =
+          song.created_at
+            ? new Date(
+                song.created_at
+              ).toLocaleDateString()
+            : "";
+
+
+        const coverHTML =
+          cover
+            ? `
+              <img
+                src="${escapeHTML(cover)}"
+                class="music-cover"
+                alt="${escapeHTML(title)}"
+                loading="lazy"
+              >
+            `
+            : `
+              <div class="music-cover-placeholder">
+                🎵
+              </div>
+            `;
+
+
+        const audioHTML =
+          audio
+            ? `
+              <audio
+                controls
+                preload="metadata"
+                class="audio-player"
+              >
+                <source
+                  src="${escapeHTML(audio)}"
+                >
+                Your browser does not support audio.
+              </audio>
+            `
+            : `
+              <div class="no-audio">
+                Audio unavailable
+              </div>
+            `;
+
+
+        const downloadHTML =
+          audio
+            ? `
+              <a
+                href="${escapeHTML(audio)}"
+                class="download-button"
+                download
+                target="_blank"
+                rel="noopener"
+              >
+                ⬇️ Download
+              </a>
+            `
+            : "";
+
+
+        container.innerHTML += `
+
+          <article class="music-card">
+
+            ${coverHTML}
+
+            <div class="music-info">
+
+              <span class="music-tag">
+                ${escapeHTML(genre)}
+              </span>
+
+              <h2>
+                ${escapeHTML(title)}
+              </h2>
+
+              <h3>
+                🎤 ${escapeHTML(artist)}
+              </h3>
+
+              ${
+                description
+                  ? `
+                    <p>
+                      ${escapeHTML(
+                        description
+                      )}
+                    </p>
+                  `
+                  : ""
+              }
+
+              ${audioHTML}
+
+              <div class="music-actions">
+
+                ${downloadHTML}
+
+              </div>
+
+              ${
+                date
+                  ? `
+                    <div class="music-date">
+                      Uploaded ${escapeHTML(date)}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          </article>
+
+        `;
+
+      }
+    );
+
+
+    /* ONLY ONE SONG PLAYS AT A TIME */
+
+    const players =
+      document.querySelectorAll(
+        ".audio-player"
+      );
+
+
+    players.forEach(
+      function(player) {
+
+        player.addEventListener(
+          "play",
+          function() {
+
+            players.forEach(
+              function(otherPlayer) {
+
+                if (
+                  otherPlayer !== player
+                ) {
+
+                  otherPlayer.pause();
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Music loading error:",
+      error
+    );
+
+    container.innerHTML = `
+      <div class="message">
+        Unable to load music.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* START */
+
+loadMusic();
 
 </script>
 
