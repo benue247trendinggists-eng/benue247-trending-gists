@@ -6,129 +6,248 @@
 
   <title>Benue24/7 Trending Gists</title>
 
+  <meta
+    name="description"
+    content="Read the latest news, trending stories, entertainment, sports and politics from Benue and beyond."
+  >
+
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f5f7;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
       color: #111827;
+      line-height: 1.7;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
 
     header {
       background: #111;
       color: white;
-      padding: 35px 20px;
       text-align: center;
+      padding: 28px 15px;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 34px;
+      font-size: 28px;
+      font-weight: 800;
     }
 
     header p {
-      font-size: 17px;
-      color: #ccc;
-      margin-top: 12px;
+      color: #d1d5db;
+      margin-top: 5px;
+      font-size: 14px;
     }
+
+    /* NAVIGATION */
 
     nav {
       background: #222;
+      color: white;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      padding: 18px 10px;
+      gap: 5px;
+      padding: 12px;
       overflow-x: auto;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      white-space: nowrap;
+      padding: 8px 13px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
+    nav a:hover {
+      background: white;
+      color: #111;
     }
+
+    /* MAIN */
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 15px 60px;
+    }
+
+    /* ARTICLE */
 
     .article {
       background: white;
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
-    .category {
-      color: #d71920;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 34px;
-      line-height: 1.2;
-      margin: 10px 0 15px;
-    }
-
-    .author {
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    .cover {
+    .article-image {
       width: 100%;
       max-height: 500px;
       object-fit: cover;
-      border-radius: 14px;
+      display: block;
+    }
+
+    .article-content {
+      padding: 30px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .article h2 {
+      font-size: 36px;
+      line-height: 1.25;
+      margin-bottom: 15px;
+    }
+
+    .meta {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 15px;
+    }
+
+    .article-description {
+      font-size: 18px;
+      font-weight: 600;
+      color: #4b5563;
       margin-bottom: 25px;
     }
 
-    .story {
-      font-size: 19px;
-      line-height: 1.8;
+    .article-story {
+      font-size: 18px;
+      color: #1f2937;
       white-space: pre-line;
     }
 
-    .back {
-      display: inline-block;
+    .article-story p {
+      margin-bottom: 20px;
+    }
+
+    /* SHARE */
+
+    .share-box {
       margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .share-box h3 {
+      margin-bottom: 12px;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .share-button {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 7px;
       background: #111;
       color: white;
-      padding: 13px 20px;
-      border-radius: 8px;
-      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
     }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 18px;
+      background: #111;
+      color: white;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    /* MESSAGE */
 
     .message {
       background: white;
+      border-radius: 12px;
       padding: 40px 20px;
       text-align: center;
-      border-radius: 15px;
-      color: #666;
+      color: #6b7280;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
     }
 
+    .message h2 {
+      color: #111827;
+      margin-bottom: 10px;
+    }
+
+    /* FOOTER */
+
     footer {
-      margin-top: 50px;
       background: #111;
       color: white;
       text-align: center;
       padding: 35px 15px;
     }
 
-    @media (max-width: 600px) {
-      h2 {
+    footer p {
+      color: #bbb;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      header h1 {
+        font-size: 23px;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .article-content {
+        padding: 20px;
+      }
+
+      .article h2 {
         font-size: 27px;
       }
 
-      .story {
+      .article-description {
+        font-size: 16px;
+      }
+
+      .article-story {
         font-size: 17px;
+      }
+
+      .article-image {
+        max-height: 350px;
       }
     }
   </style>
@@ -136,141 +255,392 @@
 
 <body>
 
-<header>
-  <h1>BENUE24/7 TRENDING GISTS</h1>
-  <p>News • Entertainment • Sports • Politics • Trending Stories</p>
-</header>
+  <header>
+    <h1>BENUE24/7 TRENDING GISTS</h1>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="index.html">News</a>
-  <a href="index.html">Trending</a>
-  <a href="index.html">Entertainment</a>
-  <a href="index.html">Sports</a>
-  <a href="music.html">Music</a>
-</nav>
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
+  </header>
 
-<div class="container">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#news">News</a>
+    <a href="index.html#trending">Trending</a>
+    <a href="index.html#entertainment">Entertainment</a>
+    <a href="index.html#sports">Sports</a>
+    <a href="index.html#politics">Politics</a>
+    <a href="music.html">Music</a>
+  </nav>
 
-  <div id="loading" class="message">
-    Loading story...
-  </div>
+  <main>
 
-  <article id="article" class="article" style="display:none;">
+    <div id="articleContainer">
+      <div class="message">
+        Loading story...
+      </div>
+    </div>
 
-    <div id="category" class="category"></div>
+  </main>
 
-    <h2 id="title"></h2>
+  <footer>
 
-    <div id="author" class="author"></div>
+    <h3>BENUE24/7 TRENDING GISTS</h3>
 
-    <img id="cover" class="cover" style="display:none;">
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
 
-    <div id="story" class="story"></div>
+    <p>
+      © 2026 Benue24/7 Trending Gists
+    </p>
 
-    <a href="index.html" class="back">
-      ← Back to Home
-    </a>
+  </footer>
 
-  </article>
 
-</div>
+  <!-- SUPABASE -->
 
-<footer>
-  © 2026 Benue24/7 Trending Gists
-</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="config.js"></script>
+  <script src="config.js"></script>
 
-<script>
 
-  const params = new URLSearchParams(window.location.search);
-  const articleId = params.get("id");
+  <script>
 
-  const loading = document.getElementById("loading");
-  const articleBox = document.getElementById("article");
-
-  async function loadArticle() {
-
-    if (!articleId) {
-      loading.innerHTML = "No article was selected.";
-      return;
-    }
+    let supabaseClient = null;
 
     try {
 
-      const url =
-        supabaseUrl +
-        "/rest/v1/article?id=eq." +
-        encodeURIComponent(articleId) +
-        "&select=*";
+      if (
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
 
-      const response = await fetch(url, {
-        headers: {
-          "apikey": supabaseKey,
-          "Authorization": "Bearer " + supabaseKey
-        }
-      });
+        supabaseClient = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
 
-      if (!response.ok) {
-        throw new Error("Unable to load article");
       }
-
-      const data = await response.json();
-
-      if (!data || data.length === 0) {
-        loading.innerHTML = "This story could not be found.";
-        return;
-      }
-
-      const item = data[0];
-
-      document.getElementById("title").textContent =
-        item.title || "Untitled Story";
-
-      document.getElementById("author").textContent =
-        "By " + (item.author || "Benue24/7 Trending Gists");
-
-      document.getElementById("category").textContent =
-        item.category || "News";
-
-      document.getElementById("story").textContent =
-        item.content || item.story || item.body || "No story content available.";
-
-      if (item.image_url || item.cover_url || item.image) {
-
-        const image =
-          item.image_url ||
-          item.cover_url ||
-          item.image;
-
-        const cover = document.getElementById("cover");
-
-        cover.src = image;
-        cover.style.display = "block";
-      }
-
-      loading.style.display = "none";
-      articleBox.style.display = "block";
-
-      document.title =
-        (item.title || "Story") +
-        " | Benue24/7 Trending Gists";
 
     } catch (error) {
 
-      console.error(error);
-
-      loading.innerHTML =
-        "Unable to load this story.";
+      console.error("Supabase error:", error);
 
     }
 
-  }
 
-  loadArticle();
+    function escapeHTML(value) {
 
-</script>
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    async function loadArticle() {
+
+      const container =
+        document.getElementById("articleContainer");
+
+      if (!supabaseClient) {
+
+        container.innerHTML = `
+          <div class="message">
+            <h2>Unable to load story</h2>
+            <p>Supabase connection is not configured.</p>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      const params =
+        new URLSearchParams(window.location.search);
+
+      const slug =
+        params.get("slug");
+
+
+      if (!slug) {
+
+        container.innerHTML = `
+          <div class="message">
+            <h2>Story not found</h2>
+            <p>No story was specified.</p>
+            <a class="back-button" href="index.html">
+              ← Back to Home
+            </a>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      const result =
+        await supabaseClient
+          .from("article")
+          .select("*")
+          .eq("slug", slug)
+          .limit(1)
+          .maybeSingle();
+
+
+      if (result.error) {
+
+        console.error(result.error);
+
+        container.innerHTML = `
+          <div class="message">
+            <h2>Unable to load story</h2>
+            <p>${escapeHTML(result.error.message)}</p>
+            <a class="back-button" href="index.html">
+              ← Back to Home
+            </a>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      const article = result.data;
+
+
+      if (!article) {
+
+        container.innerHTML = `
+          <div class="message">
+            <h2>Story not found</h2>
+            <p>This story may have been removed or the link is incorrect.</p>
+            <a class="back-button" href="index.html">
+              ← Back to Home
+            </a>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      const title =
+        article.title ||
+        article.headline ||
+        "Untitled story";
+
+
+      const category =
+        article.category ||
+        "News";
+
+
+      const description =
+        article.description ||
+        article.excerpt ||
+        "";
+
+
+      const story =
+        article.story ||
+        article.content ||
+        article.body ||
+        "";
+
+
+      const author =
+        article.author ||
+        "Benue24/7 Trending Gists";
+
+
+      const date =
+        article.created_at
+          ? new Date(
+              article.created_at
+            ).toLocaleString()
+          : "";
+
+
+      const image =
+        article.image_url ||
+        article.cover_url ||
+        article.image ||
+        "";
+
+
+      document.title =
+        title + " | Benue24/7 Trending Gists";
+
+
+      const imageHTML =
+        image
+          ? `
+            <img
+              class="article-image"
+              src="${escapeHTML(image)}"
+              alt="${escapeHTML(title)}"
+            >
+          `
+          : "";
+
+
+      const descriptionHTML =
+        description
+          ? `
+            <div class="article-description">
+              ${escapeHTML(description)}
+            </div>
+          `
+          : "";
+
+
+      const storyHTML =
+        story
+          ? `
+            <div class="article-story">
+              ${escapeHTML(story)}
+            </div>
+          `
+          : `
+            <div class="article-story">
+              No full story available.
+            </div>
+          `;
+
+
+      const shareURL =
+        window.location.href;
+
+
+      const whatsappURL =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+          title + "\n\n" + shareURL
+        );
+
+
+      const facebookURL =
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodeURIComponent(shareURL);
+
+
+      container.innerHTML = `
+
+        <article class="article">
+
+          ${imageHTML}
+
+          <div class="article-content">
+
+            <span class="tag">
+              ${escapeHTML(category)}
+            </span>
+
+            <h2>
+              ${escapeHTML(title)}
+            </h2>
+
+            <div class="meta">
+
+              By <strong>
+                ${escapeHTML(author)}
+              </strong>
+
+              ${date ? " • " + escapeHTML(date) : ""}
+
+            </div>
+
+            ${descriptionHTML}
+
+            ${storyHTML}
+
+            <div class="share-box">
+
+              <h3>
+                📲 Share this story
+              </h3>
+
+              <div class="share-buttons">
+
+                <a
+                  class="share-button"
+                  href="${whatsappURL}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  WhatsApp
+                </a>
+
+                <a
+                  class="share-button"
+                  href="${facebookURL}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Facebook
+                </a>
+
+                <button
+                  class="share-button"
+                  onclick="copyStoryLink()"
+                  style="border:0; cursor:pointer;"
+                >
+                  Copy Link
+                </button>
+
+              </div>
+
+            </div>
+
+            <a
+              class="back-button"
+              href="index.html"
+            >
+              ← Back to Home
+            </a>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    async function copyStoryLink() {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+        alert("Story link copied!");
+
+      } catch (error) {
+
+        alert(
+          "Unable to copy link. Please copy the URL manually."
+        );
+
+      }
+
+    }
+
+
+    loadArticle();
+
+  </script>
 
 </body>
 </html>
