@@ -1265,7 +1265,22 @@
     /* START */
 
     loadArticles();
+<script>
+document.addEventListener("click", function (event) {
 
+  const link = event.target.closest(
+    'a[href*="article.html?slug="]'
+  );
+
+  if (!link) return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  window.location.href = link.href;
+
+}, true);
+</script>
   </script>
 
 </body>
