@@ -960,260 +960,425 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script src="config.js"></script>
+   <script>
+
+let supabaseClient = null;
+let allArticles = [];
+
+/* CONNECT TO SUPABASE */
+
+try {
+
+  if (
+    typeof SUPABASE_URL !== "undefined" &&
+    typeof SUPABASE_ANON_KEY !== "undefined"
+  ) {
+
+    supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+  }
+
+} catch (error) {
+
+  console.error("Supabase connection error:", error);
+
+}
 
 
-  <script>
+/* ESCAPE HTML */
 
-    let supabaseClient = null;
+function escapeHTML(value) {
 
-    let allArticles = [];
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
 
 
-    /* SUPABASE */
+/* SHOW MESSAGE */
 
-    try {
+function showMessage(elementId, message) {
 
-      if (
-        typeof SUPABASE_URL !== "undefined" &&
-        typeof SUPABASE_ANON_KEY !== "undefined"
-      ) {
+  const box = document.getElementById(elementId);
 
-        supabaseClient =
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          );
+  if (!box) return;
 
-      }
+  box.innerHTML = `
+    <div class="message">
+      ${escapeHTML(message)}
+    </div>
+  `;
 
-    } catch (error) {
+}
+
+
+/* LOAD NEWS */
+
+async function loadArticles() {
+
+  if (!supabaseClient) {
+
+    showMessage(
+      "latestNews",
+      "Supabase connection is not configured."
+    );
+
+    return;
+
+  }
+
+  try {
+
+    /*
+      IMPORTANT:
+      Use SELECT * because your article table
+      contains additional columns.
+    */
+
+    const result = await supabaseClient
+      .from("article")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      })
+      .limit(100);
+
+
+    if (result.error) {
 
       console.error(
-        "Supabase error:",
-        error
+        "Supabase article error:",
+        result.error
       );
 
-    }
+      showMessage(
+        "featuredStory",
+        "Unable to load stories."
+      );
 
+      showMessage(
+        "latestNews",
+        "Unable to load stories."
+      );
 
-    /* ESCAPE HTML */
-
-    function escapeHTML(value) {
-
-      return String(value || "")
-
-        .replace(/&/g, "&amp;")
-
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
+      return;
 
     }
 
 
-    /* MESSAGE */
+    allArticles = result.data || [];
 
-    function showMessage(
-      elementId,
-      message,
-      error = false
-    ) {
 
-      const container =
-        document.getElementById(
-          elementId
-        );
+    console.log(
+      "Articles loaded:",
+      allArticles
+    );
 
-      if (!container) return;
 
-      container.innerHTML = `
-        <div class="message ${
-          error ? "error-message" : ""
-        }">
-          ${escapeHTML(message)}
+    if (allArticles.length === 0) {
+
+      showMessage(
+        "featuredStory",
+        "No stories published yet."
+      );
+
+      showMessage(
+        "latestNews",
+        "No news published yet."
+      );
+
+      showMessage(
+        "trendingNews",
+        "No trending stories published yet."
+      );
+
+      showMessage(
+        "entertainmentNews",
+        "No entertainment stories published yet."
+      );
+
+      showMessage(
+        "sportsNews",
+        "No sports stories published yet."
+      );
+
+      showMessage(
+        "politicsNews",
+        "No politics stories published yet."
+      );
+
+      return;
+
+    }
+
+
+    /* FEATURED */
+
+    displayFeatured(
+      allArticles[0]
+    );
+
+
+    /* LATEST NEWS */
+
+    displayArticles(
+      "latestNews",
+      allArticles.slice(0, 6)
+    );
+
+
+    /* CATEGORIES */
+
+    displayCategory(
+      "trendingNews",
+      "trending"
+    );
+
+    displayCategory(
+      "entertainmentNews",
+      "entertainment"
+    );
+
+    displayCategory(
+      "sportsNews",
+      "sports"
+    );
+
+    displayCategory(
+      "politicsNews",
+      "politics"
+    );
+
+
+    /* BREAKING HEADLINE */
+
+    const breakingText =
+      document.getElementById(
+        "breakingText"
+      );
+
+    if (breakingText) {
+
+      breakingText.textContent =
+        allArticles[0].title ||
+        "Latest news from Benue24/7 Trending Gists";
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Loading error:",
+      error
+    );
+
+    showMessage(
+      "latestNews",
+      "Unable to load news."
+    );
+
+  }
+
+}
+
+
+/* FEATURED STORY */
+
+function displayFeatured(article) {
+
+  const container =
+    document.getElementById(
+      "featuredStory"
+    );
+
+  if (!container) return;
+
+
+  const title =
+    article.title ||
+    article.headline ||
+    "Untitled story";
+
+
+  const category =
+    article.category ||
+    "News";
+
+
+  const description =
+    article.description ||
+    "";
+
+
+  const image =
+    article.image_url ||
+    article.cover_url ||
+    article.image ||
+    "";
+
+
+  const date =
+    article.created_at
+      ? new Date(
+          article.created_at
+        ).toLocaleDateString()
+      : "";
+
+
+  const slug =
+    article.slug ||
+    "";
+
+
+  const link =
+    slug
+      ? "article.html?slug=" +
+        encodeURIComponent(slug)
+      : "article.html";
+
+
+  const imageHTML =
+    image
+      ? `
+        <img
+          src="${escapeHTML(image)}"
+          class="featured-image"
+          alt="${escapeHTML(title)}"
+        >
+      `
+      : `
+        <div class="featured-placeholder">
+          📰
         </div>
       `;
 
-    }
 
+  container.innerHTML = `
 
-    /* LOAD ARTICLES */
+    <article class="featured-card">
 
-    async function loadArticles() {
+      ${imageHTML}
 
-      if (!supabaseClient) {
+      <div class="featured-content">
 
-        showMessage(
-          "latestNews",
-          "Supabase connection is not configured.",
-          true
-        );
+        <span class="tag">
+          ${escapeHTML(category)}
+        </span>
 
-        return;
+        <h2>
+          ${escapeHTML(title)}
+        </h2>
 
-      }
-
-
-      try {
-
-        const result =
-          await supabaseClient
-            .from("article")
-            .select(
-              "id,title,slug,category,description,content,image_url,author,created_at,story"
-            )
-            .order(
-              "created_at",
-              {
-                ascending: false
-              }
-            )
-            .limit(100);
-
-
-        if (result.error) {
-
-          console.error(
-            result.error
-          );
-
-          showMessage(
-            "featuredStory",
-            result.error.message,
-            true
-          );
-
-          showMessage(
-            "latestNews",
-            result.error.message,
-            true
-          );
-
-          return;
-
+        ${
+          date
+            ? `
+              <div class="meta">
+                Published ${escapeHTML(date)}
+              </div>
+            `
+            : ""
         }
 
-
-        allArticles =
-          result.data || [];
-
-
-        if (
-          allArticles.length === 0
-        ) {
-
-          showMessage(
-            "featuredStory",
-            "No stories published yet."
-          );
-
-          showMessage(
-            "latestNews",
-            "No news published yet."
-          );
-
-          showMessage(
-            "trendingNews",
-            "No trending stories published yet."
-          );
-
-          showMessage(
-            "entertainmentNews",
-            "No entertainment stories published yet."
-          );
-
-          showMessage(
-            "sportsNews",
-            "No sports stories published yet."
-          );
-
-          showMessage(
-            "politicsNews",
-            "No politics stories published yet."
-          );
-
-          return;
-
+        ${
+          description
+            ? `
+              <p>
+                ${escapeHTML(description)}
+              </p>
+            `
+            : ""
         }
 
+        <a
+          href="${link}"
+          class="read-button"
+        >
+          Read Full Story →
+        </a>
 
-        displayFeatured(
-          allArticles[0]
-        );
+      </div>
 
+    </article>
 
-        displayArticles(
-          "latestNews",
-          allArticles.slice(0, 6)
-        );
+  `;
 
-
-        displayCategory(
-          "trendingNews",
-          "trending"
-        );
+}
 
 
-        displayCategory(
-          "entertainmentNews",
-          "entertainment"
-        );
+/* CATEGORY STORIES */
 
+function displayCategory(
+  elementId,
+  category
+) {
 
-        displayCategory(
-          "sportsNews",
-          "sports"
-        );
+  const filtered =
+    allArticles.filter(
+      function(article) {
 
-
-        displayCategory(
-          "politicsNews",
-          "politics"
-        );
-
-
-        updateBreaking(
-          allArticles[0]
-        );
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-        showMessage(
-          "latestNews",
-          error.message ||
-          "Unable to load news.",
-          true
-        );
+        return String(
+          article.category || ""
+        )
+        .toLowerCase()
+        .trim() === category;
 
       }
+    );
 
-    }
+
+  if (filtered.length === 0) {
+
+    showMessage(
+      elementId,
+      "No " +
+      category +
+      " stories published yet."
+    );
+
+    return;
+
+  }
 
 
-    /* FEATURED STORY */
+  displayArticles(
+    elementId,
+    filtered.slice(0, 6)
+  );
 
-    function displayFeatured(
-      article
-    ) {
+}
 
-      const container =
-        document.getElementById(
-          "featuredStory"
-        );
 
-      if (!container) return;
+/* DISPLAY ARTICLES */
 
+function displayArticles(
+  elementId,
+  articles
+) {
+
+  const container =
+    document.getElementById(
+      elementId
+    );
+
+  if (!container) return;
+
+
+  container.innerHTML = "";
+
+
+  articles.forEach(
+    function(article) {
 
       const title =
         article.title ||
+        article.headline ||
         "Untitled story";
 
 
@@ -1229,7 +1394,14 @@
 
       const image =
         article.image_url ||
+        article.cover_url ||
+        article.image ||
         "";
+
+
+      const author =
+        article.author ||
+        "Benue24/7 Trending Gists";
 
 
       const date =
@@ -1240,12 +1412,15 @@
           : "";
 
 
+      const slug =
+        article.slug ||
+        "";
+
+
       const link =
-        article.slug
+        slug
           ? "article.html?slug=" +
-            encodeURIComponent(
-              article.slug
-            )
+            encodeURIComponent(slug)
           : "article.html";
 
 
@@ -1253,43 +1428,38 @@
         image
           ? `
             <img
+              class="card-image"
               src="${escapeHTML(image)}"
-              class="featured-image"
               alt="${escapeHTML(title)}"
+              loading="lazy"
             >
           `
           : `
-            <div class="featured-placeholder">
+            <div class="placeholder-image">
               📰
             </div>
           `;
 
 
-      container.innerHTML = `
+      container.innerHTML += `
 
-        <article class="featured-card">
+        <article class="card">
 
           ${imageHTML}
 
-          <div class="featured-content">
+          <div class="card-body">
 
             <span class="tag">
               ${escapeHTML(category)}
             </span>
 
-            <h2>
-              ${escapeHTML(title)}
-            </h2>
+            <h3>
 
-            ${
-              date
-                ? `
-                  <div class="meta">
-                    Published ${escapeHTML(date)}
-                  </div>
-                `
-                : ""
-            }
+              <a href="${link}">
+                ${escapeHTML(title)}
+              </a>
+
+            </h3>
 
             ${
               description
@@ -1303,12 +1473,23 @@
                 : ""
             }
 
-            <a
-              href="${link}"
-              class="read-button"
-            >
-              Read Full Story →
-            </a>
+            <div class="date">
+
+              ${
+                author
+                  ? "By " +
+                    escapeHTML(author)
+                  : ""
+              }
+
+              ${
+                date
+                  ? " • " +
+                    escapeHTML(date)
+                  : ""
+              }
+
+            </div>
 
           </div>
 
@@ -1317,343 +1498,135 @@
       `;
 
     }
+  );
+
+}
 
 
-    /* BREAKING */
+/* SEARCH */
 
-    function updateBreaking(
-      article
-    ) {
+function performSearch(query) {
 
-      const element =
-        document.getElementById(
-          "breakingText"
+  const resultsSection =
+    document.getElementById(
+      "searchResults"
+    );
+
+  const cleanQuery =
+    query
+      .toLowerCase()
+      .trim();
+
+
+  if (!cleanQuery) {
+
+    resultsSection.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  resultsSection.style.display =
+    "block";
+
+
+  const filtered =
+    allArticles.filter(
+      function(article) {
+
+        const searchableText = (
+
+          (article.title || "") +
+          " " +
+          (article.description || "") +
+          " " +
+          (article.category || "") +
+          " " +
+          (article.content || "") +
+          " " +
+          (article.story || "")
+
+        ).toLowerCase();
+
+
+        return searchableText.includes(
+          cleanQuery
         );
-
-      if (!element) return;
-
-
-      element.textContent =
-        article.title ||
-        "Latest stories from Benue24/7 Trending Gists";
-
-    }
-
-
-    /* CATEGORY */
-
-    function displayCategory(
-      elementId,
-      category
-    ) {
-
-      const filtered =
-        allArticles.filter(
-          function(article) {
-
-            return String(
-              article.category || ""
-            )
-            .toLowerCase()
-            .trim() === category;
-
-          }
-        );
-
-
-      if (
-        filtered.length === 0
-      ) {
-
-        showMessage(
-          elementId,
-          "No " +
-          category +
-          " stories published yet."
-        );
-
-        return;
-
-      }
-
-
-      displayArticles(
-        elementId,
-        filtered.slice(0, 6)
-      );
-
-    }
-
-
-    /* ARTICLES */
-
-    function displayArticles(
-      elementId,
-      articles
-    ) {
-
-      const container =
-        document.getElementById(
-          elementId
-        );
-
-      if (!container) return;
-
-
-      container.innerHTML = "";
-
-
-      articles.forEach(
-        function(article) {
-
-          const title =
-            article.title ||
-            "Untitled story";
-
-
-          const category =
-            article.category ||
-            "News";
-
-
-          const description =
-            article.description ||
-            "";
-
-
-          const image =
-            article.image_url ||
-            "";
-
-
-          const author =
-            article.author ||
-            "Benue24/7 Trending Gists";
-
-
-          const date =
-            article.created_at
-              ? new Date(
-                  article.created_at
-                ).toLocaleDateString()
-              : "";
-
-
-          const link =
-            article.slug
-              ? "article.html?slug=" +
-                encodeURIComponent(
-                  article.slug
-                )
-              : "article.html";
-
-
-          const imageHTML =
-            image
-              ? `
-                <img
-                  class="card-image"
-                  src="${escapeHTML(image)}"
-                  alt="${escapeHTML(title)}"
-                  loading="lazy"
-                >
-              `
-              : `
-                <div class="placeholder-image">
-                  📰
-                </div>
-              `;
-
-
-          container.innerHTML += `
-
-            <article class="card">
-
-              ${imageHTML}
-
-              <div class="card-body">
-
-                <span class="tag">
-                  ${escapeHTML(category)}
-                </span>
-
-                <h3>
-
-                  <a href="${link}">
-                    ${escapeHTML(title)}
-                  </a>
-
-                </h3>
-
-                ${
-                  description
-                    ? `
-                      <p>
-                        ${escapeHTML(
-                          description
-                        )}
-                      </p>
-                    `
-                    : ""
-                }
-
-                <div class="date">
-
-                  ${
-                    author
-                      ? "By " +
-                        escapeHTML(author)
-                      : ""
-                  }
-
-                  ${
-                    date
-                      ? " • " +
-                        escapeHTML(date)
-                      : ""
-                  }
-
-                </div>
-
-              </div>
-
-            </article>
-
-          `;
-
-        }
-      );
-
-    }
-
-
-    /* SEARCH */
-
-    function performSearch(
-      query
-    ) {
-
-      const resultsSection =
-        document.getElementById(
-          "searchResults"
-        );
-
-      const results =
-        document.getElementById(
-          "searchArticles"
-        );
-
-
-      const cleanQuery =
-        query
-          .toLowerCase()
-          .trim();
-
-
-      if (!cleanQuery) {
-
-        resultsSection.style.display =
-          "none";
-
-        return;
-
-      }
-
-
-      resultsSection.style.display =
-        "block";
-
-
-      const filtered =
-        allArticles.filter(
-          function(article) {
-
-            const text = (
-
-              (article.title || "") +
-              " " +
-              (article.description || "") +
-              " " +
-              (article.category || "") +
-              " " +
-              (article.content || "") +
-              " " +
-              (article.story || "")
-
-            ).toLowerCase();
-
-
-            return text.includes(
-              cleanQuery
-            );
-
-          }
-        );
-
-
-      if (
-        filtered.length === 0
-      ) {
-
-        results.innerHTML = `
-          <div class="message">
-            No stories found for
-            "${escapeHTML(query)}".
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      displayArticles(
-        "searchArticles",
-        filtered
-      );
-
-      results.scrollIntoView({
-        behavior: "smooth"
-      });
-
-    }
-
-
-    /* SEARCH FORM */
-
-    document
-      .getElementById("searchForm")
-      .addEventListener(
-        "submit",
-        function(event) {
-
-          event.preventDefault();
-
-          const input =
-            document.getElementById(
-              "searchInput"
-            );
-
-          performSearch(
-            input.value
-          );
-
-        }
-      );
-
-
-    /* START */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function() {
-
-        loadArticles();
 
       }
     );
 
-  </script>
 
+  if (filtered.length === 0) {
+
+    document.getElementById(
+      "searchArticles"
+    ).innerHTML = `
+
+      <div class="message">
+
+        No stories found for
+        "${escapeHTML(query)}".
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  displayArticles(
+    "searchArticles",
+    filtered
+  );
+
+
+  resultsSection.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+/* SEARCH BUTTON */
+
+const searchForm =
+  document.getElementById(
+    "searchForm"
+  );
+
+
+if (searchForm) {
+
+  searchForm.addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+      const input =
+        document.getElementById(
+          "searchInput"
+        );
+
+      performSearch(
+        input.value
+      );
+
+    }
+  );
+
+}
+
+
+/* START WEBSITE */
+
+loadArticles();
+
+</script>
 </body>
 </html>
