@@ -6,13 +6,19 @@
 
   <title>Benue24/7 Trending Gists</title>
 
-  <meta name="description" content="Benue24/7 Trending Gists — latest news, trending gists, entertainment, sports, politics and music from Benue and beyond.">
+  <meta name="description"
+    content="Benue24/7 Trending Gists — latest news, trending gists, entertainment, sports, politics and music from Benue and beyond.">
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -87,6 +93,8 @@
       padding: 20px 15px;
     }
 
+    /* BREAKING */
+
     .breaking {
       background: #d71920;
       color: white;
@@ -154,6 +162,7 @@
       overflow: hidden;
       box-shadow: 0 2px 10px rgba(0,0,0,.07);
       transition: .2s;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -165,6 +174,7 @@
       height: 190px;
       object-fit: cover;
       background: #e5e7eb;
+      display: block;
     }
 
     .card-body {
@@ -239,7 +249,7 @@
       font-weight: bold;
     }
 
-    /* CATEGORY BOXES */
+    /* CATEGORIES */
 
     .categories {
       display: grid;
@@ -259,6 +269,92 @@
     .category-box:hover {
       background: #111;
       color: white;
+    }
+
+    /* STORY READER */
+
+    #storyReader {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 5000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .story-reader-box {
+      background: white;
+      max-width: 850px;
+      margin: 30px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,.3);
+    }
+
+    .story-reader-header {
+      position: sticky;
+      top: 0;
+      background: #111;
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .close-story {
+      background: #d71920;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .story-reader-content {
+      padding: 25px;
+    }
+
+    .story-reader-content img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .story-category {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .story-reader-content h1 {
+      font-size: 32px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .story-date {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .full-story {
+      white-space: pre-line;
+      font-size: 17px;
+      line-height: 1.8;
+      color: #333;
     }
 
     /* FOOTER */
@@ -308,45 +404,88 @@
       .card-image {
         height: 210px;
       }
+
+      .story-reader-content h1 {
+        font-size: 25px;
+      }
+
+      .story-reader-content {
+        padding: 18px;
+      }
+
+      .full-story {
+        font-size: 16px;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
+
   <header>
+
     <h1>BENUE24/7 TRENDING GISTS</h1>
+
     <p>
       News • Trending Gists • Entertainment • Sports • Politics • Music
     </p>
+
   </header>
 
+
+  <!-- NAVIGATION -->
+
   <nav>
+
     <a href="index.html">Home</a>
+
     <a href="#news">News</a>
+
     <a href="#trending">Trending</a>
+
     <a href="#entertainment">Entertainment</a>
+
     <a href="#sports">Sports</a>
+
     <a href="#politics">Politics</a>
+
     <a href="music.html">Music</a>
+
   </nav>
 
+
   <main>
+
+    <!-- BREAKING -->
 
     <div class="breaking">
       🔴 BREAKING: Welcome to Benue24/7 Trending Gists
     </div>
 
+
+    <!-- HERO -->
+
     <section class="hero">
+
       <div class="hero-content">
-        <h2>Welcome to Benue24/7 Trending Gists</h2>
+
+        <h2>
+          Welcome to Benue24/7 Trending Gists
+        </h2>
 
         <p>
           Your trusted home for the latest news, trending stories,
           entertainment, sports, politics and music from Benue and beyond.
         </p>
+
       </div>
+
     </section>
+
 
     <!-- NEWS -->
 
@@ -357,12 +496,15 @@
       </div>
 
       <div id="latestNews" class="articles">
+
         <div class="message">
           Loading latest news...
         </div>
+
       </div>
 
     </section>
+
 
     <!-- TRENDING -->
 
@@ -373,12 +515,15 @@
       </div>
 
       <div id="trendingNews" class="articles">
+
         <div class="message">
           Loading trending stories...
         </div>
+
       </div>
 
     </section>
+
 
     <!-- ENTERTAINMENT -->
 
@@ -389,12 +534,15 @@
       </div>
 
       <div id="entertainmentNews" class="articles">
+
         <div class="message">
           Loading entertainment...
         </div>
+
       </div>
 
     </section>
+
 
     <!-- SPORTS -->
 
@@ -405,12 +553,15 @@
       </div>
 
       <div id="sportsNews" class="articles">
+
         <div class="message">
           Loading sports...
         </div>
+
       </div>
 
     </section>
+
 
     <!-- POLITICS -->
 
@@ -421,12 +572,15 @@
       </div>
 
       <div id="politicsNews" class="articles">
+
         <div class="message">
           Loading politics...
         </div>
+
       </div>
 
     </section>
+
 
     <!-- CATEGORIES -->
 
@@ -466,6 +620,7 @@
 
     </section>
 
+
     <!-- MUSIC -->
 
     <section class="music-box">
@@ -484,9 +639,42 @@
 
   </main>
 
+
+  <!-- STORY READER -->
+
+  <div id="storyReader">
+
+    <div class="story-reader-box">
+
+      <div class="story-reader-header">
+
+        <strong>Benue24/7 Trending Gists</strong>
+
+        <button
+          class="close-story"
+          onclick="closeStory()">
+          ✕ Close
+        </button>
+
+      </div>
+
+      <div
+        id="storyContent"
+        class="story-reader-content">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FOOTER -->
+
   <footer>
 
-    <h3>BENUE24/7 TRENDING GISTS</h3>
+    <h3>
+      BENUE24/7 TRENDING GISTS
+    </h3>
 
     <p>
       News • Trending Gists • Entertainment • Sports • Politics • Music
@@ -503,8 +691,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- YOUR SUPABASE CONFIG -->
-
   <script src="config.js"></script>
 
 
@@ -512,26 +698,35 @@
 
     let supabaseClient = null;
 
+
+    /* CONNECT TO SUPABASE */
+
     try {
 
       if (
-  typeof SUPABASE_URL !== "undefined" &&
-  typeof SUPABASE_ANON_KEY !== "undefined"
-) {
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
 
-  supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
 
-}
+      }
 
     } catch (error) {
 
-      console.error("Supabase error:", error);
+      console.error(
+        "Supabase connection error:",
+        error
+      );
 
     }
 
+
+    /* LOAD ARTICLES */
 
     async function loadArticles() {
 
@@ -547,21 +742,61 @@
       }
 
 
-      /*
-        We use SELECT * so the homepage does not depend
-        on a particular column list.
-      */
-
-      const result = await supabaseClient
-        .from("article")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(30);
+      const result =
+        await supabaseClient
+          .from("article")
+          .select("*")
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          )
+          .limit(50);
 
 
       if (result.error) {
 
-        console.error(result.error);
+        console.error(
+          "Article loading error:",
+          result.error
+        );
+
+        showMessage(
+          "latestNews",
+          "Unable to load news."
+        );
+
+        showMessage(
+          "trendingNews",
+          "Unable to load trending stories."
+        );
+
+        showMessage(
+          "entertainmentNews",
+          "Unable to load entertainment."
+        );
+
+        showMessage(
+          "sportsNews",
+          "Unable to load sports."
+        );
+
+        showMessage(
+          "politicsNews",
+          "Unable to load politics."
+        );
+
+        return;
+
+      }
+
+
+      const articles =
+        result.data || [];
+
+
+      if (articles.length === 0) {
 
         showMessage(
           "latestNews",
@@ -593,46 +828,15 @@
       }
 
 
-      const articles = result.data || [];
-
-
-      if (articles.length === 0) {
-
-        showMessage(
-          "latestNews",
-          "🎉 No news published yet. New stories will appear here."
-        );
-
-        showMessage(
-          "trendingNews",
-          "No trending stories yet."
-        );
-
-        showMessage(
-          "entertainmentNews",
-          "No entertainment stories yet."
-        );
-
-        showMessage(
-          "sportsNews",
-          "No sports stories yet."
-        );
-
-        showMessage(
-          "politicsNews",
-          "No politics stories yet."
-        );
-
-        return;
-
-      }
-
+      /* LATEST NEWS */
 
       displayArticles(
         "latestNews",
         articles.slice(0, 6)
       );
 
+
+      /* TRENDING */
 
       displayCategory(
         "trendingNews",
@@ -641,6 +845,8 @@
       );
 
 
+      /* ENTERTAINMENT */
+
       displayCategory(
         "entertainmentNews",
         articles,
@@ -648,12 +854,16 @@
       );
 
 
+      /* SPORTS */
+
       displayCategory(
         "sportsNews",
         articles,
         "sports"
       );
 
+
+      /* POLITICS */
 
       displayCategory(
         "politicsNews",
@@ -664,26 +874,35 @@
     }
 
 
+    /* CATEGORY FILTER */
+
     function displayCategory(
       elementId,
       articles,
       category
     ) {
 
-      const filtered = articles.filter(function(article) {
+      const filtered =
+        articles.filter(
+          function(article) {
 
-        return String(
-          article.category || ""
-        ).toLowerCase() === category;
+            return String(
+              article.category || ""
+            )
+              .toLowerCase()
+              .trim() === category;
 
-      });
+          }
+        );
 
 
       if (filtered.length === 0) {
 
         showMessage(
           elementId,
-          "No " + category + " stories published yet."
+          "No " +
+          category +
+          " stories published yet."
         );
 
         return;
@@ -699,13 +918,18 @@
     }
 
 
+    /* DISPLAY ARTICLE CARDS */
+
     function displayArticles(
       elementId,
       articles
     ) {
 
       const container =
-        document.getElementById(elementId);
+        document.getElementById(
+          elementId
+        );
+
 
       if (!container) return;
 
@@ -713,61 +937,66 @@
       container.innerHTML = "";
 
 
-      articles.forEach(function(article) {
+      articles.forEach(
+        function(article) {
 
-        const title =
-          article.title ||
-          article.headline ||
-          "Untitled story";
-
-
-        const description =
-          article.description ||
-          article.excerpt ||
-          "";
+          const title =
+            article.title ||
+            article.headline ||
+            "Untitled story";
 
 
-        const image =
-          article.image_url ||
-          article.cover_url ||
-          article.image ||
-          "";
+          const description =
+            article.description ||
+            article.excerpt ||
+            "";
 
 
-        const category =
-          article.category ||
-          "News";
+          const story =
+            article.story ||
+            article.content ||
+            article.body ||
+            description ||
+            "No full story available.";
 
 
-        const date =
-          article.created_at
-            ? new Date(
-                article.created_at
-              ).toLocaleDateString()
-            : "";
+          const image =
+            article.image_url ||
+            article.cover_url ||
+            article.image ||
+            "";
 
 
-        const slug =
-          article.slug || "";
+          const category =
+            article.category ||
+            "News";
 
 
-        const link =
-          slug
-            ? "article.html?slug=" +
-              encodeURIComponent(slug)
-            : "article.html";
+          const date =
+            article.created_at
+              ? new Date(
+                  article.created_at
+                ).toLocaleDateString()
+              : "";
 
 
-        const imageHTML =
-          image
-            ? `
+          let imageHTML = "";
+
+
+          if (image) {
+
+            imageHTML = `
               <img
                 class="card-image"
                 src="${escapeHTML(image)}"
                 alt="${escapeHTML(title)}"
+                onerror="this.style.display='none'"
               >
-            `
-            : `
+            `;
+
+          } else {
+
+            imageHTML = `
               <div
                 class="card-image"
                 style="
@@ -781,10 +1010,19 @@
               </div>
             `;
 
+          }
 
-        container.innerHTML += `
 
-          <article class="card">
+          const card =
+            document.createElement(
+              "article"
+            );
+
+
+          card.className = "card";
+
+
+          card.innerHTML = `
 
             ${imageHTML}
 
@@ -795,9 +1033,7 @@
               </span>
 
               <h3>
-                <a href="${link}">
-                  ${escapeHTML(title)}
-                </a>
+                ${escapeHTML(title)}
               </h3>
 
               ${
@@ -816,7 +1052,7 @@
                 date
                   ? `
                     <div class="date">
-                      ${date}
+                      ${escapeHTML(date)}
                     </div>
                   `
                   : ""
@@ -824,14 +1060,148 @@
 
             </div>
 
-          </article>
+          `;
 
-        `;
 
-      });
+          card.addEventListener(
+            "click",
+            function() {
+
+              openStory(
+                title,
+                story,
+                image,
+                category,
+                date
+              );
+
+            }
+          );
+
+
+          container.appendChild(card);
+
+        }
+      );
 
     }
 
+
+    /* OPEN FULL STORY */
+
+    function openStory(
+      title,
+      story,
+      image,
+      category,
+      date
+    ) {
+
+      const reader =
+        document.getElementById(
+          "storyReader"
+        );
+
+
+      const content =
+        document.getElementById(
+          "storyContent"
+        );
+
+
+      let imageHTML = "";
+
+
+      if (image) {
+
+        imageHTML = `
+          <img
+            src="${escapeHTML(image)}"
+            alt="${escapeHTML(title)}"
+            onerror="this.style.display='none'"
+          >
+        `;
+
+      }
+
+
+      content.innerHTML = `
+
+        ${imageHTML}
+
+        <span class="story-category">
+          ${escapeHTML(category)}
+        </span>
+
+        <h1>
+          ${escapeHTML(title)}
+        </h1>
+
+        ${
+          date
+            ? `
+              <div class="story-date">
+                Published: ${escapeHTML(date)}
+              </div>
+            `
+            : ""
+        }
+
+        <div class="full-story">
+          ${escapeHTML(story)}
+        </div>
+
+      `;
+
+
+      reader.style.display = "block";
+
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    /* CLOSE STORY */
+
+    function closeStory() {
+
+      const reader =
+        document.getElementById(
+          "storyReader"
+        );
+
+
+      reader.style.display =
+        "none";
+
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    /* CLOSE WITH ESC KEY */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeStory();
+
+        }
+
+      }
+    );
+
+
+    /* SHOW MESSAGE */
 
     function showMessage(
       elementId,
@@ -839,30 +1209,60 @@
     ) {
 
       const container =
-        document.getElementById(elementId);
+        document.getElementById(
+          elementId
+        );
+
 
       if (!container) return;
 
+
       container.innerHTML = `
+
         <div class="message">
-          ${message}
+          ${escapeHTML(message)}
         </div>
+
       `;
 
     }
 
 
+    /* SECURITY */
+
     function escapeHTML(value) {
 
       return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
 
+
+    /* START */
 
     loadArticles();
 
