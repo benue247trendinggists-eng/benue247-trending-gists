@@ -1624,7 +1624,188 @@ if (searchForm) {
 
 
 /* START WEBSITE */
+/* ================================
+   SEARCH SYSTEM
+================================ */
 
+const searchForm =
+  document.getElementById("searchForm");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const searchResults =
+  document.getElementById("searchResults");
+
+const searchArticles =
+  document.getElementById("searchArticles");
+
+
+if (searchForm) {
+
+  searchForm.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      const searchTerm =
+        searchInput.value.trim();
+
+
+      if (!searchTerm) {
+
+        searchResults.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      if (!supabaseClient) {
+
+        searchResults.style.display =
+          "block";
+
+        searchArticles.innerHTML = `
+
+          <div class="message">
+
+            Supabase connection is not configured.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      searchResults.style.display =
+        "block";
+
+
+      searchArticles.innerHTML = `
+
+        <div class="message">
+
+          🔎 Searching for "${escapeHTML(searchTerm)}"...
+
+        </div>
+
+      `;
+
+
+      try {
+
+        /*
+          Search title, description and story
+        */
+
+        const result =
+          await supabaseClient
+
+            .from("article")
+
+            .select("*")
+
+            .or(
+              "title.ilike.%" +
+              searchTerm +
+              "%,description.ilike.%" +
+              searchTerm +
+              "%,story.ilike.%" +
+              searchTerm +
+              "%"
+            )
+
+            .order(
+              "created_at",
+              {
+                ascending: false
+              }
+            )
+
+            .limit(30);
+
+
+        if (result.error) {
+
+          console.error(
+            "Search error:",
+            result.error
+          );
+
+
+          searchArticles.innerHTML = `
+
+            <div class="message">
+
+              ⚠️ Search failed. Please try again.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        const articles =
+          result.data || [];
+
+
+        if (articles.length === 0) {
+
+          searchArticles.innerHTML = `
+
+            <div class="message">
+
+              No stories found for
+              "<strong>${escapeHTML(searchTerm)}</strong>".
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        displayArticles(
+          "searchArticles",
+          articles
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Search error:",
+          error
+        );
+
+
+        searchArticles.innerHTML = `
+
+          <div class="message">
+
+            ⚠️ Something went wrong while searching.
+
+          </div>
+
+        `;
+
+      }
+
+    }
+  );
+
+}
 loadArticles();
 
 </script>
