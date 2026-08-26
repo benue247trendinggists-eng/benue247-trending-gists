@@ -73,7 +73,7 @@
       white-space: nowrap;
     }
 
-    /* NAVIGATION */
+    /* NAV */
 
     nav {
       background: #222;
@@ -112,7 +112,7 @@
 
     .page-title {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .page-title h2 {
@@ -124,38 +124,77 @@
       color: #6b7280;
     }
 
-    /* MUSIC LIST */
+    /* SEARCH */
+
+    .search-box {
+      max-width: 650px;
+      margin: 0 auto 30px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: 1px solid #d1d5db;
+      background: white;
+      border-radius: 8px;
+      padding: 13px 15px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #111;
+    }
+
+    .search-button {
+      border: 0;
+      background: #111;
+      color: white;
+      border-radius: 8px;
+      padding: 13px 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* MUSIC GRID */
 
     #musicList {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
+
+    /* MUSIC CARD */
 
     .music-card {
       background: white;
-      border-radius: 15px;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
-      display: flex;
-      flex-direction: column;
+      transition: transform .2s ease;
+    }
+
+    .music-card:hover {
+      transform: translateY(-3px);
     }
 
     .music-cover {
       width: 100%;
-      height: 280px;
+      height: 310px;
       object-fit: cover;
+      display: block;
       background: #e5e7eb;
     }
 
     .music-cover-placeholder {
       width: 100%;
-      height: 280px;
+      height: 310px;
       background: #e5e7eb;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 75px;
+      font-size: 80px;
     }
 
     .music-info {
@@ -174,8 +213,8 @@
     }
 
     .music-info h2 {
-      font-size: 24px;
-      margin: 10px 0 3px;
+      font-size: 25px;
+      margin: 10px 0 2px;
     }
 
     .music-info h3 {
@@ -190,27 +229,44 @@
       margin-bottom: 15px;
     }
 
+    /* AUDIO */
+
     .audio-player {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 8px;
     }
+
+    /* ACTIONS */
 
     .music-actions {
-      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 16px;
     }
 
-    .download-button {
+    .action-button {
       display: inline-block;
-      background: #111;
-      color: white;
-      padding: 10px 16px;
+      padding: 10px 15px;
       border-radius: 7px;
       font-weight: bold;
       font-size: 14px;
+      border: 0;
+      cursor: pointer;
     }
 
-    .download-button:hover {
-      background: #333;
+    .download-button {
+      background: #111;
+      color: white;
+    }
+
+    .share-button {
+      background: #e5e7eb;
+      color: #111;
+    }
+
+    .action-button:hover {
+      opacity: .85;
     }
 
     .no-audio {
@@ -238,6 +294,23 @@
       color: #6b7280;
       grid-column: 1 / -1;
       box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    }
+
+    /* SHARE MESSAGE */
+
+    .share-message {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%);
+      background: #111;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      display: none;
+      z-index: 5000;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     /* FOOTER */
@@ -278,6 +351,14 @@
 
       .page-title h2 {
         font-size: 27px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-button {
+        width: 100%;
       }
 
       .music-cover,
@@ -379,17 +460,48 @@
     </section>
 
 
-    <!-- MUSIC WILL APPEAR HERE -->
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <input
+        type="search"
+        id="musicSearch"
+        placeholder="🔎 Search song or artist..."
+        autocomplete="off"
+      >
+
+      <button
+        class="search-button"
+        id="searchButton"
+      >
+        Search
+      </button>
+
+    </div>
+
+
+    <!-- MUSIC -->
 
     <div id="musicList">
 
       <div class="message">
-        Loading music...
+        🎵 Loading music...
       </div>
 
     </div>
 
   </main>
+
+
+  <!-- SHARE MESSAGE -->
+
+  <div
+    id="shareMessage"
+    class="share-message"
+  >
+    Link copied!
+  </div>
 
 
   <!-- FOOTER -->
@@ -411,12 +523,9 @@
   </footer>
 
 
-  <!-- SUPABASE LIBRARY -->
+  <!-- SUPABASE -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-  <!-- SUPABASE CONFIG -->
 
   <script src="config.js"></script>
 
@@ -427,14 +536,10 @@
 
     let supabaseClient = null;
 
+    let allSongs = [];
 
-    /*
-      CONNECT TO SUPABASE
 
-      config.js contains:
-      SUPABASE_URL
-      SUPABASE_ANON_KEY
-    */
+    /* SUPABASE CONNECTION */
 
     try {
 
@@ -448,12 +553,6 @@
             SUPABASE_URL,
             SUPABASE_ANON_KEY
           );
-
-      } else {
-
-        console.error(
-          "Supabase configuration variables are missing."
-        );
 
       }
 
@@ -496,11 +595,7 @@
         );
 
 
-      if (!container) {
-
-        return;
-
-      }
+      if (!container) return;
 
 
       if (!supabaseClient) {
@@ -564,10 +659,6 @@
 
               ⚠️ Unable to load music.
 
-              <br><br>
-
-              Please try refreshing the page.
-
             </div>
 
           `;
@@ -577,17 +668,11 @@
         }
 
 
-        const songs =
+        allSongs =
           result.data || [];
 
 
-        console.log(
-          "Music loaded:",
-          songs
-        );
-
-
-        if (songs.length === 0) {
+        if (allSongs.length === 0) {
 
           container.innerHTML = `
 
@@ -604,266 +689,7 @@
         }
 
 
-        container.innerHTML = "";
-
-
-        songs.forEach(
-          function(song) {
-
-
-            const title =
-              song.title ||
-              "Untitled Song";
-
-
-            const artist =
-              song.artist ||
-              "Unknown Artist";
-
-
-            const genre =
-              song.genre ||
-              "Music";
-
-
-            const description =
-              song.description ||
-              "";
-
-
-            const audio =
-              song.audio_url ||
-              "";
-
-
-            const cover =
-              song.cover_url ||
-              "";
-
-
-            const date =
-              song.created_at
-                ? new Date(
-                    song.created_at
-                  ).toLocaleDateString()
-                : "";
-
-
-            /* COVER */
-
-            const coverHTML =
-              cover
-
-                ? `
-
-                  <img
-                    src="${escapeHTML(cover)}"
-                    class="music-cover"
-                    alt="${escapeHTML(title)}"
-                    loading="lazy"
-                  >
-
-                `
-
-                : `
-
-                  <div class="music-cover-placeholder">
-
-                    🎵
-
-                  </div>
-
-                `;
-
-
-            /* AUDIO */
-
-            const audioHTML =
-              audio
-
-                ? `
-
-                  <audio
-                    controls
-                    preload="metadata"
-                    class="audio-player"
-                  >
-
-                    <source
-                      src="${escapeHTML(audio)}"
-                      type="audio/mpeg"
-                    >
-
-                    Your browser does not support audio.
-
-                  </audio>
-
-                `
-
-                : `
-
-                  <div class="no-audio">
-
-                    Audio unavailable
-
-                  </div>
-
-                `;
-
-
-            /* DOWNLOAD */
-
-            const downloadHTML =
-              audio
-
-                ? `
-
-                  <div class="music-actions">
-
-                    <a
-                      href="${escapeHTML(audio)}"
-                      class="download-button"
-                      download
-                      target="_blank"
-                      rel="noopener"
-                    >
-
-                      ⬇️ Download Song
-
-                    </a>
-
-                  </div>
-
-                `
-
-                : "";
-
-
-            container.innerHTML += `
-
-              <article class="music-card">
-
-
-                ${coverHTML}
-
-
-                <div class="music-info">
-
-
-                  <span class="music-tag">
-
-                    ${escapeHTML(genre)}
-
-                  </span>
-
-
-                  <h2>
-
-                    ${escapeHTML(title)}
-
-                  </h2>
-
-
-                  <h3>
-
-                    🎤 ${escapeHTML(artist)}
-
-                  </h3>
-
-
-                  ${
-                    description
-
-                      ? `
-
-                        <p>
-
-                          ${escapeHTML(
-                            description
-                          )}
-
-                        </p>
-
-                      `
-
-                      : ""
-
-                  }
-
-
-                  ${audioHTML}
-
-
-                  ${downloadHTML}
-
-
-                  ${
-                    date
-
-                      ? `
-
-                        <div class="music-date">
-
-                          Uploaded
-                          ${escapeHTML(date)}
-
-                        </div>
-
-                      `
-
-                      : ""
-
-                  }
-
-
-                </div>
-
-
-              </article>
-
-            `;
-
-          }
-        );
-
-
-        /*
-          PREVENT TWO SONGS
-          FROM PLAYING AT ONCE
-        */
-
-        const players =
-          document.querySelectorAll(
-            ".audio-player"
-          );
-
-
-        players.forEach(
-          function(player) {
-
-            player.addEventListener(
-              "play",
-              function() {
-
-                players.forEach(
-                  function(otherPlayer) {
-
-                    if (
-                      otherPlayer !== player
-                    ) {
-
-                      otherPlayer.pause();
-
-                    }
-
-                  }
-                );
-
-              }
-            );
-
-          }
-        );
+        displaySongs(allSongs);
 
 
       } catch (error) {
@@ -889,7 +715,522 @@
     }
 
 
-    /* START MUSIC */
+    /* DISPLAY SONGS */
+
+    function displaySongs(songs) {
+
+      const container =
+        document.getElementById(
+          "musicList"
+        );
+
+
+      if (!container) return;
+
+
+      if (songs.length === 0) {
+
+        container.innerHTML = `
+
+          <div class="message">
+
+            🔎 No music found.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML = "";
+
+
+      songs.forEach(
+        function(song) {
+
+
+          const title =
+            song.title ||
+            "Untitled Song";
+
+
+          const artist =
+            song.artist ||
+            "Unknown Artist";
+
+
+          const genre =
+            song.genre ||
+            "Music";
+
+
+          const description =
+            song.description ||
+            "";
+
+
+          const audio =
+            song.audio_url ||
+            "";
+
+
+          const cover =
+            song.cover_url ||
+            "";
+
+
+          const date =
+            song.created_at
+              ? new Date(
+                  song.created_at
+                ).toLocaleDateString()
+              : "";
+
+
+          /* COVER */
+
+          const coverHTML =
+            cover
+
+              ? `
+
+                <img
+                  src="${escapeHTML(cover)}"
+                  class="music-cover"
+                  alt="${escapeHTML(title)}"
+                  loading="lazy"
+                >
+
+              `
+
+              : `
+
+                <div class="music-cover-placeholder">
+
+                  🎵
+
+                </div>
+
+              `;
+
+
+          /* AUDIO */
+
+          const audioHTML =
+            audio
+
+              ? `
+
+                <audio
+                  controls
+                  preload="metadata"
+                  class="audio-player"
+                >
+
+                  <source
+                    src="${escapeHTML(audio)}"
+                    type="audio/mpeg"
+                  >
+
+                  Your browser does not support audio.
+
+                </audio>
+
+              `
+
+              : `
+
+                <div class="no-audio">
+
+                  Audio unavailable
+
+                </div>
+
+              `;
+
+
+          /* ACTIONS */
+
+          const actionsHTML =
+            audio
+
+              ? `
+
+                <div class="music-actions">
+
+                  <a
+                    href="${escapeHTML(audio)}"
+                    class="action-button download-button"
+                    download
+                    target="_blank"
+                    rel="noopener"
+                  >
+
+                    ⬇️ Download
+
+                  </a>
+
+                  <button
+                    class="action-button share-button"
+                    onclick="shareSong(
+                      '${escapeHTML(title).replace(/'/g, "\\'")}',
+                      '${escapeHTML(artist).replace(/'/g, "\\'")}'
+                    )"
+                  >
+
+                    📤 Share
+
+                  </button>
+
+                </div>
+
+              `
+
+              : `
+
+                <div class="music-actions">
+
+                  <button
+                    class="action-button share-button"
+                    onclick="shareSong(
+                      '${escapeHTML(title).replace(/'/g, "\\'")}',
+                      '${escapeHTML(artist).replace(/'/g, "\\'")}'
+                    )"
+                  >
+
+                    📤 Share
+
+                  </button>
+
+                </div>
+
+              `;
+
+
+          /* CARD */
+
+          container.innerHTML += `
+
+            <article class="music-card">
+
+              ${coverHTML}
+
+              <div class="music-info">
+
+                <span class="music-tag">
+
+                  ${escapeHTML(genre)}
+
+                </span>
+
+                <h2>
+
+                  ${escapeHTML(title)}
+
+                </h2>
+
+                <h3>
+
+                  🎤 ${escapeHTML(artist)}
+
+                </h3>
+
+                ${
+                  description
+
+                    ? `
+
+                      <p>
+
+                        ${escapeHTML(
+                          description
+                        )}
+
+                      </p>
+
+                    `
+
+                    : ""
+
+                }
+
+                ${audioHTML}
+
+                ${actionsHTML}
+
+                ${
+                  date
+
+                    ? `
+
+                      <div class="music-date">
+
+                        Uploaded
+                        ${escapeHTML(date)}
+
+                      </div>
+
+                    `
+
+                    : ""
+
+                }
+
+              </div>
+
+            </article>
+
+          `;
+
+        }
+      );
+
+
+      setupAudioPlayers();
+
+    }
+
+
+    /* ONE SONG AT A TIME */
+
+    function setupAudioPlayers() {
+
+      const players =
+        document.querySelectorAll(
+          ".audio-player"
+        );
+
+
+      players.forEach(
+        function(player) {
+
+          player.addEventListener(
+            "play",
+            function() {
+
+              players.forEach(
+                function(otherPlayer) {
+
+                  if (
+                    otherPlayer !== player
+                  ) {
+
+                    otherPlayer.pause();
+
+                  }
+
+                }
+              );
+
+            }
+          );
+
+        }
+      );
+
+    }
+
+
+    /* SEARCH */
+
+    function searchMusic() {
+
+      const input =
+        document.getElementById(
+          "musicSearch"
+        );
+
+
+      const query =
+        input.value
+          .trim()
+          .toLowerCase();
+
+
+      if (!query) {
+
+        displaySongs(allSongs);
+
+        return;
+
+      }
+
+
+      const filtered =
+        allSongs.filter(
+          function(song) {
+
+            const title =
+              String(
+                song.title || ""
+              ).toLowerCase();
+
+
+            const artist =
+              String(
+                song.artist || ""
+              ).toLowerCase();
+
+
+            const genre =
+              String(
+                song.genre || ""
+              ).toLowerCase();
+
+
+            return (
+
+              title.includes(query) ||
+
+              artist.includes(query) ||
+
+              genre.includes(query)
+
+            );
+
+          }
+        );
+
+
+      displaySongs(filtered);
+
+    }
+
+
+    /* SEARCH BUTTON */
+
+    document
+      .getElementById("searchButton")
+      .addEventListener(
+        "click",
+        searchMusic
+      );
+
+
+    /* SEARCH AS YOU TYPE */
+
+    document
+      .getElementById("musicSearch")
+      .addEventListener(
+        "input",
+        searchMusic
+      );
+
+
+    /* SHARE SONG */
+
+    async function shareSong(
+      title,
+      artist
+    ) {
+
+      const shareText =
+        "🎵 " +
+        title +
+        " by " +
+        artist +
+        " — Listen on Benue24/7 Trending Gists";
+
+
+      const shareData = {
+
+        title:
+          title +
+          " — " +
+          artist,
+
+        text:
+          shareText,
+
+        url:
+          window.location.href
+
+      };
+
+
+      try {
+
+        if (
+          navigator.share
+        ) {
+
+          await navigator.share(
+            shareData
+          );
+
+          return;
+
+        }
+
+
+        if (
+          navigator.clipboard
+        ) {
+
+          await navigator.clipboard.writeText(
+
+            window.location.href
+
+          );
+
+
+          showShareMessage(
+            "🔗 Song link copied!"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.log(
+          "Share cancelled or unavailable."
+        );
+
+      }
+
+    }
+
+
+    /* SHARE NOTIFICATION */
+
+    function showShareMessage(
+      message
+    ) {
+
+      const box =
+        document.getElementById(
+          "shareMessage"
+        );
+
+
+      if (!box) return;
+
+
+      box.textContent =
+        message;
+
+
+      box.style.display =
+        "block";
+
+
+      setTimeout(
+        function() {
+
+          box.style.display =
+            "none";
+
+        },
+        2500
+      );
+
+    }
+
+
+    /* START */
 
     loadMusic();
 
