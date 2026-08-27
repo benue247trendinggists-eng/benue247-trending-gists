@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Dashboard | Benue24/7 Trending Gists</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 22px 15px;
+    }
+
+    .header-inner {
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header h1 {
+      font-size: 25px;
+    }
+
+    header p {
+      color: #bbb;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .logout {
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 11px 15px;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .dashboard-top {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      margin-top: 5px;
+    }
+
+    .controls {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    .controls input,
+    .controls select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+    }
+
+    .article {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    .article h2 {
+      font-size: 20px;
+      margin: 8px 0;
+    }
+
+    .category {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .date {
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      color: #6b7280;
+      margin-bottom: 15px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .actions button {
+      border: none;
+      padding: 10px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .edit {
+      background: #111;
+      color: white;
+    }
+
+    .delete {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .view {
+      background: #e5e7eb;
+      color: #111;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .message {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      color: #6b7280;
+    }
+
+    .login {
+      max-width: 450px;
+      margin: 70px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+    }
+
+    .login h2 {
+      margin-bottom: 8px;
+    }
+
+    .login p {
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .login input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    .login button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 7px;
+      background: #111;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 7px;
+      display: none;
+    }
+
+    .error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 50px;
+    }
+
+    footer p {
+      color: #aaa;
+      margin-top: 7px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+
+      .header-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .dashboard-top {
+        grid-template-columns: 1fr;
+      }
+
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="header-inner">
+
+      <div>
+
+        <h1>
+          BENUE24/7 ADMIN
+        </h1>
+
+        <p>
+          Manage your stories
+        </p>
+
+      </div>
+
+      <button
+        class="logout"
+        onclick="logoutAdmin()"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- LOGIN -->
+
+  <div
+    id="loginBox"
+    class="login"
+    style="display:none;"
+  >
+
+    <h2>
+      🔐 Admin Login
+    </h2>
+
+    <p>
+      Login to manage Benue24/7 Trending Gists.
+    </p>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Admin email"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Admin password"
+    >
+
+    <button onclick="loginAdmin()">
+      🔐 Login
+    </button>
+
+    <div
+      id="loginMessage"
+      class="login-message"
+    ></div>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+
+  <main
+    id="dashboard"
+    style="display:none;"
+  >
+
+    <div class="dashboard-top">
+
+      <div class="stat">
+
+        📰 Total Stories
+
+        <strong id="totalStories">
+          0
+        </strong>
+
+      </div>
+
+      <div class="stat">
+
+        🔥 Trending
+
+        <strong id="totalTrending">
+          0
+        </strong>
+
+      </div>
+
+      <div class="stat">
+
+        🎬 Entertainment
+
+        <strong id="totalEntertainment">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+      <div class="controls-grid">
+
+        <input
+          id="search"
+          type="search"
+          placeholder="🔎 Search stories..."
+          oninput="renderArticles()"
+        >
+
+        <select
+          id="categoryFilter"
+          onchange="renderArticles()"
+        >
+
+          <option value="all">
+            All Categories
+          </option>
+
+          <option value="news">
+            📰 News
+          </option>
+
+          <option value="trending">
+            🔥 Trending
+          </option>
+
+          <option value="entertainment">
+            🎬 Entertainment
+          </option>
+
+          <option value="sports">
+            ⚽ Sports
+          </option>
+
+          <option value="politics">
+            🏛️ Politics
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- ARTICLES -->
+
+    <div id="articles">
+
+      <div class="message">
+        Loading stories...
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <footer>
+
+    <h3>
+      BENUE24/7 TRENDING GISTS
+    </h3>
+
+    <p>
+      Admin Dashboard
+    </p>
+
+  </footer>
+
+
+  <!-- SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+
+
+  <script>
+
+    let supabaseClient = null;
+
+    let allArticles = [];
+
+
+    /* ================================
+       CONNECT
+    ================================= */
+
+    try {
+
+      if (
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
+
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Supabase error:",
+        error
+      );
+
+    }
+
+
+    /* ================================
+       CHECK LOGIN
+    ================================= */
+
+    async function checkLogin() {
+
+      if (!supabaseClient) {
+
+        showLogin();
+
+        showLoginMessage(
+          "Supabase connection is not configured.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const result =
+        await supabaseClient.auth.getSession();
+
+
+      if (
+        result.data.session
+      ) {
+
+        showDashboard();
+
+        loadStories();
+
+      } else {
+
+        showLogin();
+
+      }
+
+    }
+
+
+    function showLogin() {
+
+      document.getElementById(
+        "loginBox"
+      ).style.display = "block";
+
+      document.getElementById(
+        "dashboard"
+      ).style.display = "none";
+
+    }
+
+
+    function showDashboard() {
+
+      document.getElementById(
+        "loginBox"
+      ).style.display = "none";
+
+      document.getElementById(
+        "dashboard"
+      ).style.display = "block";
+
+    }
+
+
+    /* ================================
+       LOGIN
+    ================================= */
+
+    async function loginAdmin() {
+
+      const email =
+        document.getElementById(
+          "email"
+        ).value.trim();
+
+
+      const password =
+        document.getElementById(
+          "password"
+        ).value;
+
+
+      if (!email || !password) {
+
+        showLoginMessage(
+          "Enter your email and password.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const result =
+        await supabaseClient.auth
+          .signInWithPassword({
+
+            email: email,
+
+            password: password
+
+          });
+
+
+      if (result.error) {
+
+        showLoginMessage(
+          result.error.message,
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      showDashboard();
+
+      loadStories();
+
+    }
+
+
+    /* ================================
+       LOGOUT
+    ================================= */
+
+    async function logoutAdmin() {
+
+      await supabaseClient.auth.signOut();
+
+      showLogin();
+
+    }
+
+
+    /* ================================
+       LOGIN MESSAGE
+    ================================= */
+
+    function showLoginMessage(
+      text,
+      type
+    ) {
+
+      const box =
+        document.getElementById(
+          "loginMessage"
+        );
+
+      box.textContent = text;
+
+      box.className =
+        "login-message " + type;
+
+    }
+
+
+    /* ================================
+       LOAD STORIES
+    ================================= */
+
+    async function loadStories() {
+
+      const result =
+        await supabaseClient
+
+          .from("article")
+
+          .select("*")
+
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          );
+
+
+      if (result.error) {
+
+        console.error(
+          result.error
+        );
+
+
+        document.getElementById(
+          "articles"
+        ).innerHTML = `
+
+          <div class="message">
+
+            ⚠️ Unable to load stories.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      allArticles =
+        result.data || [];
+
+
+      updateStats();
+
+      renderArticles();
+
+    }
+
+
+    /* ================================
+       STATS
+    ================================= */
+
+    function updateStats() {
+
+      document.getElementById(
+        "totalStories"
+      ).textContent =
+        allArticles.length;
+
+
+      document.getElementById(
+        "totalTrending"
+      ).textContent =
+        allArticles.filter(
+          article =>
+            article.category === "trending"
+        ).length;
+
+
+      document.getElementById(
+        "totalEntertainment"
+      ).textContent =
+        allArticles.filter(
+          article =>
+            article.category === "entertainment"
+        ).length;
+
+    }
+
+
+    /* ================================
+       RENDER
+    ================================= */
+
+    function renderArticles() {
+
+      const container =
+        document.getElementById(
+          "articles"
+        );
+
+
+      const search =
+        document.getElementById(
+          "search"
+        ).value
+          .trim()
+          .toLowerCase();
+
+
+      const category =
+        document.getElementById(
+          "categoryFilter"
+        ).value;
+
+
+      const filtered =
+        allArticles.filter(
+          article => {
+
+            const title =
+              String(
+                article.title || ""
+              ).toLowerCase();
+
+
+            const description =
+              String(
+                article.description || ""
+              ).toLowerCase();
+
+
+            const story =
+              String(
+                article.story || ""
+              ).toLowerCase();
+
+
+            const matchesSearch =
+              !search ||
+              title.includes(search) ||
+              description.includes(search) ||
+              story.includes(search);
+
+
+            const matchesCategory =
+              category === "all" ||
+              article.category === category;
+
+
+            return (
+              matchesSearch &&
+              matchesCategory
+            );
+
+          }
+        );
+
+
+      if (
+        filtered.length === 0
+      ) {
+
+        container.innerHTML = `
+
+          <div class="message">
+
+            No stories found.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML = filtered
+        .map(article => {
+
+          const date =
+            article.created_at
+
+              ? new Date(
+                  article.created_at
+                ).toLocaleDateString(
+                  "en-GB"
+                )
+
+              : "";
+
+
+          const slug =
+            article.slug || "";
+
+
+          const link =
+            "article.html?slug=" +
+            encodeURIComponent(slug);
+
+
+          return `
+
+            <article class="article">
+
+              <span class="category">
+
+                ${escapeHTML(
+                  article.category ||
+                  "news"
+                )}
+
+              </span>
+
+
+              <h2>
+
+                ${escapeHTML(
+                  article.title ||
+                  "Untitled"
+                )}
+
+              </h2>
+
+
+              <div class="date">
+
+                Published:
+                ${escapeHTML(date)}
+
+              </div>
+
+
+              <p class="description">
+
+                ${escapeHTML(
+                  article.description ||
+                  ""
+                )}
+
+              </p>
+
+
+              <div class="actions">
+
+                <a
+                  class="view"
+                  href="${link}"
+                  target="_blank"
+                >
+                  👁️ View
+                </a>
+
+
+                <button
+                  class="edit"
+                  onclick="editStory('${article.id}')"
+                >
+                  ✏️ Edit
+                </button>
+
+
+                <button
+                  class="delete"
+                  onclick="deleteStory('${article.id}')"
+                >
+                  🗑️ Delete
+                </button>
+
+              </div>
+
+            </article>
+
+          `;
+
+        })
+        .join("");
+
+    }
+
+
+    /* ================================
+       ESCAPE
+    ================================= */
+
+    function escapeHTML(value) {
+
+      return String(value || "")
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* ================================
+       EDIT
+    ================================= */
+
+    async function editStory(id) {
+
+      const article =
+        allArticles.find(
+          item =>
+            String(item.id) ===
+            String(id)
+        );
+
+
+      if (!article) {
+
+        alert(
+          "Story not found."
+        );
+
+        return;
+
+      }
+
+
+      const title =
+        prompt(
+          "Edit story title:",
+          article.title || ""
+        );
+
+
+      if (
+        title === null
+      ) return;
+
+
+      const description =
+        prompt(
+          "Edit short description:",
+          article.description || ""
+        );
+
+
+      if (
+        description === null
+      ) return;
+
+
+      const story =
+        prompt(
+          "Edit full story:",
+          article.story || ""
+        );
+
+
+      if (
+        story === null
+      ) return;
+
+
+      const result =
+        await supabaseClient
+
+          .from("article")
+
+          .update({
+
+            title:
+              title.trim(),
+
+            description:
+              description.trim(),
+
+            story:
+              story.trim()
+
+          })
+
+          .eq(
+            "id",
+            id
+          );
+
+
+      if (result.error) {
+
+        alert(
+          "Update failed: " +
+          result.error.message
+        );
+
+        return;
+
+      }
+
+
+      alert(
+        "✅ Story updated successfully."
+      );
+
+
+      loadStories();
+
+    }
+
+
+    /* ================================
+       DELETE
+    ================================= */
+
+    async function deleteStory(id) {
+
+      const article =
+        allArticles.find(
+          item =>
+            String(item.id) ===
+            String(id)
+        );
+
+
+      if (!article) return;
+
+
+      const confirmed =
+        confirm(
+
+          "Are you sure you want to delete this story?\n\n" +
+
+          article.title
+
+        );
+
+
+      if (!confirmed) return;
+
+
+      const result =
+        await supabaseClient
+
+          .from("article")
+
+          .delete()
+
+          .eq(
+            "id",
+            id
+          );
+
+
+      if (result.error) {
+
+        alert(
+          "Delete failed: " +
+          result.error.message
+        );
+
+        return;
+
+      }
+
+
+      alert(
+        "✅ Story deleted successfully."
+      );
+
+
+      loadStories();
+
+    }
+
+
+    /* ================================
+       START
+    ================================= */
+
+    checkLogin();
+
+  </script>
+
+</body>
+</html>
