@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Publish Story | Benue24/7 Trending Gists</title>
+  <meta charset="UTF-8">
 
   <meta
-    name="description"
-    content="Publish news, trending gists, entertainment, sports and politics on Benue24/7 Trending Gists."
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
   >
 
+  <title>Admin | Publish Story | Benue24/7 Trending Gists</title>
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -33,8 +34,8 @@
     }
 
     header h1 {
-      font-size: 27px;
-      margin-bottom: 6px;
+      font-size: 26px;
+      margin-bottom: 5px;
     }
 
     header p {
@@ -47,45 +48,47 @@
       color: white;
       display: flex;
       justify-content: center;
-      gap: 6px;
-      padding: 11px;
+      gap: 8px;
+      padding: 12px;
       overflow-x: auto;
       white-space: nowrap;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
 
-    nav a {
+    nav a,
+    nav button {
       color: white;
       text-decoration: none;
       padding: 8px 12px;
       font-weight: bold;
-      border-radius: 6px;
+      border-radius: 5px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
       font-size: 14px;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav button:hover {
       background: white;
       color: #111;
     }
 
     main {
-      max-width: 900px;
+      max-width: 850px;
       margin: 30px auto;
-      padding: 0 15px 50px;
+      padding: 0 15px;
     }
 
     .publish-box {
       background: white;
-      padding: 28px;
-      border-radius: 16px;
+      padding: 25px;
+      border-radius: 15px;
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
     .publish-box h2 {
-      font-size: 28px;
-      margin-bottom: 7px;
+      font-size: 27px;
+      margin-bottom: 8px;
     }
 
     .intro {
@@ -93,14 +96,11 @@
       margin-bottom: 25px;
     }
 
-    .field {
-      margin-top: 20px;
-    }
-
     label {
       display: block;
       font-weight: bold;
       margin-bottom: 7px;
+      margin-top: 18px;
     }
 
     input,
@@ -120,11 +120,10 @@
     select:focus,
     textarea:focus {
       border-color: #111;
-      box-shadow: 0 0 0 2px rgba(17,17,17,.08);
     }
 
     textarea {
-      min-height: 200px;
+      min-height: 180px;
       resize: vertical;
     }
 
@@ -132,52 +131,13 @@
       min-height: 110px;
     }
 
-    .hint {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 5px;
-    }
-
-    .counter {
-      text-align: right;
-      font-size: 12px;
-      color: #9ca3af;
-      margin-top: 4px;
-    }
-
-    /* IMAGE PREVIEW */
-
-    .image-preview {
-      display: none;
-      margin-top: 14px;
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    .image-preview img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 8px;
-      display: block;
-    }
-
-    .image-preview p {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 7px;
-      text-align: center;
-    }
-
     .publish-button {
       width: 100%;
-      margin-top: 28px;
+      margin-top: 25px;
       border: none;
       background: #111;
       color: white;
-      padding: 16px;
+      padding: 15px;
       border-radius: 9px;
       font-size: 17px;
       font-weight: bold;
@@ -213,34 +173,46 @@
       color: #991b1b;
     }
 
-    .preview-box {
-      margin-top: 25px;
-      padding: 20px;
-      background: #f9fafb;
-      border-radius: 10px;
-      display: none;
+    .login-box {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
-    .preview-box h3 {
+    .login-box h2 {
       margin-bottom: 8px;
     }
 
-    .success-actions {
-      margin-top: 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .login-box p {
+      color: #6b7280;
+      margin-bottom: 20px;
     }
 
-    .success-actions a {
-      display: inline-block;
-      padding: 10px 15px;
-      border-radius: 7px;
+    .login-button {
+      width: 100%;
+      margin-top: 20px;
+      border: none;
       background: #111;
       color: white;
-      text-decoration: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
       font-weight: bold;
-      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .logout-button {
+      background: #dc2626;
+    }
+
+    .admin-bar {
+      background: #ecfdf5;
+      color: #166534;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: bold;
     }
 
     footer {
@@ -248,7 +220,7 @@
       color: white;
       text-align: center;
       padding: 30px 15px;
-      margin-top: 30px;
+      margin-top: 50px;
     }
 
     footer p {
@@ -258,598 +230,761 @@
     }
 
     @media (max-width: 600px) {
-      .publish-box {
-        padding: 19px;
+
+      .publish-box,
+      .login-box {
+        padding: 18px;
       }
 
-      .publish-box h2 {
+      .publish-box h2,
+      .login-box h2 {
         font-size: 23px;
       }
 
-      nav {
-        justify-content: flex-start;
-      }
     }
+
   </style>
+
 </head>
 
 <body>
 
-<header>
-  <h1>BENUE24/7 TRENDING GISTS</h1>
-  <p>
-    Publish News • Trending Gists • Entertainment • Sports • Politics
-  </p>
-</header>
+  <header>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="index.html#news">News</a>
-  <a href="index.html#trending">Trending</a>
-  <a href="index.html#entertainment">Entertainment</a>
-  <a href="index.html#sports">Sports</a>
-  <a href="index.html#politics">Politics</a>
-  <a href="music.html">Music</a>
-</nav>
+    <h1>BENUE24/7 TRENDING GISTS</h1>
 
-<main>
-
-  <div class="publish-box">
-
-    <h2>📝 Publish New Story</h2>
-
-    <p class="intro">
-      Publish your latest story to Benue24/7 Trending Gists.
+    <p>
+      Admin Publishing Panel
     </p>
 
-    <!-- TITLE -->
+  </header>
 
-    <div class="field">
 
-      <label for="title">
-        Story Title *
-      </label>
+  <nav>
 
-      <input
-        id="title"
-        type="text"
-        placeholder="Enter the headline of your story"
-        maxlength="180"
-        required
-      >
+    <a href="index.html">
+      Home
+    </a>
 
-      <div class="counter">
-        <span id="titleCount">0</span>/180
-      </div>
+    <a href="index.html#news">
+      News
+    </a>
 
-    </div>
+    <a href="index.html#trending">
+      Trending
+    </a>
 
-    <!-- CATEGORY -->
+    <a href="index.html#entertainment">
+      Entertainment
+    </a>
 
-    <div class="field">
+    <a href="index.html#sports">
+      Sports
+    </a>
 
-      <label for="category">
-        Category *
-      </label>
+    <a href="index.html#politics">
+      Politics
+    </a>
 
-      <select id="category">
-
-        <option value="news">
-          📰 News
-        </option>
-
-        <option value="trending">
-          🔥 Trending
-        </option>
-
-        <option value="entertainment">
-          🎬 Entertainment
-        </option>
-
-        <option value="sports">
-          ⚽ Sports
-        </option>
-
-        <option value="politics">
-          🏛️ Politics
-        </option>
-
-      </select>
-
-    </div>
-
-    <!-- DESCRIPTION -->
-
-    <div class="field">
-
-      <label for="description">
-        Short Description
-      </label>
-
-      <textarea
-        id="description"
-        maxlength="500"
-        placeholder="Write a short summary of the story..."
-      ></textarea>
-
-      <div class="counter">
-        <span id="descriptionCount">0</span>/500
-      </div>
-
-    </div>
-
-    <!-- IMAGE -->
-
-    <div class="field">
-
-      <label for="image_url">
-        🖼️ Story Image URL
-      </label>
-
-      <input
-        id="image_url"
-        type="url"
-        placeholder="Paste your public image URL here"
-      >
-
-      <div class="hint">
-        Paste the public URL of the image from Supabase Storage or another image host.
-      </div>
-
-      <div
-        id="imagePreview"
-        class="image-preview"
-      >
-
-        <img
-          id="previewImage"
-          src=""
-          alt="Story image preview"
-        >
-
-        <p>
-          ✅ Image preview
-        </p>
-
-      </div>
-
-    </div>
-
-    <!-- FULL STORY -->
-
-    <div class="field">
-
-      <label for="story">
-        Full Story *
-      </label>
-
-      <textarea
-        id="story"
-        placeholder="Write the complete story here..."
-        required
-      ></textarea>
-
-      <div class="counter">
-        <span id="storyCount">0</span> characters
-      </div>
-
-    </div>
-
-    <!-- AUTHOR -->
-
-    <div class="field">
-
-      <label for="author">
-        Author
-      </label>
-
-      <input
-        id="author"
-        type="text"
-        value="Benue24/7 Trending Gists"
-      >
-
-    </div>
-
-    <!-- PUBLISH -->
+    <a href="music.html">
+      Music
+    </a>
 
     <button
-      id="publishButton"
-      class="publish-button"
-      onclick="publishStory()"
+      id="logoutButton"
+      style="display:none;"
+      onclick="logoutAdmin()"
     >
-      🚀 Publish Story
+      🚪 Logout
     </button>
 
-    <div
-      id="message"
-      class="message"
-    ></div>
+  </nav>
 
-    <!-- SUCCESS -->
+
+  <main>
+
+
+    <!-- LOGIN -->
 
     <div
-      id="previewBox"
-      class="preview-box"
+      id="loginBox"
+      class="login-box"
+      style="display:none;"
     >
 
-      <h3>
-        ✅ Story Published Successfully
-      </h3>
+      <h2>
+        🔐 Admin Login
+      </h2>
 
       <p>
-        Your story has been added to Benue24/7 Trending Gists.
+        Sign in with your authorized administrator account to publish stories.
       </p>
 
-      <div class="success-actions">
 
-        <a href="index.html">
-          🏠 View Homepage
-        </a>
+      <label for="email">
+        Email
+      </label>
 
-        <a href="publish.html">
-          ✍️ Publish Another
-        </a>
+      <input
+        id="email"
+        type="email"
+        placeholder="Admin email"
+        autocomplete="email"
+      >
+
+
+      <label for="password">
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Admin password"
+        autocomplete="current-password"
+      >
+
+
+      <button
+        id="loginButton"
+        class="login-button"
+        onclick="loginAdmin()"
+      >
+        🔐 Login
+      </button>
+
+
+      <div
+        id="loginMessage"
+        class="message"
+      ></div>
+
+    </div>
+
+
+    <!-- PUBLISH PANEL -->
+
+    <div
+      id="adminPanel"
+      style="display:none;"
+    >
+
+      <div class="admin-bar">
+
+        ✅ You are logged in as an administrator.
+
+      </div>
+
+
+      <div class="publish-box">
+
+        <h2>
+          📝 Publish New Story
+        </h2>
+
+        <p class="intro">
+          Add a new story to Benue24/7 Trending Gists.
+        </p>
+
+
+        <label for="title">
+          Story Title *
+        </label>
+
+        <input
+          id="title"
+          type="text"
+          placeholder="Enter the headline of your story"
+          required
+        >
+
+
+        <label for="category">
+          Category *
+        </label>
+
+        <select id="category">
+
+          <option value="news">
+            📰 News
+          </option>
+
+          <option value="trending">
+            🔥 Trending
+          </option>
+
+          <option value="entertainment">
+            🎬 Entertainment
+          </option>
+
+          <option value="sports">
+            ⚽ Sports
+          </option>
+
+          <option value="politics">
+            🏛️ Politics
+          </option>
+
+        </select>
+
+
+        <label for="description">
+          Short Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Write a short summary of the story..."
+        ></textarea>
+
+
+        <label for="image_url">
+          Story Image URL
+        </label>
+
+        <input
+          id="image_url"
+          type="url"
+          placeholder="https://example.com/image.jpg"
+        >
+
+
+        <label for="story">
+          Full Story *
+        </label>
+
+        <textarea
+          id="story"
+          placeholder="Write the complete story here..."
+          required
+        ></textarea>
+
+
+        <label for="author">
+          Author
+        </label>
+
+        <input
+          id="author"
+          type="text"
+          value="Benue24/7 Trending Gists"
+        >
+
+
+        <button
+          id="publishButton"
+          class="publish-button"
+          onclick="publishStory()"
+        >
+          🚀 Publish Story
+        </button>
+
+
+        <div
+          id="message"
+          class="message"
+        ></div>
 
       </div>
 
     </div>
 
-  </div>
+  </main>
 
-</main>
 
-<footer>
+  <footer>
 
-  <h3>
-    BENUE24/7 TRENDING GISTS
-  </h3>
+    <h3>
+      BENUE24/7 TRENDING GISTS
+    </h3>
 
-  <p>
-    News • Trending Gists • Entertainment • Sports • Politics • Music
-  </p>
+    <p>
+      News • Trending Gists • Entertainment • Sports • Politics • Music
+    </p>
 
-  <p>
-    © 2026 Benue24/7 Trending Gists
-  </p>
+    <p>
+      © 2026 Benue24/7 Trending Gists
+    </p>
 
-</footer>
+  </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="config.js"></script>
+  <!-- SUPABASE -->
 
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  let supabaseClient = null;
+  <script src="config.js"></script>
 
-  /* SUPABASE CONNECTION */
 
-  try {
+  <script>
 
-    if (
-      typeof SUPABASE_URL !== "undefined" &&
-      typeof SUPABASE_ANON_KEY !== "undefined"
-    ) {
+    let supabaseClient = null;
 
-      supabaseClient =
-        window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_ANON_KEY
-        );
+
+    /* ================================
+       SUPABASE CONNECTION
+    ================================= */
+
+    try {
+
+      if (
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
+
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Supabase connection error:",
+        error
+      );
 
     }
 
-  } catch (error) {
 
-    console.error(
-      "Supabase connection error:",
-      error
-    );
+    /* ================================
+       SHOW LOGIN / ADMIN
+    ================================= */
 
-  }
+    async function checkAdmin() {
 
+      if (!supabaseClient) {
 
-  /* SLUG */
+        document.getElementById(
+          "loginBox"
+        ).style.display = "block";
 
-  function createSlug(text) {
-
-    return text
-
-      .toLowerCase()
-
-      .trim()
-
-      .replace(
-        /[^a-z0-9\s-]/g,
-        ""
-      )
-
-      .replace(
-        /\s+/g,
-        "-"
-      )
-
-      .replace(
-        /-+/g,
-        "-"
-      )
-
-      + "-" +
-      Date.now();
-
-  }
-
-
-  /* MESSAGE */
-
-  function showMessage(
-    text,
-    type
-  ) {
-
-    const box =
-      document.getElementById(
-        "message"
-      );
-
-    box.textContent = text;
-
-    box.className =
-      "message " + type;
-
-  }
-
-
-  /* IMAGE PREVIEW */
-
-  const imageInput =
-    document.getElementById(
-      "image_url"
-    );
-
-  const imagePreview =
-    document.getElementById(
-      "imagePreview"
-    );
-
-  const previewImage =
-    document.getElementById(
-      "previewImage"
-    );
-
-
-  imageInput.addEventListener(
-    "input",
-    function() {
-
-      const url =
-        imageInput.value.trim();
-
-
-      if (!url) {
-
-        imagePreview.style.display =
-          "none";
-
-        previewImage.src =
-          "";
+        showLoginMessage(
+          "Supabase connection is not configured.",
+          "error"
+        );
 
         return;
 
       }
 
 
-      previewImage.onload =
-        function() {
-
-          imagePreview.style.display =
-            "block";
-
-        };
+      const result =
+        await supabaseClient.auth.getSession();
 
 
-      previewImage.onerror =
-        function() {
-
-          imagePreview.style.display =
-            "none";
-
-        };
+      const session =
+        result.data.session;
 
 
-      previewImage.src =
-        url;
+      if (session) {
+
+        showAdminPanel();
+
+      } else {
+
+        showLoginBox();
+
+      }
 
     }
-  );
 
 
-  /* CHARACTER COUNTERS */
-
-  const titleInput =
-    document.getElementById(
-      "title"
-    );
-
-  const descriptionInput =
-    document.getElementById(
-      "description"
-    );
-
-  const storyInput =
-    document.getElementById(
-      "story"
-    );
-
-
-  titleInput.addEventListener(
-    "input",
-    function() {
+    function showLoginBox() {
 
       document.getElementById(
-        "titleCount"
-      ).textContent =
-        titleInput.value.length;
+        "loginBox"
+      ).style.display = "block";
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display = "none";
+
+      document.getElementById(
+        "logoutButton"
+      ).style.display = "none";
 
     }
-  );
 
 
-  descriptionInput.addEventListener(
-    "input",
-    function() {
+    function showAdminPanel() {
 
       document.getElementById(
-        "descriptionCount"
-      ).textContent =
-        descriptionInput.value.length;
+        "loginBox"
+      ).style.display = "none";
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display = "block";
+
+      document.getElementById(
+        "logoutButton"
+      ).style.display = "inline-block";
 
     }
-  );
 
 
-  storyInput.addEventListener(
-    "input",
-    function() {
+    /* ================================
+       LOGIN
+    ================================= */
+
+    async function loginAdmin() {
+
+      if (!supabaseClient) {
+
+        showLoginMessage(
+          "Supabase connection is not configured.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const email =
+        document.getElementById(
+          "email"
+        ).value.trim();
+
+
+      const password =
+        document.getElementById(
+          "password"
+        ).value;
+
+
+      if (!email || !password) {
+
+        showLoginMessage(
+          "Please enter your email and password.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const button =
+        document.getElementById(
+          "loginButton"
+        );
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "Logging in...";
+
+
+      const result =
+        await supabaseClient.auth.signInWithPassword({
+
+          email: email,
+
+          password: password
+
+        });
+
+
+      if (result.error) {
+
+        console.error(
+          "Login error:",
+          result.error
+        );
+
+
+        showLoginMessage(
+          "Login failed: " +
+          result.error.message,
+          "error"
+        );
+
+
+        button.disabled = false;
+
+        button.textContent =
+          "🔐 Login";
+
+        return;
+
+      }
+
 
       document.getElementById(
-        "storyCount"
-      ).textContent =
-        storyInput.value.length;
+        "email"
+      ).value = "";
+
+      document.getElementById(
+        "password"
+      ).value = "";
+
+
+      showAdminPanel();
+
 
     }
-  );
 
 
-  /* PUBLISH */
+    /* ================================
+       LOGOUT
+    ================================= */
 
-  async function publishStory() {
+    async function logoutAdmin() {
 
-    const button =
-      document.getElementById(
-        "publishButton"
-      );
-
-
-    const title =
-      titleInput.value.trim();
+      if (!supabaseClient) return;
 
 
-    const category =
-      document.getElementById(
-        "category"
-      ).value;
+      await supabaseClient.auth.signOut();
 
 
-    const description =
-      descriptionInput.value.trim();
+      showLoginBox();
+
+    }
 
 
-    const image_url =
-      imageInput.value.trim();
+    /* ================================
+       LOGIN MESSAGE
+    ================================= */
+
+    function showLoginMessage(
+      text,
+      type
+    ) {
+
+      const box =
+        document.getElementById(
+          "loginMessage"
+        );
 
 
-    const story =
-      storyInput.value.trim();
+      box.textContent = text;
+
+      box.className =
+        "message " + type;
+
+    }
 
 
-    const author =
-      document.getElementById(
-        "author"
-      ).value.trim();
+    /* ================================
+       PUBLISH MESSAGE
+    ================================= */
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      const box =
+        document.getElementById(
+          "message"
+        );
 
 
-    if (!title) {
+      box.textContent = text;
+
+      box.className =
+        "message " + type;
+
+    }
+
+
+    /* ================================
+       CREATE SLUG
+    ================================= */
+
+    function createSlug(text) {
+
+      return text
+
+        .toLowerCase()
+
+        .trim()
+
+        .replace(
+          /[^a-z0-9\s-]/g,
+          ""
+        )
+
+        .replace(
+          /\s+/g,
+          "-"
+        )
+
+        .replace(
+          /-+/g,
+          "-"
+        )
+
+        +
+        "-" +
+        Date.now();
+
+    }
+
+
+    /* ================================
+       PUBLISH STORY
+    ================================= */
+
+    async function publishStory() {
+
+      if (!supabaseClient) {
+
+        showMessage(
+          "Supabase connection is not configured.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /* VERIFY LOGIN */
+
+      const sessionResult =
+        await supabaseClient.auth.getSession();
+
+
+      const session =
+        sessionResult.data.session;
+
+
+      if (!session) {
+
+        showLoginBox();
+
+        showLoginMessage(
+          "Please login before publishing.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const title =
+        document.getElementById(
+          "title"
+        ).value.trim();
+
+
+      const category =
+        document.getElementById(
+          "category"
+        ).value;
+
+
+      const description =
+        document.getElementById(
+          "description"
+        ).value.trim();
+
+
+      const image_url =
+        document.getElementById(
+          "image_url"
+        ).value.trim();
+
+
+      const story =
+        document.getElementById(
+          "story"
+        ).value.trim();
+
+
+      const author =
+        document.getElementById(
+          "author"
+        ).value.trim();
+
+
+      if (!title) {
+
+        showMessage(
+          "Please enter a story title.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (!story) {
+
+        showMessage(
+          "Please enter the full story.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const button =
+        document.getElementById(
+          "publishButton"
+        );
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "Publishing...";
+
 
       showMessage(
-        "Please enter a story title.",
-        "error"
+        "Publishing your story...",
+        "success"
       );
 
-      titleInput.focus();
 
-      return;
+      const article = {
 
-    }
+        title: title,
 
+        slug:
+          createSlug(title),
 
-    if (!story) {
+        description:
+          description,
 
-      showMessage(
-        "Please enter the full story.",
-        "error"
-      );
+        story:
+          story,
 
-      storyInput.focus();
+        image_url:
+          image_url || null,
 
-      return;
+        category:
+          category,
 
-    }
+        author:
+          author ||
+          "Benue24/7 Trending Gists",
 
+        created_at:
+          new Date().toISOString()
 
-    if (!supabaseClient) {
+      };
 
-      showMessage(
-        "Supabase connection is not configured.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-      "⏳ Publishing...";
-
-
-    showMessage(
-      "Publishing your story...",
-      "success"
-    );
-
-
-    const article = {
-
-      title:
-        title,
-
-      slug:
-        createSlug(title),
-
-      category:
-        category,
-
-      description:
-        description || null,
-
-      story:
-        story,
-
-      image_url:
-        image_url || null,
-
-      author:
-        author ||
-        "Benue24/7 Trending Gists",
-
-      created_at:
-        new Date().toISOString()
-
-    };
-
-
-    try {
 
       const result =
         await supabaseClient
 
           .from("article")
 
-          .insert([article]);
+          .insert([
+            article
+          ]);
 
 
       if (result.error) {
@@ -884,63 +1019,20 @@
 
 
       document.getElementById(
-        "previewBox"
-      ).style.display =
-        "block";
-
-
-      /* RESET FORM */
-
-      titleInput.value = "";
-
-      descriptionInput.value = "";
-
-      imageInput.value = "";
-
-      storyInput.value = "";
-
+        "title"
+      ).value = "";
 
       document.getElementById(
-        "titleCount"
-      ).textContent = "0";
-
-
-      document.getElementById(
-        "descriptionCount"
-      ).textContent = "0";
-
+        "description"
+      ).value = "";
 
       document.getElementById(
-        "storyCount"
-      ).textContent = "0";
+        "image_url"
+      ).value = "";
 
-
-      imagePreview.style.display =
-        "none";
-
-
-      previewImage.src =
-        "";
-
-
-      button.disabled = false;
-
-      button.textContent =
-        "🚀 Publish Story";
-
-
-    } catch (error) {
-
-      console.error(
-        "Unexpected publishing error:",
-        error
-      );
-
-
-      showMessage(
-        "Something went wrong while publishing.",
-        "error"
-      );
+      document.getElementById(
+        "story"
+      ).value = "";
 
 
       button.disabled = false;
@@ -950,9 +1042,15 @@
 
     }
 
-  }
 
-</script>
+    /* ================================
+       START
+    ================================= */
+
+    checkAdmin();
+
+
+  </script>
 
 </body>
 </html>
