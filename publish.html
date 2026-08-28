@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <meta charset="UTF-8">
@@ -10,9 +9,12 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    Publish Story | Benue24/7 Trending Gists
-  </title>
+  <title>Article | Benue24/7 Trending Gists</title>
+
+  <meta
+    name="description"
+    content="Read the latest news, trending stories, entertainment, sports and politics from Benue24/7 Trending Gists."
+  >
 
   <style>
 
@@ -26,43 +28,72 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f3f4f6;
       color: #111827;
-      line-height: 1.6;
+      line-height: 1.7;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
 
     header {
       background: #111;
       color: white;
       padding: 25px 15px;
-      text-align: center;
     }
 
-    header h1 {
-      font-size: 26px;
-      margin-bottom: 5px;
+    .header-inner {
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    header p {
+    .brand h1 {
+      font-size: 29px;
+      font-weight: 900;
+    }
+
+    .brand p {
       color: #d1d5db;
       font-size: 14px;
+      margin-top: 5px;
     }
+
+    .publish-button {
+      background: #e11d48;
+      color: white;
+      padding: 11px 17px;
+      border-radius: 7px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    /* NAV */
 
     nav {
       background: #222;
       color: white;
       display: flex;
       justify-content: center;
-      gap: 8px;
-      padding: 12px;
+      gap: 5px;
+      padding: 11px;
       overflow-x: auto;
       white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      padding: 7px 12px;
-      font-weight: bold;
-      border-radius: 5px;
+      padding: 8px 13px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     nav a:hover {
@@ -70,189 +101,226 @@
       color: #111;
     }
 
+    /* MAIN */
+
     main {
-      max-width: 850px;
+      max-width: 900px;
       margin: 30px auto;
-      padding: 0 15px;
+      padding: 0 15px 60px;
     }
 
-    .publish-box {
+    /* ARTICLE */
+
+    .article {
       background: white;
-      padding: 25px;
-      border-radius: 15px;
+      border-radius: 16px;
+      overflow: hidden;
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
-    .publish-box h2 {
-      font-size: 27px;
-      margin-bottom: 8px;
+    .article-content {
+      padding: 30px;
     }
 
-    .intro {
+    .category {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+    }
+
+    .article h2 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
+
+    .description {
       color: #6b7280;
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .meta {
+      color: #6b7280;
+      font-size: 13px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 18px;
       margin-bottom: 25px;
     }
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-      margin-top: 18px;
-    }
-
-    input,
-    select,
-    textarea {
+    .article-image {
       width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      padding: 13px;
-      font-size: 16px;
-      font-family: inherit;
-      outline: none;
-      background: white;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #111;
-    }
-
-    textarea {
-      min-height: 180px;
-      resize: vertical;
-    }
-
-    #description {
-      min-height: 110px;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 5px;
-    }
-
-    /* IMAGE UPLOAD */
-
-    .image-upload-box {
-      border: 2px dashed #d1d5db;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      background: #f9fafb;
-      margin-top: 8px;
-    }
-
-    .image-upload-box input {
-      border: none;
-      padding: 10px 0;
-      background: transparent;
-    }
-
-    .image-preview {
-      display: none;
-      margin-top: 15px;
-    }
-
-    .image-preview img {
-      width: 100%;
-      max-height: 400px;
+      max-height: 550px;
       object-fit: cover;
-      border-radius: 10px;
+      display: block;
     }
 
-    .image-name {
-      font-size: 13px;
-      color: #6b7280;
-      margin-top: 8px;
-      word-break: break-word;
+    .story {
+      font-size: 18px;
+      line-height: 1.85;
+      white-space: pre-line;
     }
 
-    .upload-status {
-      margin-top: 10px;
-      font-size: 13px;
-      font-weight: bold;
-      display: none;
+    .story p {
+      margin-bottom: 20px;
     }
 
-    .publish-button {
-      width: 100%;
-      margin-top: 25px;
+    /* SHARE */
+
+    .share-section {
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .share-section h3 {
+      margin-bottom: 12px;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .share-button {
       border: none;
+      border-radius: 7px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .facebook {
+      background: #1877f2;
+      color: white;
+    }
+
+    .whatsapp {
+      background: #25d366;
+      color: white;
+    }
+
+    .copy {
       background: #111;
       color: white;
-      padding: 15px;
-      border-radius: 9px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
     }
 
-    .publish-button:hover {
-      background: #333;
+    /* RELATED */
+
+    .related {
+      margin-top: 35px;
     }
 
-    .publish-button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
+    .related h2 {
+      margin-bottom: 15px;
     }
+
+    .related-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .related-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 9px rgba(0,0,0,.06);
+    }
+
+    .related-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .related-body {
+      padding: 13px;
+    }
+
+    .related-body h3 {
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    /* MESSAGE */
 
     .message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      display: none;
+      background: white;
+      border-radius: 12px;
+      padding: 35px 20px;
+      text-align: center;
+      color: #6b7280;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 18px;
+      background: #111;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 7px;
       font-weight: bold;
     }
 
-    .success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .error {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .preview {
-      margin-top: 25px;
-      padding: 18px;
-      background: #f9fafb;
-      border-radius: 10px;
-      display: none;
-    }
-
-    .preview h3 {
-      margin-bottom: 10px;
-    }
+    /* FOOTER */
 
     footer {
       background: #111;
       color: white;
       text-align: center;
-      padding: 30px 15px;
-      margin-top: 50px;
+      padding: 35px 15px;
     }
 
     footer p {
       color: #bbb;
-      margin-top: 7px;
+      margin-top: 8px;
       font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    /* MOBILE */
 
-      .publish-box {
-        padding: 18px;
+    @media (max-width: 700px) {
+
+      .header-inner {
+        flex-direction: column;
+        text-align: center;
       }
 
-      .publish-box h2 {
-        font-size: 23px;
+      .brand h1 {
+        font-size: 25px;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .article-content {
+        padding: 20px;
+      }
+
+      .article h2 {
+        font-size: 28px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+
+      .story {
+        font-size: 17px;
+      }
+
+      .related-list {
+        grid-template-columns: 1fr;
       }
 
     }
@@ -261,7 +329,6 @@
 
 </head>
 
-
 <body>
 
 
@@ -269,13 +336,28 @@
 
   <header>
 
-    <h1>
-      BENUE24/7 TRENDING GISTS
-    </h1>
+    <div class="header-inner">
 
-    <p>
-      Publish News • Trending Gists • Entertainment • Sports • Politics
-    </p>
+      <div class="brand">
+
+        <h1>
+          BENUE24/7 TRENDING GISTS
+        </h1>
+
+        <p>
+          Your home for Benue news, entertainment, sports, politics & music
+        </p>
+
+      </div>
+
+      <a
+        href="publish.html"
+        class="publish-button"
+      >
+        ✍️ Publish Story
+      </a>
+
+    </div>
 
   </header>
 
@@ -312,10 +394,6 @@
       🎵 Music
     </a>
 
-    <a href="admin.html">
-      🔐 Admin
-    </a>
-
   </nav>
 
 
@@ -323,186 +401,43 @@
 
   <main>
 
-    <div class="publish-box">
-
-      <h2>
-        📝 Publish New Story
-      </h2>
-
-      <p class="intro">
-        Add a new story to Benue24/7 Trending Gists.
-      </p>
+    <a
+      href="index.html"
+      class="back-button"
+    >
+      ← Back to Home
+    </a>
 
 
-      <!-- TITLE -->
+    <div
+      id="articleContainer"
+    >
 
-      <label for="title">
-        Story Title *
-      </label>
+      <div class="message">
 
-      <input
-        id="title"
-        type="text"
-        placeholder="Enter the headline of your story"
-        required
-      >
-
-
-      <!-- CATEGORY -->
-
-      <label for="category">
-        Category *
-      </label>
-
-      <select id="category">
-
-        <option value="news">
-          📰 News
-        </option>
-
-        <option value="trending">
-          🔥 Trending
-        </option>
-
-        <option value="entertainment">
-          🎬 Entertainment
-        </option>
-
-        <option value="sports">
-          ⚽ Sports
-        </option>
-
-        <option value="politics">
-          🏛️ Politics
-        </option>
-
-      </select>
-
-
-      <!-- DESCRIPTION -->
-
-      <label for="description">
-        Short Description
-      </label>
-
-      <textarea
-        id="description"
-        placeholder="Write a short summary of the story..."
-      ></textarea>
-
-
-      <!-- IMAGE -->
-
-      <label for="Image">
-        📷 Image
-      </label>
-
-      <div class="image-upload-box">
-
-        <p>
-          Choose an image from your phone
-        </p>
-
-        <input
-          id="Image"
-          type="file"
-          accept="image/*"
-          onchange="previewImage(event)"
-        >
-
-        <div
-          id="imagePreview"
-          class="image-preview"
-        >
-
-          <img
-            id="previewImage"
-            src=""
-            alt="Story image preview"
-          >
-
-          <div
-            id="imageName"
-            class="image-name"
-          ></div>
-
-        </div>
-
-        <div
-          id="uploadStatus"
-          class="upload-status"
-        ></div>
-
-      </div>
-
-
-      <!-- FULL STORY -->
-
-      <label for="story">
-        Full Story *
-      </label>
-
-      <textarea
-        id="story"
-        placeholder="Write the complete story here..."
-        required
-      ></textarea>
-
-
-      <!-- AUTHOR -->
-
-      <label for="author">
-        Author
-      </label>
-
-      <input
-        id="author"
-        type="text"
-        value="Benue24/7 Trending Gists"
-      >
-
-
-      <!-- PUBLISH -->
-
-      <button
-        id="publishButton"
-        class="publish-button"
-        onclick="publishStory()"
-      >
-        🚀 Publish Story
-      </button>
-
-
-      <!-- MESSAGE -->
-
-      <div
-        id="message"
-        class="message"
-      ></div>
-
-
-      <!-- SUCCESS -->
-
-      <div
-        id="preview"
-        class="preview"
-      >
-
-        <h3>
-          ✅ Story Published Successfully
-        </h3>
-
-        <p>
-          Your story has been added to the website.
-        </p>
-
-        <p style="margin-top:10px;">
-          Go to the homepage and refresh it to see the story.
-        </p>
+        📰 Loading article...
 
       </div>
 
     </div>
+
+
+    <section
+      id="relatedSection"
+      class="related"
+      style="display:none;"
+    >
+
+      <h2>
+        📰 You May Also Like
+      </h2>
+
+      <div
+        id="relatedList"
+        class="related-list"
+      ></div>
+
+    </section>
 
   </main>
 
@@ -538,9 +473,7 @@
     let supabaseClient = null;
 
 
-    /* ================================
-       CONNECT TO SUPABASE
-    ================================= */
+    /* SUPABASE */
 
     try {
 
@@ -560,81 +493,14 @@
     } catch (error) {
 
       console.error(
-        "Supabase connection error:",
+        "Supabase error:",
         error
       );
 
     }
 
 
-    /* ================================
-       CHECK ADMIN LOGIN
-    ================================= */
-
-    async function checkAdminLogin() {
-
-      if (!supabaseClient) {
-
-        showMessage(
-          "Supabase connection is not configured.",
-          "error"
-        );
-
-        return false;
-
-      }
-
-      const result =
-        await supabaseClient.auth.getSession();
-
-
-      if (!result.data.session) {
-
-        showMessage(
-          "Please login to your admin account before publishing.",
-          "error"
-        );
-
-        return false;
-
-      }
-
-      return true;
-
-    }
-
-
-    /* ================================
-       CREATE SLUG
-    ================================= */
-
-    function createSlug(text) {
-
-      return text
-        .toLowerCase()
-        .trim()
-        .replace(
-          /[^a-z0-9\s-]/g,
-          ""
-        )
-        .replace(
-          /\s+/g,
-          "-"
-        )
-        .replace(
-          /-+/g,
-          "-"
-        )
-        +
-        "-" +
-        Date.now();
-
-    }
-
-
-    /* ================================
-       ESCAPE HTML
-    ================================= */
+    /* ESCAPE HTML */
 
     function escapeHTML(value) {
 
@@ -668,480 +534,133 @@
     }
 
 
-    /* ================================
-       SHOW MESSAGE
-    ================================= */
-
-    function showMessage(
-      text,
-      type
-    ) {
-
-      const box =
-        document.getElementById(
-          "message"
-        );
-
-      box.textContent =
-        text;
-
-      box.className =
-        "message " + type;
-
-    }
-
-
-    /* ================================
-       IMAGE PREVIEW
-    ================================= */
-
-    function previewImage(event) {
-
-      const file =
-        event.target.files[0];
-
-
-      const preview =
-        document.getElementById(
-          "imagePreview"
-        );
-
-
-      const image =
-        document.getElementById(
-          "previewImage"
-        );
-
-
-      const name =
-        document.getElementById(
-          "imageName"
-        );
-
-
-      const status =
-        document.getElementById(
-          "uploadStatus"
-        );
-
-
-      if (!file) {
-
-        preview.style.display =
-          "none";
-
-        return;
-
-      }
-
-
-      if (!file.type.startsWith("image/")) {
-
-        showMessage(
-          "Please choose a valid image file.",
-          "error"
-        );
-
-        event.target.value = "";
-
-        return;
-
-      }
-
-
-      /* MAX 5MB */
-
-      if (
-        file.size >
-        5 * 1024 * 1024
-      ) {
-
-        showMessage(
-          "Image is too large. Maximum size is 5MB.",
-          "error"
-        );
-
-        event.target.value = "";
-
-        return;
-
-      }
-
-
-      const objectURL =
-        URL.createObjectURL(
-          file
-        );
-
-
-      image.src =
-        objectURL;
-
-
-      name.textContent =
-        file.name;
-
-
-      status.style.display =
-        "none";
-
-
-      preview.style.display =
-        "block";
-
-    }
-
-
-    /* ================================
-       UPLOAD IMAGE
-    ================================= */
-
-    async function uploadStoryImage(file) {
-
-      if (!file) {
-
-        return null;
-
-      }
-
-
-      const extension =
-        file.name
-          .split(".")
-          .pop()
-          .toLowerCase();
-
-
-      const fileName =
-        "story-" +
-        Date.now() +
-        "-" +
-        Math.random()
-          .toString(36)
-          .substring(2, 10) +
-        "." +
-        extension;
-
-
-      const filePath =
-        fileName;
-
-
-      const status =
-        document.getElementById(
-          "uploadStatus"
-        );
-
-
-      status.textContent =
-        "Uploading image...";
-
-      status.style.display =
-        "block";
-
-
-      const result =
-        await supabaseClient.storage
-
-          .from("story-images")
-
-          .upload(
-            filePath,
-            file,
-            {
-              cacheControl: "3600",
-              upsert: false
-            }
-          );
-
-
-      if (result.error) {
-
-        console.error(
-          "Image upload error:",
-          result.error
-        );
-
-        throw new Error(
-          "Image upload failed: " +
-          result.error.message
-        );
-
-      }
-
-
-      const publicResult =
-        supabaseClient.storage
-
-          .from("story-images")
-
-          .getPublicUrl(
-            filePath
-          );
-
-
-      if (
-        !publicResult.data ||
-        !publicResult.data.publicUrl
-      ) {
-
-        throw new Error(
-          "Unable to create image URL."
-        );
-
-      }
-
-
-      status.textContent =
-        "✅ Image uploaded successfully.";
-
-
-      return (
-        publicResult.data.publicUrl
+    /* GET SLUG */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
       );
 
-    }
+    const slug =
+      params.get("slug");
 
 
-    /* ================================
-       PUBLISH STORY
-    ================================= */
+    /* LOAD ARTICLE */
 
-    async function publishStory() {
+    async function loadArticle() {
 
-      const button =
+      const container =
         document.getElementById(
-          "publishButton"
+          "articleContainer"
         );
 
 
-      /* LOGIN CHECK */
+      if (!slug) {
 
-      const loggedIn =
-        await checkAdminLogin();
+        container.innerHTML = `
 
+          <div class="message">
 
-      if (!loggedIn) {
+            ❌ Article not found.
+
+          </div>
+
+        `;
 
         return;
 
       }
 
 
-      /* GET VALUES */
+      if (!supabaseClient) {
 
-      const title =
-        document.getElementById(
-          "title"
-        ).value.trim();
+        container.innerHTML = `
 
+          <div class="message">
 
-      const category =
-        document.getElementById(
-          "category"
-        ).value;
+            ⚠️ Supabase connection is not configured.
 
+          </div>
 
-      const description =
-        document.getElementById(
-          "description"
-        ).value.trim();
-
-
-      const story =
-        document.getElementById(
-          "story"
-        ).value.trim();
-
-
-      const author =
-        document.getElementById(
-          "author"
-        ).value.trim();
-
-
-      const imageInput =
-        document.getElementById(
-          "storyImage"
-        );
-
-
-      const imageFile =
-        imageInput.files[0];
-
-
-      /* REQUIRED */
-
-      if (!title) {
-
-        showMessage(
-          "Please enter a story title.",
-          "error"
-        );
+        `;
 
         return;
 
       }
-
-
-      if (!story) {
-
-        showMessage(
-          "Please enter the full story.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      /* DISABLE */
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Publishing...";
-
-
-      showMessage(
-        "Preparing your story...",
-        "success"
-      );
 
 
       try {
-
-        /* IMAGE */
-
-        let image_url =
-          null;
-
-
-        if (imageFile) {
-
-          image_url =
-            await uploadStoryImage(
-              imageFile
-            );
-
-        }
-
-
-        /* SLUG */
-
-        const slug =
-          createSlug(
-            title
-          );
-
-
-        /* ARTICLE */
-
-        const article = {
-
-          title:
-            title,
-
-          slug:
-            slug,
-
-          description:
-            description,
-
-          story:
-            story,
-
-          image_url:
-            image_url,
-
-          category:
-            category,
-
-          author:
-            author ||
-            "Benue24/7 Trending Gists",
-
-          created_at:
-            new Date().toISOString()
-
-        };
-
-
-        /* INSERT */
 
         const result =
           await supabaseClient
 
             .from("article")
 
-            .insert([
-              article
-            ]);
+            .select("*")
+
+            .eq(
+              "slug",
+              slug
+            )
+
+            .limit(1);
 
 
         if (result.error) {
 
           console.error(
-            "Publishing error:",
             result.error
           );
 
-          throw new Error(
-            "Publishing failed: " +
-            result.error.message
-          );
+
+          container.innerHTML = `
+
+            <div class="message">
+
+              ⚠️ Unable to load this article.
+
+            </div>
+
+          `;
+
+          return;
 
         }
 
 
-        /* SUCCESS */
+        const article =
+          result.data &&
+          result.data.length
+            ? result.data[0]
+            : null;
 
-        showMessage(
-          "✅ Story published successfully!",
-          "success"
+
+        if (!article) {
+
+          container.innerHTML = `
+
+            <div class="message">
+
+              ❌ This article could not be found.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        displayArticle(
+          article
         );
 
 
-        document.getElementById(
-          "preview"
-        ).style.display =
-          "block";
-
-
-        /* CLEAR */
-
-        document.getElementById(
-          "title"
-        ).value = "";
-
-
-        document.getElementById(
-          "description"
-        ).value = "";
-
-
-        document.getElementById(
-          "story"
-        ).value = "";
-
-
-        document.getElementById(
-          "storyImage"
-        ).value = "";
-
-
-        document.getElementById(
-          "imagePreview"
-        ).style.display =
-          "none";
-
-
-        document.getElementById(
-          "uploadStatus"
-        ).style.display =
-          "none";
+        loadRelatedArticles(
+          article.category,
+          article.id
+        );
 
 
       } catch (error) {
@@ -1151,27 +670,452 @@
         );
 
 
-        showMessage(
-          error.message ||
-          "Something went wrong.",
-          "error"
+        container.innerHTML = `
+
+          <div class="message">
+
+            ⚠️ Something went wrong.
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* DISPLAY ARTICLE */
+
+    function displayArticle(
+      article
+    ) {
+
+      const container =
+        document.getElementById(
+          "articleContainer"
+        );
+
+
+      const title =
+        article.title ||
+        "Untitled Story";
+
+
+      const description =
+        article.description ||
+        "";
+
+
+      const story =
+        article.story ||
+        article.content ||
+        "";
+
+
+      const category =
+        article.category ||
+        "news";
+
+
+      const author =
+        article.author ||
+        "Benue24/7 Trending Gists";
+
+
+      const image =
+        article.image_url ||
+        "";
+
+
+      const date =
+        article.created_at
+          ? new Date(
+              article.created_at
+            ).toLocaleDateString(
+              "en-GB",
+              {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+              }
+            )
+          : "";
+
+
+      const imageHTML =
+        image
+
+          ? `
+
+            <img
+              src="${escapeHTML(image)}"
+              class="article-image"
+              alt="${escapeHTML(title)}"
+            >
+
+          `
+
+          : "";
+
+
+      document.title =
+        title +
+        " | Benue24/7 Trending Gists";
+
+
+      container.innerHTML = `
+
+        <article class="article">
+
+          ${imageHTML}
+
+          <div class="article-content">
+
+            <span class="category">
+
+              ${escapeHTML(category)}
+
+            </span>
+
+            <h2>
+
+              ${escapeHTML(title)}
+
+            </h2>
+
+            ${
+              description
+
+                ? `
+
+                  <div class="description">
+
+                    ${escapeHTML(
+                      description
+                    )}
+
+                  </div>
+
+                `
+
+                : ""
+
+            }
+
+            <div class="meta">
+
+              ✍️ By
+              <strong>
+                ${escapeHTML(author)}
+              </strong>
+
+              ${
+                date
+                  ? `
+                    • Published
+                    ${escapeHTML(date)}
+                  `
+                  : ""
+              }
+
+            </div>
+
+            <div class="story">
+
+              ${formatStory(
+                story
+              )}
+
+            </div>
+
+
+            <!-- SHARE -->
+
+            <div class="share-section">
+
+              <h3>
+                📤 Share This Story
+              </h3>
+
+              <div class="share-buttons">
+
+                <button
+                  class="share-button facebook"
+                  onclick="shareFacebook()"
+                >
+                  Facebook
+                </button>
+
+                <button
+                  class="share-button whatsapp"
+                  onclick="shareWhatsApp()"
+                >
+                  WhatsApp
+                </button>
+
+                <button
+                  class="share-button copy"
+                  onclick="copyArticleLink()"
+                >
+                  🔗 Copy Link
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    /* FORMAT STORY */
+
+    function formatStory(
+      text
+    ) {
+
+      return escapeHTML(
+        text
+      )
+      .split(/\n\s*\n/)
+      .map(
+        function(paragraph) {
+
+          return "<p>" +
+            paragraph
+              .replace(
+                /\n/g,
+                "<br>"
+              ) +
+            "</p>";
+
+        }
+      )
+      .join("");
+
+    }
+
+
+    /* FACEBOOK */
+
+    function shareFacebook() {
+
+      const url =
+        encodeURIComponent(
+          window.location.href
+        );
+
+
+      window.open(
+
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        url,
+
+        "_blank"
+
+      );
+
+    }
+
+
+    /* WHATSAPP */
+
+    function shareWhatsApp() {
+
+      const text =
+        encodeURIComponent(
+
+          document.title +
+          "\n\n" +
+          window.location.href
+
+        );
+
+
+      window.open(
+
+        "https://wa.me/?text=" +
+        text,
+
+        "_blank"
+
+      );
+
+    }
+
+
+    /* COPY LINK */
+
+    async function copyArticleLink() {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+
+        alert(
+          "✅ Article link copied!"
+        );
+
+      } catch (error) {
+
+        alert(
+          "Copy failed. Please copy the URL from your browser."
         );
 
       }
 
+    }
 
-      /* ENABLE */
 
-      button.disabled =
-        false;
+    /* RELATED STORIES */
 
-      button.textContent =
-        "🚀 Publish Story";
+    async function loadRelatedArticles(
+      category,
+      currentId
+    ) {
+
+      if (!supabaseClient)
+        return;
+
+
+      try {
+
+        const result =
+          await supabaseClient
+
+            .from("article")
+
+            .select(
+              "id,title,slug,image_url,category"
+            )
+
+            .eq(
+              "category",
+              category
+            )
+
+            .neq(
+              "id",
+              currentId
+            )
+
+            .order(
+              "created_at",
+              {
+                ascending: false
+              }
+            )
+
+            .limit(3);
+
+
+        if (
+          result.error ||
+          !result.data ||
+          result.data.length === 0
+        ) {
+
+          return;
+
+        }
+
+
+        const relatedSection =
+          document.getElementById(
+            "relatedSection"
+          );
+
+
+        const relatedList =
+          document.getElementById(
+            "relatedList"
+          );
+
+
+        relatedSection.style.display =
+          "block";
+
+
+        relatedList.innerHTML =
+          "";
+
+
+        result.data.forEach(
+          function(article) {
+
+            const image =
+              article.image_url
+                ? `
+
+                  <img
+                    src="${escapeHTML(
+                      article.image_url
+                    )}"
+                    alt="${escapeHTML(
+                      article.title
+                    )}"
+                  >
+
+                `
+                : "";
+
+
+            relatedList.innerHTML += `
+
+              <a
+                href="article.html?slug=${encodeURIComponent(
+                  article.slug || ""
+                )}"
+                class="related-card"
+              >
+
+                ${image}
+
+                <div class="related-body">
+
+                  <h3>
+
+                    ${escapeHTML(
+                      article.title
+                    )}
+
+                  </h3>
+
+                </div>
+
+              </a>
+
+            `;
+
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Related articles error:",
+          error
+        );
+
+      }
 
     }
+
+
+    /* START */
+
+    loadArticle();
 
   </script>
 
 </body>
-
 </html>
