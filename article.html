@@ -12,8 +12,43 @@
   <title>Article | Benue24/7 Trending Gists</title>
 
   <meta
+    id="metaDescription"
     name="description"
-    content="Read the latest news, trending stories, entertainment, sports and politics from Benue24/7 Trending Gists."
+    content="Read the latest news, trending stories, entertainment, sports, politics and music from Benue24/7 Trending Gists."
+  >
+
+  <meta
+    id="metaOgTitle"
+    property="og:title"
+    content="Benue24/7 Trending Gists"
+  >
+
+  <meta
+    id="metaOgDescription"
+    property="og:description"
+    content="Latest Benue news, trending stories, entertainment, sports, politics and music."
+  >
+
+  <meta
+    id="metaOgImage"
+    property="og:image"
+    content=""
+  >
+
+  <meta
+    id="metaOgUrl"
+    property="og:url"
+    content=""
+  >
+
+  <meta
+    property="og:type"
+    content="article"
+  >
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
   >
 
   <style>
@@ -36,12 +71,18 @@
       color: inherit;
     }
 
-    /* HEADER */
+    button {
+      font-family: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       background: #111;
       color: white;
-      padding: 25px 15px;
+      padding: 24px 15px;
     }
 
     .header-inner {
@@ -73,7 +114,13 @@
       white-space: nowrap;
     }
 
-    /* NAV */
+    .publish-button:hover {
+      background: #be123c;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       background: #222;
@@ -101,7 +148,9 @@
       color: #111;
     }
 
-    /* MAIN */
+    /* =========================
+       MAIN
+    ========================= */
 
     main {
       max-width: 900px;
@@ -109,7 +158,27 @@
       padding: 0 15px 60px;
     }
 
-    /* ARTICLE */
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 18px;
+      background: #111;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .back-button:hover {
+      background: #333;
+    }
+
+    /* =========================
+       ARTICLE
+    ========================= */
 
     .article {
       background: white;
@@ -122,6 +191,14 @@
       padding: 30px;
     }
 
+    .article-image {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      display: block;
+      background: #e5e7eb;
+    }
+
     .category {
       display: inline-block;
       background: #111;
@@ -132,6 +209,17 @@
       font-weight: bold;
       text-transform: uppercase;
       margin-bottom: 13px;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: #f59e0b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 5px;
     }
 
     .article h2 {
@@ -154,24 +242,28 @@
       margin-bottom: 25px;
     }
 
-    .article-image {
-      width: 100%;
-      max-height: 550px;
-      object-fit: cover;
-      display: block;
+    .meta strong {
+      color: #111827;
     }
+
+    /* =========================
+       STORY
+    ========================= */
 
     .story {
       font-size: 18px;
-      line-height: 1.85;
-      white-space: pre-line;
+      line-height: 1.9;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
     }
 
     .story p {
       margin-bottom: 20px;
     }
 
-    /* SHARE */
+    /* =========================
+       SHARE
+    ========================= */
 
     .share-section {
       margin-top: 30px;
@@ -181,6 +273,7 @@
 
     .share-section h3 {
       margin-bottom: 12px;
+      font-size: 19px;
     }
 
     .share-buttons {
@@ -198,6 +291,10 @@
       font-size: 14px;
     }
 
+    .share-button:hover {
+      opacity: .9;
+    }
+
     .facebook {
       background: #1877f2;
       color: white;
@@ -213,7 +310,15 @@
       color: white;
     }
 
-    /* RELATED */
+    .native-share {
+      background: #7c3aed;
+      color: white;
+      display: none;
+    }
+
+    /* =========================
+       RELATED STORIES
+    ========================= */
 
     .related {
       margin-top: 35px;
@@ -221,6 +326,7 @@
 
     .related h2 {
       margin-bottom: 15px;
+      font-size: 25px;
     }
 
     .related-list {
@@ -234,16 +340,31 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 2px 9px rgba(0,0,0,.06);
+      transition: transform .2s ease;
+    }
+
+    .related-card:hover {
+      transform: translateY(-3px);
     }
 
     .related-card img {
       width: 100%;
       height: 150px;
       object-fit: cover;
+      display: block;
+      background: #e5e7eb;
     }
 
     .related-body {
       padding: 13px;
+    }
+
+    .related-category {
+      font-size: 10px;
+      font-weight: bold;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-bottom: 5px;
     }
 
     .related-body h3 {
@@ -251,7 +372,9 @@
       line-height: 1.35;
     }
 
-    /* MESSAGE */
+    /* =========================
+       MESSAGE
+    ========================= */
 
     .message {
       background: white;
@@ -259,19 +382,17 @@
       padding: 35px 20px;
       text-align: center;
       color: #6b7280;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
     }
 
-    .back-button {
-      display: inline-block;
-      margin-bottom: 18px;
-      background: #111;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 7px;
-      font-weight: bold;
+    .error-message {
+      color: #991b1b;
+      background: #fee2e2;
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: #111;
@@ -286,7 +407,9 @@
       font-size: 13px;
     }
 
-    /* MOBILE */
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 700px) {
 
@@ -299,8 +422,16 @@
         font-size: 25px;
       }
 
+      .brand p {
+        font-size: 13px;
+      }
+
       nav {
         justify-content: flex-start;
+      }
+
+      main {
+        margin-top: 20px;
       }
 
       .article-content {
@@ -317,10 +448,32 @@
 
       .story {
         font-size: 17px;
+        line-height: 1.8;
+      }
+
+      .article-image {
+        max-height: 400px;
       }
 
       .related-list {
         grid-template-columns: 1fr;
+      }
+
+      .related-card img {
+        height: 200px;
+      }
+
+      .share-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .share-button {
+        width: 100%;
+      }
+
+      .native-share {
+        display: block;
       }
 
     }
@@ -332,728 +485,1036 @@
 <body>
 
 
-  <!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 
-  <header>
+<header>
 
-    <div class="header-inner">
+  <div class="header-inner">
 
-      <div class="brand">
+    <div class="brand">
 
-        <h1>
-          BENUE24/7 TRENDING GISTS
-        </h1>
+      <h1>
+        BENUE24/7 TRENDING GISTS
+      </h1>
 
-        <p>
-          Your home for Benue news, entertainment, sports, politics & music
-        </p>
+      <p>
+        Your home for Benue news, entertainment, sports, politics & music
+      </p>
 
-      </div>
+    </div>
+
+    <a
+      href="publish.html"
+      class="publish-button"
+    >
+      ✍️ Publish Story
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+  <a href="index.html">
+    Home
+  </a>
+
+  <a href="index.html#news">
+    News
+  </a>
+
+  <a href="index.html#trending">
+    Trending
+  </a>
+
+  <a href="index.html#entertainment">
+    Entertainment
+  </a>
+
+  <a href="index.html#sports">
+    Sports
+  </a>
+
+  <a href="index.html#politics">
+    Politics
+  </a>
+
+  <a href="music.html">
+    🎵 Music
+  </a>
+
+</nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+  <a
+    href="index.html"
+    class="back-button"
+  >
+    ← Back to Home
+  </a>
+
+
+  <div id="articleContainer">
+
+    <div class="message">
+      📰 Loading article...
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       RELATED
+  ========================= -->
+
+  <section
+    id="relatedSection"
+    class="related"
+    style="display:none;"
+  >
+
+    <h2>
+      📰 You May Also Like
+    </h2>
+
+    <div
+      id="relatedList"
+      class="related-list"
+    ></div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <h3>
+    BENUE24/7 TRENDING GISTS
+  </h3>
+
+  <p>
+    News • Trending Gists • Entertainment • Sports • Politics • Music
+  </p>
+
+  <p>
+    © 2026 Benue24/7 Trending Gists
+  </p>
+
+</footer>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+let supabaseClient = null;
+
+
+/* =========================
+   SUPABASE CONNECTION
+========================= */
+
+try {
+
+  if (
+    typeof SUPABASE_URL !== "undefined" &&
+    typeof SUPABASE_ANON_KEY !== "undefined"
+  ) {
+
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+  } else {
+
+    console.error(
+      "SUPABASE_URL or SUPABASE_ANON_KEY is missing."
+    );
+
+  }
+
+} catch (error) {
+
+  console.error(
+    "Supabase connection error:",
+    error
+  );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================
+   GET ARTICLE SLUG
+========================= */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const slug =
+  params.get("slug");
+
+
+/* =========================
+   LOAD ARTICLE
+========================= */
+
+async function loadArticle() {
+
+  const container =
+    document.getElementById(
+      "articleContainer"
+    );
+
+
+  if (!slug) {
+
+    showArticleError(
+      "❌ Article not found.",
+      container
+    );
+
+    return;
+
+  }
+
+
+  if (!supabaseClient) {
+
+    showArticleError(
+      "⚠️ Supabase connection is not configured.",
+      container
+    );
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      await supabaseClient
+
+        .from("article")
+
+        .select("*")
+
+        .eq(
+          "slug",
+          slug
+        )
+
+        .limit(1);
+
+
+    if (result.error) {
+
+      console.error(
+        "Article loading error:",
+        result.error
+      );
+
+      showArticleError(
+        "⚠️ Unable to load this article.",
+        container
+      );
+
+      return;
+
+    }
+
+
+    const article =
+      result.data &&
+      result.data.length
+        ? result.data[0]
+        : null;
+
+
+    if (!article) {
+
+      showArticleError(
+        "❌ This article could not be found.",
+        container
+      );
+
+      return;
+
+    }
+
+
+    displayArticle(
+      article
+    );
+
+
+    loadRelatedArticles(
+      article.category,
+      article.id
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Article error:",
+      error
+    );
+
+    showArticleError(
+      "⚠️ Something went wrong while loading this article.",
+      container
+    );
+
+  }
+
+}
+
+
+/* =========================
+   ARTICLE ERROR
+========================= */
+
+function showArticleError(
+  message,
+  container
+) {
+
+  container.innerHTML = `
+
+    <div class="message error-message">
+
+      ${escapeHTML(message)}
+
+      <br><br>
 
       <a
-        href="publish.html"
-        class="publish-button"
+        href="index.html"
+        class="back-button"
       >
-        ✍️ Publish Story
+        ← Return Home
       </a>
 
     </div>
 
-  </header>
+  `;
+
+}
 
 
-  <!-- NAVIGATION -->
+/* =========================
+   DISPLAY ARTICLE
+========================= */
 
-  <nav>
+function displayArticle(
+  article
+) {
 
-    <a href="index.html">
-      Home
-    </a>
-
-    <a href="index.html#news">
-      News
-    </a>
-
-    <a href="index.html#trending">
-      Trending
-    </a>
-
-    <a href="index.html#entertainment">
-      Entertainment
-    </a>
-
-    <a href="index.html#sports">
-      Sports
-    </a>
-
-    <a href="index.html#politics">
-      Politics
-    </a>
-
-    <a href="music.html">
-      🎵 Music
-    </a>
-
-  </nav>
+  const container =
+    document.getElementById(
+      "articleContainer"
+    );
 
 
-  <!-- MAIN -->
-
-  <main>
-
-    <a
-      href="index.html"
-      class="back-button"
-    >
-      ← Back to Home
-    </a>
+  const title =
+    article.title ||
+    "Untitled Story";
 
 
-    <div
-      id="articleContainer"
-    >
-
-      <div class="message">
-
-        📰 Loading article...
-
-      </div>
-
-    </div>
+  const description =
+    article.description ||
+    "";
 
 
-    <section
-      id="relatedSection"
-      class="related"
-      style="display:none;"
-    >
-
-      <h2>
-        📰 You May Also Like
-      </h2>
-
-      <div
-        id="relatedList"
-        class="related-list"
-      ></div>
-
-    </section>
-
-  </main>
+  const story =
+    article.story ||
+    article.content ||
+    "";
 
 
-  <!-- FOOTER -->
-
-  <footer>
-
-    <h3>
-      BENUE24/7 TRENDING GISTS
-    </h3>
-
-    <p>
-      News • Trending Gists • Entertainment • Sports • Politics • Music
-    </p>
-
-    <p>
-      © 2026 Benue24/7 Trending Gists
-    </p>
-
-  </footer>
+  const category =
+    article.category ||
+    "news";
 
 
-  <!-- SUPABASE -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="config.js"></script>
+  const author =
+    article.author ||
+    "Benue24/7 Trending Gists";
 
 
-  <script>
-
-    let supabaseClient = null;
-
-
-    /* SUPABASE */
-
-    try {
-
-      if (
-        typeof SUPABASE_URL !== "undefined" &&
-        typeof SUPABASE_ANON_KEY !== "undefined"
-      ) {
-
-        supabaseClient =
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          );
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "Supabase error:",
-        error
-      );
-
-    }
+  const image =
+    article.image_url ||
+    "";
 
 
-    /* ESCAPE HTML */
+  const featured =
+    article.featured === true;
 
-    function escapeHTML(value) {
 
-      return String(value || "")
-
-        .replace(
-          /&/g,
-          "&amp;"
+  const date =
+    article.created_at
+      ? new Date(
+          article.created_at
+        ).toLocaleDateString(
+          "en-GB",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }
         )
+      : "";
 
-        .replace(
-          /</g,
-          "&lt;"
-        )
 
-        .replace(
-          />/g,
-          "&gt;"
-        )
+  /* =========================
+     SEO
+  ========================= */
 
-        .replace(
-          /"/g,
-          "&quot;"
-        )
+  document.title =
+    title +
+    " | Benue24/7 Trending Gists";
 
-        .replace(
-          /'/g,
-          "&#039;"
-        );
 
-    }
+  const metaDescription =
+    document.getElementById(
+      "metaDescription"
+    );
 
 
-    /* GET SLUG */
+  if (metaDescription) {
 
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+    metaDescription.setAttribute(
+      "content",
+      description ||
+      title
+    );
 
-    const slug =
-      params.get("slug");
+  }
 
 
-    /* LOAD ARTICLE */
+  const ogTitle =
+    document.getElementById(
+      "metaOgTitle"
+    );
 
-    async function loadArticle() {
 
-      const container =
-        document.getElementById(
-          "articleContainer"
-        );
+  if (ogTitle) {
 
+    ogTitle.setAttribute(
+      "content",
+      title
+    );
 
-      if (!slug) {
+  }
 
-        container.innerHTML = `
 
-          <div class="message">
+  const ogDescription =
+    document.getElementById(
+      "metaOgDescription"
+    );
 
-            ❌ Article not found.
 
-          </div>
+  if (ogDescription) {
 
-        `;
+    ogDescription.setAttribute(
+      "content",
+      description ||
+      title
+    );
 
-        return;
+  }
 
-      }
 
+  const ogImage =
+    document.getElementById(
+      "metaOgImage"
+    );
 
-      if (!supabaseClient) {
 
-        container.innerHTML = `
+  if (
+    ogImage &&
+    image
+  ) {
 
-          <div class="message">
+    ogImage.setAttribute(
+      "content",
+      image
+    );
 
-            ⚠️ Supabase connection is not configured.
+  }
 
-          </div>
 
-        `;
+  const ogUrl =
+    document.getElementById(
+      "metaOgUrl"
+    );
 
-        return;
 
-      }
+  if (ogUrl) {
 
+    ogUrl.setAttribute(
+      "content",
+      window.location.href
+    );
 
-      try {
+  }
 
-        const result =
-          await supabaseClient
 
-            .from("article")
+  /* =========================
+     IMAGE
+  ========================= */
 
-            .select("*")
+  const imageHTML =
+    image
 
-            .eq(
-              "slug",
-              slug
-            )
+      ? `
 
-            .limit(1);
+        <img
+          src="${escapeHTML(image)}"
+          class="article-image"
+          alt="${escapeHTML(title)}"
+          loading="eager"
+          onerror="this.style.display='none'"
+        >
 
+      `
 
-        if (result.error) {
+      : "";
 
-          console.error(
-            result.error
-          );
 
+  /* =========================
+     FEATURED
+  ========================= */
 
-          container.innerHTML = `
+  const featuredHTML =
+    featured
 
-            <div class="message">
+      ? `
 
-              ⚠️ Unable to load this article.
+        <span class="featured-badge">
+          ⭐ FEATURED
+        </span>
 
-            </div>
+      `
 
-          `;
+      : "";
 
-          return;
 
-        }
+  /* =========================
+     ARTICLE HTML
+  ========================= */
 
+  container.innerHTML = `
 
-        const article =
-          result.data &&
-          result.data.length
-            ? result.data[0]
-            : null;
+    <article class="article">
 
+      ${imageHTML}
 
-        if (!article) {
 
-          container.innerHTML = `
+      <div class="article-content">
 
-            <div class="message">
+        <span class="category">
 
-              ❌ This article could not be found.
+          ${escapeHTML(
+            category
+          )}
 
-            </div>
+        </span>
 
-          `;
 
-          return;
+        ${featuredHTML}
 
-        }
 
+        <h2>
 
-        displayArticle(
-          article
-        );
+          ${escapeHTML(
+            title
+          )}
 
+        </h2>
 
-        loadRelatedArticles(
-          article.category,
-          article.id
-        );
 
+        ${
+          description
 
-      } catch (error) {
+            ? `
 
-        console.error(
-          error
-        );
+              <div class="description">
 
-
-        container.innerHTML = `
-
-          <div class="message">
-
-            ⚠️ Something went wrong.
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-    /* DISPLAY ARTICLE */
-
-    function displayArticle(
-      article
-    ) {
-
-      const container =
-        document.getElementById(
-          "articleContainer"
-        );
-
-
-      const title =
-        article.title ||
-        "Untitled Story";
-
-
-      const description =
-        article.description ||
-        "";
-
-
-      const story =
-        article.story ||
-        article.content ||
-        "";
-
-
-      const category =
-        article.category ||
-        "news";
-
-
-      const author =
-        article.author ||
-        "Benue24/7 Trending Gists";
-
-
-      const image =
-        article.image_url ||
-        "";
-
-
-      const date =
-        article.created_at
-          ? new Date(
-              article.created_at
-            ).toLocaleDateString(
-              "en-GB",
-              {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-              }
-            )
-          : "";
-
-
-      const imageHTML =
-        image
-
-          ? `
-
-            <img
-              src="${escapeHTML(image)}"
-              class="article-image"
-              alt="${escapeHTML(title)}"
-            >
-
-          `
-
-          : "";
-
-
-      document.title =
-        title +
-        " | Benue24/7 Trending Gists";
-
-
-      container.innerHTML = `
-
-        <article class="article">
-
-          ${imageHTML}
-
-          <div class="article-content">
-
-            <span class="category">
-
-              ${escapeHTML(category)}
-
-            </span>
-
-            <h2>
-
-              ${escapeHTML(title)}
-
-            </h2>
-
-            ${
-              description
-
-                ? `
-
-                  <div class="description">
-
-                    ${escapeHTML(
-                      description
-                    )}
-
-                  </div>
-
-                `
-
-                : ""
-
-            }
-
-            <div class="meta">
-
-              ✍️ By
-              <strong>
-                ${escapeHTML(author)}
-              </strong>
-
-              ${
-                date
-                  ? `
-                    • Published
-                    ${escapeHTML(date)}
-                  `
-                  : ""
-              }
-
-            </div>
-
-            <div class="story">
-
-              ${formatStory(
-                story
-              )}
-
-            </div>
-
-
-            <!-- SHARE -->
-
-            <div class="share-section">
-
-              <h3>
-                📤 Share This Story
-              </h3>
-
-              <div class="share-buttons">
-
-                <button
-                  class="share-button facebook"
-                  onclick="shareFacebook()"
-                >
-                  Facebook
-                </button>
-
-                <button
-                  class="share-button whatsapp"
-                  onclick="shareWhatsApp()"
-                >
-                  WhatsApp
-                </button>
-
-                <button
-                  class="share-button copy"
-                  onclick="copyArticleLink()"
-                >
-                  🔗 Copy Link
-                </button>
+                ${escapeHTML(
+                  description
+                )}
 
               </div>
 
-            </div>
+            `
+
+            : ""
+
+        }
+
+
+        <div class="meta">
+
+          ✍️ By
+
+          <strong>
+            ${escapeHTML(author)}
+          </strong>
+
+          ${
+            date
+
+              ? `
+
+                • Published
+                ${escapeHTML(date)}
+
+              `
+
+              : ""
+
+          }
+
+        </div>
+
+
+        <div class="story">
+
+          ${formatStory(
+            story
+          )}
+
+        </div>
+
+
+        <!-- SHARE -->
+
+        <div class="share-section">
+
+          <h3>
+            📤 Share This Story
+          </h3>
+
+
+          <div class="share-buttons">
+
+            <button
+              class="share-button facebook"
+              onclick="shareFacebook()"
+            >
+              📘 Facebook
+            </button>
+
+
+            <button
+              class="share-button whatsapp"
+              onclick="shareWhatsApp()"
+            >
+              💬 WhatsApp
+            </button>
+
+
+            <button
+              class="share-button copy"
+              onclick="copyArticleLink()"
+            >
+              🔗 Copy Link
+            </button>
+
+
+            <button
+              class="share-button native-share"
+              onclick="nativeShare()"
+            >
+              📤 Share
+            </button>
 
           </div>
 
-        </article>
+        </div>
 
-      `;
+      </div>
 
-    }
+    </article>
 
+  `;
 
-    /* FORMAT STORY */
-
-    function formatStory(
-      text
-    ) {
-
-      return escapeHTML(
-        text
-      )
-      .split(/\n\s*\n/)
-      .map(
-        function(paragraph) {
-
-          return "<p>" +
-            paragraph
-              .replace(
-                /\n/g,
-                "<br>"
-              ) +
-            "</p>";
-
-        }
-      )
-      .join("");
-
-    }
+}
 
 
-    /* FACEBOOK */
+/* =========================
+   FORMAT STORY
+========================= */
 
-    function shareFacebook() {
+function formatStory(
+  text
+) {
 
-      const url =
-        encodeURIComponent(
-          window.location.href
-        );
-
-
-      window.open(
-
-        "https://www.facebook.com/sharer/sharer.php?u=" +
-        url,
-
-        "_blank"
-
-      );
-
-    }
+  const cleanText =
+    String(text ?? "").trim();
 
 
-    /* WHATSAPP */
+  if (!cleanText) {
 
-    function shareWhatsApp() {
+    return `
+      <p>
+        No story content available.
+      </p>
+    `;
 
-      const text =
-        encodeURIComponent(
-
-          document.title +
-          "\n\n" +
-          window.location.href
-
-        );
+  }
 
 
-      window.open(
+  return escapeHTML(
+    cleanText
+  )
 
-        "https://wa.me/?text=" +
-        text,
+  .split(
+    /\n\s*\n/
+  )
 
-        "_blank"
+  .map(
+    function(paragraph) {
+
+      return (
+
+        "<p>" +
+
+        paragraph.replace(
+          /\n/g,
+          "<br>"
+        ) +
+
+        "</p>"
 
       );
 
     }
+  )
+
+  .join("");
+
+}
 
 
-    /* COPY LINK */
+/* =========================
+   FACEBOOK SHARE
+========================= */
 
-    async function copyArticleLink() {
+function shareFacebook() {
 
-      try {
+  const url =
+    encodeURIComponent(
+      window.location.href
+    );
 
-        await navigator.clipboard.writeText(
-          window.location.href
+
+  const facebookURL =
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    url;
+
+
+  window.open(
+    facebookURL,
+    "_blank",
+    "width=700,height=600"
+  );
+
+}
+
+
+/* =========================
+   WHATSAPP SHARE
+========================= */
+
+function shareWhatsApp() {
+
+  const text =
+    encodeURIComponent(
+
+      document.title +
+      "\n\n" +
+      window.location.href
+
+    );
+
+
+  const whatsappURL =
+    "https://wa.me/?text=" +
+    text;
+
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+}
+
+
+/* =========================
+   COPY LINK
+========================= */
+
+async function copyArticleLink() {
+
+  const url =
+    window.location.href;
+
+
+  try {
+
+    if (
+      navigator.clipboard &&
+      window.isSecureContext
+    ) {
+
+      await navigator.clipboard.writeText(
+        url
+      );
+
+    } else {
+
+      const textarea =
+        document.createElement(
+          "textarea"
         );
 
+      textarea.value =
+        url;
 
-        alert(
-          "✅ Article link copied!"
-        );
+      textarea.style.position =
+        "fixed";
 
-      } catch (error) {
+      textarea.style.left =
+        "-9999px";
 
-        alert(
-          "Copy failed. Please copy the URL from your browser."
-        );
+      document.body.appendChild(
+        textarea
+      );
 
-      }
+      textarea.select();
+
+      document.execCommand(
+        "copy"
+      );
+
+      textarea.remove();
 
     }
 
 
-    /* RELATED STORIES */
+    alert(
+      "✅ Article link copied!"
+    );
 
-    async function loadRelatedArticles(
-      category,
-      currentId
+
+  } catch (error) {
+
+    alert(
+      "Copy failed. Please copy the URL manually."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   NATIVE SHARE
+========================= */
+
+async function nativeShare() {
+
+  if (
+    !navigator.share
+  ) {
+
+    await copyArticleLink();
+
+    return;
+
+  }
+
+
+  try {
+
+    await navigator.share({
+
+      title:
+        document.title,
+
+      text:
+        "Read this story from Benue24/7 Trending Gists:",
+
+      url:
+        window.location.href
+
+    });
+
+  } catch (error) {
+
+    console.log(
+      "Share cancelled."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   RELATED STORIES
+========================= */
+
+async function loadRelatedArticles(
+  category,
+  currentId
+) {
+
+  const relatedSection =
+    document.getElementById(
+      "relatedSection"
+    );
+
+
+  const relatedList =
+    document.getElementById(
+      "relatedList"
+    );
+
+
+  if (
+    !supabaseClient ||
+    !category
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      await supabaseClient
+
+        .from("article")
+
+        .select(
+          "id,title,slug,image_url,category,created_at"
+        )
+
+        .eq(
+          "category",
+          category
+        )
+
+        .neq(
+          "id",
+          currentId
+        )
+
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        )
+
+        .limit(3);
+
+
+    if (
+      result.error ||
+      !result.data ||
+      result.data.length === 0
     ) {
 
-      if (!supabaseClient)
-        return;
+      return;
+
+    }
 
 
-      try {
-
-        const result =
-          await supabaseClient
-
-            .from("article")
-
-            .select(
-              "id,title,slug,image_url,category"
-            )
-
-            .eq(
-              "category",
-              category
-            )
-
-            .neq(
-              "id",
-              currentId
-            )
-
-            .order(
-              "created_at",
-              {
-                ascending: false
-              }
-            )
-
-            .limit(3);
+    relatedSection.style.display =
+      "block";
 
 
-        if (
-          result.error ||
-          !result.data ||
-          result.data.length === 0
-        ) {
-
-          return;
-
-        }
-
-
-        const relatedSection =
-          document.getElementById(
-            "relatedSection"
-          );
-
-
-        const relatedList =
-          document.getElementById(
-            "relatedList"
-          );
-
-
-        relatedSection.style.display =
-          "block";
-
-
-        relatedList.innerHTML =
-          "";
-
-
-        result.data.forEach(
+    relatedList.innerHTML =
+      result.data
+        .map(
           function(article) {
 
             const image =
               article.image_url
+
                 ? `
 
                   <img
@@ -1063,13 +1524,16 @@
                     alt="${escapeHTML(
                       article.title
                     )}"
+                    loading="lazy"
+                    onerror="this.style.display='none'"
                   >
 
                 `
+
                 : "";
 
 
-            relatedList.innerHTML += `
+            return `
 
               <a
                 href="article.html?slug=${encodeURIComponent(
@@ -1080,12 +1544,24 @@
 
                 ${image}
 
+
                 <div class="related-body">
+
+                  <div class="related-category">
+
+                    ${escapeHTML(
+                      article.category ||
+                      "news"
+                    )}
+
+                  </div>
+
 
                   <h3>
 
                     ${escapeHTML(
-                      article.title
+                      article.title ||
+                      "Untitled Story"
                     )}
 
                   </h3>
@@ -1097,25 +1573,29 @@
             `;
 
           }
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Related articles error:",
-          error
-        );
-
-      }
-
-    }
+        )
+        .join("");
 
 
-    /* START */
+  } catch (error) {
 
-    loadArticle();
+    console.error(
+      "Related stories error:",
+      error
+    );
 
-  </script>
+  }
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadArticle();
+
+</script>
 
 </body>
 </html>
