@@ -13,7 +13,7 @@
 
   <meta
     name="description"
-    content="Listen to music from Benue artists and beyond on Benue24/7 Trending Gists."
+    content="Listen to the latest music from Benue artists and beyond on Benue24/7 Trending Gists."
   >
 
   <style>
@@ -60,8 +60,8 @@
 
     .brand p {
       color: #d1d5db;
-      margin-top: 5px;
       font-size: 14px;
+      margin-top: 4px;
     }
 
     .publish-button {
@@ -70,7 +70,6 @@
       padding: 11px 17px;
       border-radius: 7px;
       font-weight: bold;
-      white-space: nowrap;
     }
 
     /* NAV */
@@ -90,7 +89,7 @@
     }
 
     nav a {
-      padding: 8px 14px;
+      padding: 8px 13px;
       border-radius: 6px;
       font-weight: 600;
       font-size: 14px;
@@ -110,207 +109,153 @@
       padding: 25px 15px 60px;
     }
 
-    .page-title {
+    /* MUSIC HERO */
+
+    .music-hero {
+      background: #111;
+      color: white;
+      border-radius: 16px;
+      padding: 45px 25px;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
     }
 
-    .page-title h2 {
+    .music-hero .music-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .music-hero h2 {
       font-size: 32px;
       margin-bottom: 8px;
     }
 
-    .page-title p {
-      color: #6b7280;
-    }
-
-    /* SEARCH */
-
-    .search-box {
+    .music-hero p {
+      color: #d1d5db;
       max-width: 650px;
-      margin: 0 auto 30px;
+      margin: auto;
+    }
+
+    /* SECTION */
+
+    .section-heading {
       display: flex;
-      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #111;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
     }
 
-    .search-box input {
-      flex: 1;
-      border: 1px solid #d1d5db;
-      background: white;
-      border-radius: 8px;
-      padding: 13px 15px;
-      font-size: 15px;
-      outline: none;
-    }
-
-    .search-box input:focus {
-      border-color: #111;
-    }
-
-    .search-button {
-      border: 0;
-      background: #111;
-      color: white;
-      border-radius: 8px;
-      padding: 13px 18px;
-      font-weight: bold;
-      cursor: pointer;
+    .section-heading h2 {
+      font-size: 23px;
     }
 
     /* MUSIC GRID */
 
-    #musicList {
+    .music-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    /* MUSIC CARD */
-
-    .music-card {
+    .song-card {
       background: white;
-      border-radius: 16px;
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 3px 15px rgba(0,0,0,.08);
-      transition: transform .2s ease;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+      transition: .2s;
     }
 
-    .music-card:hover {
+    .song-card:hover {
       transform: translateY(-3px);
     }
 
-    .music-cover {
+    .cover {
       width: 100%;
-      height: 310px;
+      height: 260px;
       object-fit: cover;
-      display: block;
       background: #e5e7eb;
+      display: block;
     }
 
-    .music-cover-placeholder {
+    .cover-placeholder {
       width: 100%;
-      height: 310px;
+      height: 260px;
       background: #e5e7eb;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 80px;
+      font-size: 65px;
     }
 
-    .music-info {
-      padding: 22px;
+    .song-body {
+      padding: 17px;
     }
 
-    .music-tag {
+    .song-body h3 {
+      font-size: 20px;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .artist {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .genre {
       display: inline-block;
       background: #111;
       color: white;
-      padding: 5px 9px;
+      padding: 4px 8px;
       border-radius: 5px;
       font-size: 11px;
       font-weight: bold;
       text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
-    .music-info h2 {
-      font-size: 25px;
-      margin: 10px 0 2px;
-    }
-
-    .music-info h3 {
-      color: #6b7280;
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-
-    .music-info p {
-      color: #6b7280;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    /* AUDIO */
-
-    .audio-player {
+    audio {
       width: 100%;
-      margin-top: 8px;
+      height: 40px;
     }
 
-    /* ACTIONS */
-
-    .music-actions {
+    .song-actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 16px;
+      gap: 8px;
+      margin-top: 13px;
     }
 
-    .action-button {
-      display: inline-block;
-      padding: 10px 15px;
-      border-radius: 7px;
+    .song-button {
+      border: none;
+      padding: 9px 12px;
+      border-radius: 6px;
       font-weight: bold;
-      font-size: 14px;
-      border: 0;
       cursor: pointer;
-    }
-
-    .download-button {
-      background: #111;
-      color: white;
+      font-size: 13px;
     }
 
     .share-button {
-      background: #e5e7eb;
-      color: #111;
+      background: #25d366;
+      color: white;
     }
 
-    .action-button:hover {
-      opacity: .85;
+    .copy-button {
+      background: #111;
+      color: white;
     }
 
-    .no-audio {
-      background: #f3f4f6;
-      color: #6b7280;
-      padding: 12px;
-      border-radius: 7px;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .music-date {
-      color: #9ca3af;
-      font-size: 12px;
-      margin-top: 15px;
-    }
-
-    /* MESSAGE */
+    /* EMPTY */
 
     .message {
       background: white;
-      padding: 35px 20px;
       border-radius: 12px;
+      padding: 35px;
       text-align: center;
       color: #6b7280;
       grid-column: 1 / -1;
-      box-shadow: 0 2px 10px rgba(0,0,0,.05);
-    }
-
-    /* SHARE MESSAGE */
-
-    .share-message {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translateX(-50%);
-      background: #111;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 8px;
-      display: none;
-      z-index: 5000;
-      font-size: 14px;
-      font-weight: bold;
     }
 
     /* FOOTER */
@@ -330,39 +275,43 @@
 
     /* MOBILE */
 
-    @media (max-width: 750px) {
+    @media (max-width: 850px) {
 
       .header-inner {
         flex-direction: column;
         text-align: center;
       }
 
+      .music-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
       .brand h1 {
-        font-size: 25px;
+        font-size: 24px;
       }
 
       nav {
         justify-content: flex-start;
       }
 
-      #musicList {
+      .music-hero {
+        padding: 35px 20px;
+      }
+
+      .music-hero h2 {
+        font-size: 26px;
+      }
+
+      .music-grid {
         grid-template-columns: 1fr;
       }
 
-      .page-title h2 {
-        font-size: 27px;
-      }
-
-      .search-box {
-        flex-direction: column;
-      }
-
-      .search-button {
-        width: 100%;
-      }
-
-      .music-cover,
-      .music-cover-placeholder {
+      .cover,
+      .cover-placeholder {
         height: 300px;
       }
 
@@ -373,7 +322,6 @@
 </head>
 
 <body>
-
 
   <!-- HEADER -->
 
@@ -413,13 +361,6 @@
       Home
     </a>
 
-    <a
-      href="music.html"
-      class="active"
-    >
-      🎵 Music
-    </a>
-
     <a href="index.html#news">
       News
     </a>
@@ -440,68 +381,64 @@
       Politics
     </a>
 
+    <a
+      href="music.html"
+      class="active"
+    >
+      🎵 Music
+    </a>
+
   </nav>
 
 
-  <!-- MAIN -->
-
   <main>
 
-    <section class="page-title">
+    <!-- MUSIC HERO -->
+
+    <section class="music-hero">
+
+      <div class="music-icon">
+        🎵
+      </div>
 
       <h2>
-        🎵 Latest Music
+        Benue Music Hub
       </h2>
 
       <p>
-        Discover music from Benue artists and beyond.
+        Discover the latest songs, sounds and talented artists
+        from Benue and beyond.
       </p>
 
     </section>
 
 
-    <!-- SEARCH -->
+    <!-- SONGS -->
 
-    <div class="search-box">
+    <section>
 
-      <input
-        type="search"
-        id="musicSearch"
-        placeholder="🔎 Search song or artist..."
-        autocomplete="off"
-      >
+      <div class="section-heading">
 
-      <button
-        class="search-button"
-        id="searchButton"
-      >
-        Search
-      </button>
+        <h2>
+          🎧 Latest Releases
+        </h2>
 
-    </div>
-
-
-    <!-- MUSIC -->
-
-    <div id="musicList">
-
-      <div class="message">
-        🎵 Loading music...
       </div>
 
-    </div>
+      <div
+        id="musicGrid"
+        class="music-grid"
+      >
+
+        <div class="message">
+          🎵 Loading music...
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
-
-
-  <!-- SHARE MESSAGE -->
-
-  <div
-    id="shareMessage"
-    class="share-message"
-  >
-    Link copied!
-  </div>
 
 
   <!-- FOOTER -->
@@ -529,17 +466,12 @@
 
   <script src="config.js"></script>
 
-
-  <!-- MUSIC JAVASCRIPT -->
-
   <script>
 
     let supabaseClient = null;
 
-    let allSongs = [];
 
-
-    /* SUPABASE CONNECTION */
+    /* SUPABASE */
 
     try {
 
@@ -559,7 +491,7 @@
     } catch (error) {
 
       console.error(
-        "Supabase connection error:",
+        "Supabase error:",
         error
       );
 
@@ -591,11 +523,8 @@
 
       const container =
         document.getElementById(
-          "musicList"
+          "musicGrid"
         );
-
-
-      if (!container) return;
 
 
       if (!supabaseClient) {
@@ -615,17 +544,6 @@
       }
 
 
-      container.innerHTML = `
-
-        <div class="message">
-
-          🎵 Loading music...
-
-        </div>
-
-      `;
-
-
       try {
 
         const result =
@@ -642,13 +560,13 @@
               }
             )
 
-            .limit(100);
+            .limit(30);
 
 
         if (result.error) {
 
           console.error(
-            "Music database error:",
+            "Music loading error:",
             result.error
           );
 
@@ -659,6 +577,12 @@
 
               ⚠️ Unable to load music.
 
+              <br><br>
+
+              Make sure your Supabase
+              <strong>music</strong>
+              table exists.
+
             </div>
 
           `;
@@ -668,17 +592,21 @@
         }
 
 
-        allSongs =
+        const songs =
           result.data || [];
 
 
-        if (allSongs.length === 0) {
+        if (!songs.length) {
 
           container.innerHTML = `
 
             <div class="message">
 
-              🎵 No music uploaded yet.
+              🎵 No songs published yet.
+
+              <br><br>
+
+              Check back soon for new music.
 
             </div>
 
@@ -689,13 +617,166 @@
         }
 
 
-        displaySongs(allSongs);
+        container.innerHTML = "";
 
+
+        songs.forEach(
+          function(song) {
+
+            const title =
+              song.title ||
+              song.song_title ||
+              "Untitled Song";
+
+
+            const artist =
+              song.artist ||
+              song.artist_name ||
+              "Unknown Artist";
+
+
+            const genre =
+              song.genre ||
+              "Afrobeats";
+
+
+            const cover =
+              song.cover_url ||
+              song.image_url ||
+              song.cover_art ||
+              "";
+
+
+            const audio =
+              song.audio_url ||
+              song.song_url ||
+              song.audio ||
+              "";
+
+
+            const songUrl =
+              window.location.origin +
+              window.location.pathname +
+              "?song=" +
+              encodeURIComponent(
+                song.id || title
+              );
+
+
+            const coverHTML =
+              cover
+
+                ? `
+
+                  <img
+                    src="${escapeHTML(cover)}"
+                    class="cover"
+                    alt="${escapeHTML(title)} cover"
+                  >
+
+                `
+
+                : `
+
+                  <div class="cover-placeholder">
+                    🎵
+                  </div>
+
+                `;
+
+
+            const audioHTML =
+              audio
+
+                ? `
+
+                  <audio
+                    controls
+                    preload="none"
+                  >
+
+                    <source
+                      src="${escapeHTML(audio)}"
+                      type="audio/mpeg"
+                    >
+
+                    Your browser does not support
+                    audio playback.
+
+                  </audio>
+
+                `
+
+                : `
+
+                  <p style="
+                    color:#9ca3af;
+                    font-size:13px;
+                  ">
+                    Audio not available yet.
+                  </p>
+
+                `;
+
+
+            container.innerHTML += `
+
+              <article class="song-card">
+
+                ${coverHTML}
+
+                <div class="song-body">
+
+                  <span class="genre">
+                    ${escapeHTML(genre)}
+                  </span>
+
+                  <h3>
+                    ${escapeHTML(title)}
+                  </h3>
+
+                  <div class="artist">
+                    🎤 ${escapeHTML(artist)}
+                  </div>
+
+                  ${audioHTML}
+
+                  <div class="song-actions">
+
+                    <button
+                      class="song-button share-button"
+                      onclick="shareWhatsApp(
+                        '${escapeHTML(title)}',
+                        '${escapeHTML(artist)}',
+                        '${escapeHTML(songUrl)}'
+                      )"
+                    >
+                      WhatsApp
+                    </button>
+
+                    <button
+                      class="song-button copy-button"
+                      onclick="copySongLink(
+                        '${escapeHTML(songUrl)}'
+                      )"
+                    >
+                      🔗 Copy Link
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        );
 
       } catch (error) {
 
         console.error(
-          "Music loading error:",
           error
         );
 
@@ -704,7 +785,8 @@
 
           <div class="message">
 
-            ⚠️ Unable to load music.
+            ⚠️ Something went wrong while
+            loading music.
 
           </div>
 
@@ -715,517 +797,64 @@
     }
 
 
-    /* DISPLAY SONGS */
+    /* WHATSAPP */
 
-    function displaySongs(songs) {
-
-      const container =
-        document.getElementById(
-          "musicList"
-        );
-
-
-      if (!container) return;
-
-
-      if (songs.length === 0) {
-
-        container.innerHTML = `
-
-          <div class="message">
-
-            🔎 No music found.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      container.innerHTML = "";
-
-
-      songs.forEach(
-        function(song) {
-
-
-          const title =
-            song.title ||
-            "Untitled Song";
-
-
-          const artist =
-            song.artist ||
-            "Unknown Artist";
-
-
-          const genre =
-            song.genre ||
-            "Music";
-
-
-          const description =
-            song.description ||
-            "";
-
-
-          const audio =
-            song.audio_url ||
-            "";
-
-
-          const cover =
-            song.cover_url ||
-            "";
-
-
-          const date =
-            song.created_at
-              ? new Date(
-                  song.created_at
-                ).toLocaleDateString()
-              : "";
-
-
-          /* COVER */
-
-          const coverHTML =
-            cover
-
-              ? `
-
-                <img
-                  src="${escapeHTML(cover)}"
-                  class="music-cover"
-                  alt="${escapeHTML(title)}"
-                  loading="lazy"
-                >
-
-              `
-
-              : `
-
-                <div class="music-cover-placeholder">
-
-                  🎵
-
-                </div>
-
-              `;
-
-
-          /* AUDIO */
-
-          const audioHTML =
-            audio
-
-              ? `
-
-                <audio
-                  controls
-                  preload="metadata"
-                  class="audio-player"
-                >
-
-                  <source
-                    src="${escapeHTML(audio)}"
-                    type="audio/mpeg"
-                  >
-
-                  Your browser does not support audio.
-
-                </audio>
-
-              `
-
-              : `
-
-                <div class="no-audio">
-
-                  Audio unavailable
-
-                </div>
-
-              `;
-
-
-          /* ACTIONS */
-
-          const actionsHTML =
-            audio
-
-              ? `
-
-                <div class="music-actions">
-
-                  <a
-                    href="${escapeHTML(audio)}"
-                    class="action-button download-button"
-                    download
-                    target="_blank"
-                    rel="noopener"
-                  >
-
-                    ⬇️ Download
-
-                  </a>
-
-                  <button
-                    class="action-button share-button"
-                    onclick="shareSong(
-                      '${escapeHTML(title).replace(/'/g, "\\'")}',
-                      '${escapeHTML(artist).replace(/'/g, "\\'")}'
-                    )"
-                  >
-
-                    📤 Share
-
-                  </button>
-
-                </div>
-
-              `
-
-              : `
-
-                <div class="music-actions">
-
-                  <button
-                    class="action-button share-button"
-                    onclick="shareSong(
-                      '${escapeHTML(title).replace(/'/g, "\\'")}',
-                      '${escapeHTML(artist).replace(/'/g, "\\'")}'
-                    )"
-                  >
-
-                    📤 Share
-
-                  </button>
-
-                </div>
-
-              `;
-
-
-          /* CARD */
-
-          container.innerHTML += `
-
-            <article class="music-card">
-
-              ${coverHTML}
-
-              <div class="music-info">
-
-                <span class="music-tag">
-
-                  ${escapeHTML(genre)}
-
-                </span>
-
-                <h2>
-
-                  ${escapeHTML(title)}
-
-                </h2>
-
-                <h3>
-
-                  🎤 ${escapeHTML(artist)}
-
-                </h3>
-
-                ${
-                  description
-
-                    ? `
-
-                      <p>
-
-                        ${escapeHTML(
-                          description
-                        )}
-
-                      </p>
-
-                    `
-
-                    : ""
-
-                }
-
-                ${audioHTML}
-
-                ${actionsHTML}
-
-                ${
-                  date
-
-                    ? `
-
-                      <div class="music-date">
-
-                        Uploaded
-                        ${escapeHTML(date)}
-
-                      </div>
-
-                    `
-
-                    : ""
-
-                }
-
-              </div>
-
-            </article>
-
-          `;
-
-        }
-      );
-
-
-      setupAudioPlayers();
-
-    }
-
-
-    /* ONE SONG AT A TIME */
-
-    function setupAudioPlayers() {
-
-      const players =
-        document.querySelectorAll(
-          ".audio-player"
-        );
-
-
-      players.forEach(
-        function(player) {
-
-          player.addEventListener(
-            "play",
-            function() {
-
-              players.forEach(
-                function(otherPlayer) {
-
-                  if (
-                    otherPlayer !== player
-                  ) {
-
-                    otherPlayer.pause();
-
-                  }
-
-                }
-              );
-
-            }
-          );
-
-        }
-      );
-
-    }
-
-
-    /* SEARCH */
-
-    function searchMusic() {
-
-      const input =
-        document.getElementById(
-          "musicSearch"
-        );
-
-
-      const query =
-        input.value
-          .trim()
-          .toLowerCase();
-
-
-      if (!query) {
-
-        displaySongs(allSongs);
-
-        return;
-
-      }
-
-
-      const filtered =
-        allSongs.filter(
-          function(song) {
-
-            const title =
-              String(
-                song.title || ""
-              ).toLowerCase();
-
-
-            const artist =
-              String(
-                song.artist || ""
-              ).toLowerCase();
-
-
-            const genre =
-              String(
-                song.genre || ""
-              ).toLowerCase();
-
-
-            return (
-
-              title.includes(query) ||
-
-              artist.includes(query) ||
-
-              genre.includes(query)
-
-            );
-
-          }
-        );
-
-
-      displaySongs(filtered);
-
-    }
-
-
-    /* SEARCH BUTTON */
-
-    document
-      .getElementById("searchButton")
-      .addEventListener(
-        "click",
-        searchMusic
-      );
-
-
-    /* SEARCH AS YOU TYPE */
-
-    document
-      .getElementById("musicSearch")
-      .addEventListener(
-        "input",
-        searchMusic
-      );
-
-
-    /* SHARE SONG */
-
-    async function shareSong(
+    function shareWhatsApp(
       title,
-      artist
+      artist,
+      url
     ) {
 
-      const shareText =
-        "🎵 " +
-        title +
-        " by " +
-        artist +
-        " — Listen on Benue24/7 Trending Gists";
+      const text =
+        encodeURIComponent(
 
-
-      const shareData = {
-
-        title:
+          "🎵 " +
           title +
-          " — " +
-          artist,
+          "\n" +
+          "By " +
+          artist +
+          "\n\n" +
+          "Listen on Benue24/7 Trending Gists:\n" +
+          url
 
-        text:
-          shareText,
+        );
 
-        url:
-          window.location.href
 
-      };
+      window.open(
 
+        "https://wa.me/?text=" +
+        text,
+
+        "_blank"
+
+      );
+
+    }
+
+
+    /* COPY */
+
+    async function copySongLink(
+      url
+    ) {
 
       try {
 
-        if (
-          navigator.share
-        ) {
+        await navigator.clipboard.writeText(
+          url
+        );
 
-          await navigator.share(
-            shareData
-          );
-
-          return;
-
-        }
-
-
-        if (
-          navigator.clipboard
-        ) {
-
-          await navigator.clipboard.writeText(
-
-            window.location.href
-
-          );
-
-
-          showShareMessage(
-            "🔗 Song link copied!"
-          );
-
-        }
+        alert(
+          "✅ Song link copied!"
+        );
 
       } catch (error) {
 
-        console.log(
-          "Share cancelled or unavailable."
+        alert(
+          "Unable to copy link."
         );
 
       }
-
-    }
-
-
-    /* SHARE NOTIFICATION */
-
-    function showShareMessage(
-      message
-    ) {
-
-      const box =
-        document.getElementById(
-          "shareMessage"
-        );
-
-
-      if (!box) return;
-
-
-      box.textContent =
-        message;
-
-
-      box.style.display =
-        "block";
-
-
-      setTimeout(
-        function() {
-
-          box.style.display =
-            "none";
-
-        },
-        2500
-      );
 
     }
 
