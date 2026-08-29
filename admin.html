@@ -3,7 +3,6 @@
 <head>
 
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Admin Dashboard | Benue24/7 Trending Gists</title>
@@ -30,7 +29,7 @@
     }
 
     .header-inner {
-      max-width: 1150px;
+      max-width: 1200px;
       margin: auto;
       display: flex;
       justify-content: space-between;
@@ -48,41 +47,67 @@
       margin-top: 4px;
     }
 
+    .header-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .header-button,
     .logout {
       border: none;
-      background: #dc2626;
       color: white;
       padding: 11px 15px;
       border-radius: 7px;
       font-weight: bold;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .header-button {
+      background: #2563eb;
+    }
+
+    .logout {
+      background: #dc2626;
     }
 
     main {
-      max-width: 1150px;
+      max-width: 1200px;
       margin: 25px auto;
       padding: 0 15px;
     }
 
+    /* STATS */
+
     .dashboard-top {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
       margin-bottom: 25px;
     }
 
     .stat {
       background: white;
-      padding: 20px;
+      padding: 18px 14px;
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,.06);
     }
 
+    .stat-title {
+      font-size: 13px;
+      color: #6b7280;
+      font-weight: bold;
+    }
+
     .stat strong {
       display: block;
-      font-size: 28px;
+      font-size: 27px;
       margin-top: 5px;
     }
+
+    /* CONTROLS */
 
     .controls {
       background: white;
@@ -94,7 +119,7 @@
 
     .controls-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 2fr 1fr auto;
       gap: 10px;
     }
 
@@ -109,6 +134,18 @@
       background: white;
     }
 
+    .refresh-button {
+      border: none;
+      background: #111;
+      color: white;
+      padding: 0 18px;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ARTICLES */
+
     .article {
       background: white;
       padding: 18px;
@@ -117,9 +154,23 @@
       box-shadow: 0 2px 10px rgba(0,0,0,.06);
     }
 
-    .article h2 {
-      font-size: 20px;
-      margin: 8px 0;
+    .article-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .article-content {
+      flex: 1;
+    }
+
+    .article-image {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 9px;
+      background: #e5e7eb;
     }
 
     .category {
@@ -131,6 +182,22 @@
       font-size: 11px;
       font-weight: bold;
       text-transform: uppercase;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: #f59e0b;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .article h2 {
+      font-size: 20px;
+      margin: 8px 0;
     }
 
     .date {
@@ -176,6 +243,16 @@
       color: #111;
     }
 
+    .feature {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .unfeature {
+      background: #d97706;
+      color: white;
+    }
+
     /* EDITOR */
 
     .editor {
@@ -216,12 +293,6 @@
       background: white;
     }
 
-    .editor input:focus,
-    .editor select:focus,
-    .editor textarea:focus {
-      border-color: #111;
-    }
-
     .editor textarea {
       min-height: 160px;
       resize: vertical;
@@ -235,17 +306,25 @@
       min-height: 300px;
     }
 
+    .image-preview {
+      display: none;
+      width: 220px;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
     .editor-actions {
       display: flex;
       gap: 10px;
       margin-top: 22px;
     }
 
-    .save-button {
+    .save-button,
+    .cancel-button {
       flex: 1;
       border: none;
-      background: #111;
-      color: white;
       padding: 14px;
       border-radius: 8px;
       font-weight: bold;
@@ -253,22 +332,22 @@
       cursor: pointer;
     }
 
+    .save-button {
+      background: #111;
+      color: white;
+    }
+
     .cancel-button {
-      flex: 1;
-      border: none;
       background: #e5e7eb;
       color: #111;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
     }
 
     .save-button:disabled {
       opacity: .6;
       cursor: not-allowed;
     }
+
+    /* MESSAGE */
 
     .message {
       background: white;
@@ -287,6 +366,8 @@
       display: none;
       font-weight: bold;
     }
+
+    /* LOGIN */
 
     .login {
       max-width: 450px;
@@ -353,6 +434,14 @@
       font-size: 13px;
     }
 
+    @media (max-width: 1000px) {
+
+      .dashboard-top {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
     @media (max-width: 700px) {
 
       .header-inner {
@@ -360,12 +449,29 @@
         text-align: center;
       }
 
+      .header-buttons {
+        justify-content: center;
+      }
+
       .dashboard-top {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .controls-grid {
         grid-template-columns: 1fr;
+      }
+
+      .refresh-button {
+        padding: 12px;
+      }
+
+      .article-top {
+        flex-direction: column;
+      }
+
+      .article-image {
+        width: 100%;
+        height: 220px;
       }
 
       .editor-actions {
@@ -381,23 +487,35 @@
 <body>
 
 
-  <!-- HEADER -->
+<header>
 
-  <header>
+  <div class="header-inner">
 
-    <div class="header-inner">
+    <div>
 
-      <div>
+      <h1>BENUE24/7 ADMIN</h1>
 
-        <h1>
-          BENUE24/7 ADMIN
-        </h1>
+      <p>
+        Manage your stories, featured content and categories
+      </p>
 
-        <p>
-          Manage your stories
-        </p>
+    </div>
 
-      </div>
+    <div class="header-buttons">
+
+      <a
+        href="publish.html"
+        class="header-button"
+      >
+        ✍️ Publish
+      </a>
+
+      <a
+        href="index.html"
+        class="header-button"
+      >
+        🌐 Website
+      </a>
 
       <button
         class="logout"
@@ -408,134 +526,233 @@
 
     </div>
 
-  </header>
+  </div>
+
+</header>
 
 
-  <!-- LOGIN -->
+<!-- LOGIN -->
 
-  <div
-    id="loginBox"
-    class="login"
-    style="display:none;"
+<div
+  id="loginBox"
+  class="login"
+  style="display:none;"
+>
+
+  <h2>🔐 Admin Login</h2>
+
+  <p>
+    Login to manage Benue24/7 Trending Gists.
+  </p>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="Admin email"
+    autocomplete="email"
   >
 
-    <h2>
-      🔐 Admin Login
-    </h2>
+  <input
+    id="password"
+    type="password"
+    placeholder="Admin password"
+    autocomplete="current-password"
+  >
 
-    <p>
-      Login to manage Benue24/7 Trending Gists.
-    </p>
+  <button onclick="loginAdmin()">
+    🔐 Login
+  </button>
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Admin email"
-      autocomplete="email"
-    >
+  <div
+    id="loginMessage"
+    class="login-message"
+  ></div>
 
-    <input
-      id="password"
-      type="password"
-      placeholder="Admin password"
-      autocomplete="current-password"
-    >
+</div>
 
-    <button onclick="loginAdmin()">
-      🔐 Login
-    </button>
 
-    <div
-      id="loginMessage"
-      class="login-message"
-    ></div>
+<!-- DASHBOARD -->
+
+<main
+  id="dashboard"
+  style="display:none;"
+>
+
+
+  <!-- STATS -->
+
+  <div class="dashboard-top">
+
+    <div class="stat">
+      <div class="stat-title">📰 Total Stories</div>
+      <strong id="totalStories">0</strong>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">📰 News</div>
+      <strong id="totalNews">0</strong>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">🔥 Trending</div>
+      <strong id="totalTrending">0</strong>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">🎬 Entertainment</div>
+      <strong id="totalEntertainment">0</strong>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">⚽ Sports</div>
+      <strong id="totalSports">0</strong>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">🏛️ Politics</div>
+      <strong id="totalPolitics">0</strong>
+    </div>
 
   </div>
 
 
-  <!-- DASHBOARD -->
+  <!-- EDITOR -->
 
-  <main
-    id="dashboard"
-    style="display:none;"
+  <section
+    id="editor"
+    class="editor"
   >
 
+    <h2>✏️ Edit Story</h2>
 
-    <!-- STATS -->
+    <p class="editor-intro">
+      Update the story information below and save your changes.
+    </p>
 
-    <div class="dashboard-top">
+    <div
+      id="editMessage"
+      class="success-message"
+    ></div>
 
-      <div class="stat">
 
-        📰 Total Stories
+    <label for="editTitle">
+      Story Title *
+    </label>
 
-        <strong id="totalStories">
-          0
-        </strong>
+    <input
+      id="editTitle"
+      type="text"
+      placeholder="Story title"
+    >
 
-      </div>
 
-      <div class="stat">
+    <label for="editCategory">
+      Category *
+    </label>
 
-        🔥 Trending
+    <select id="editCategory">
 
-        <strong id="totalTrending">
-          0
-        </strong>
+      <option value="news">📰 News</option>
+      <option value="trending">🔥 Trending</option>
+      <option value="entertainment">🎬 Entertainment</option>
+      <option value="sports">⚽ Sports</option>
+      <option value="politics">🏛️ Politics</option>
 
-      </div>
+    </select>
 
-      <div class="stat">
 
-        🎬 Entertainment
+    <label for="editDescription">
+      Short Description
+    </label>
 
-        <strong id="totalEntertainment">
-          0
-        </strong>
+    <textarea
+      id="editDescription"
+      placeholder="Short description"
+    ></textarea>
 
-      </div>
+
+    <label for="editImage">
+      Story Image URL
+    </label>
+
+    <input
+      id="editImage"
+      type="url"
+      placeholder="Paste the public image URL"
+      oninput="previewEditImage()"
+    >
+
+    <img
+      id="editImagePreview"
+      class="image-preview"
+      alt="Story image preview"
+    >
+
+
+    <label for="editStory">
+      Full Story *
+    </label>
+
+    <textarea
+      id="editStory"
+      placeholder="Full story"
+    ></textarea>
+
+
+    <label for="editAuthor">
+      Author
+    </label>
+
+    <input
+      id="editAuthor"
+      type="text"
+      placeholder="Author"
+    >
+
+
+    <div class="editor-actions">
+
+      <button
+        id="saveButton"
+        class="save-button"
+        onclick="saveEditedStory()"
+      >
+        💾 Save Changes
+      </button>
+
+      <button
+        class="cancel-button"
+        onclick="cancelEdit()"
+      >
+        ✖️ Cancel
+      </button>
 
     </div>
 
-
-    <!-- EDITOR -->
-
-    <section
-      id="editor"
-      class="editor"
-    >
-
-      <h2>
-        ✏️ Edit Story
-      </h2>
-
-      <p class="editor-intro">
-        Update the story information below and save your changes.
-      </p>
+  </section>
 
 
-      <div
-        id="editMessage"
-        class="success-message"
-      ></div>
+  <!-- CONTROLS -->
 
+  <div class="controls">
 
-      <label for="editTitle">
-        Story Title *
-      </label>
+    <div class="controls-grid">
 
       <input
-        id="editTitle"
-        type="text"
-        placeholder="Story title"
+        id="search"
+        type="search"
+        placeholder="🔎 Search stories..."
+        oninput="renderArticles()"
       >
 
+      <select
+        id="categoryFilter"
+        onchange="renderArticles()"
+      >
 
-      <label for="editCategory">
-        Category *
-      </label>
-
-      <select id="editCategory">
+        <option value="all">
+          All Categories
+        </option>
 
         <option value="news">
           📰 News
@@ -559,535 +776,519 @@
 
       </select>
 
-
-      <label for="editDescription">
-        Short Description
-      </label>
-
-      <textarea
-        id="editDescription"
-        placeholder="Short description"
-      ></textarea>
-
-
-      <label for="editImage">
-        Story Image URL
-      </label>
-
-      <input
-        id="editImage"
-        type="url"
-        placeholder="https://example.com/image.jpg"
+      <button
+        class="refresh-button"
+        onclick="loadStories()"
       >
-
-
-      <label for="editStory">
-        Full Story *
-      </label>
-
-      <textarea
-        id="editStory"
-        placeholder="Full story"
-      ></textarea>
-
-
-      <label for="editAuthor">
-        Author
-      </label>
-
-      <input
-        id="editAuthor"
-        type="text"
-        placeholder="Author"
-      >
-
-
-      <div class="editor-actions">
-
-        <button
-          id="saveButton"
-          class="save-button"
-          onclick="saveEditedStory()"
-        >
-          💾 Save Changes
-        </button>
-
-        <button
-          class="cancel-button"
-          onclick="cancelEdit()"
-        >
-          ✖️ Cancel
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTROLS -->
-
-    <div class="controls">
-
-      <div class="controls-grid">
-
-        <input
-          id="search"
-          type="search"
-          placeholder="🔎 Search stories..."
-          oninput="renderArticles()"
-        >
-
-        <select
-          id="categoryFilter"
-          onchange="renderArticles()"
-        >
-
-          <option value="all">
-            All Categories
-          </option>
-
-          <option value="news">
-            📰 News
-          </option>
-
-          <option value="trending">
-            🔥 Trending
-          </option>
-
-          <option value="entertainment">
-            🎬 Entertainment
-          </option>
-
-          <option value="sports">
-            ⚽ Sports
-          </option>
-
-          <option value="politics">
-            🏛️ Politics
-          </option>
-
-        </select>
-
-      </div>
+        🔄 Refresh
+      </button>
 
     </div>
 
+  </div>
 
-    <!-- ARTICLES -->
 
-    <div id="articles">
+  <!-- ARTICLES -->
 
-      <div class="message">
-        Loading stories...
-      </div>
+  <div id="articles">
 
+    <div class="message">
+      Loading stories...
     </div>
 
-  </main>
+  </div>
+
+</main>
 
 
-  <footer>
+<footer>
 
-    <h3>
-      BENUE24/7 TRENDING GISTS
-    </h3>
+  <h3>
+    BENUE24/7 TRENDING GISTS
+  </h3>
 
-    <p>
-      Admin Dashboard
-    </p>
+  <p>
+    Admin Dashboard • Story Management
+  </p>
 
-  </footer>
-
-
-  <!-- SUPABASE -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="config.js"></script>
+</footer>
 
 
-  <script>
+<!-- SUPABASE -->
 
-    let supabaseClient = null;
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    let allArticles = [];
-
-    let editingId = null;
+<script src="config.js"></script>
 
 
-    /* ================================
-       CONNECT TO SUPABASE
-    ================================= */
+<script>
 
-    try {
+let supabaseClient = null;
 
-      if (
-        typeof SUPABASE_URL !== "undefined" &&
-        typeof SUPABASE_ANON_KEY !== "undefined"
-      ) {
+let allArticles = [];
 
-        supabaseClient =
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          );
+let editingId = null;
 
-      }
 
-    } catch (error) {
+/* ================================
+   CONNECT TO SUPABASE
+================================ */
 
-      console.error(
-        "Supabase connection error:",
-        error
+try {
+
+  if (
+    typeof SUPABASE_URL !== "undefined" &&
+    typeof SUPABASE_ANON_KEY !== "undefined"
+  ) {
+
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
       );
 
-    }
+  }
+
+} catch (error) {
+
+  console.error(
+    "Supabase connection error:",
+    error
+  );
+
+}
 
 
-    /* ================================
-       CHECK LOGIN
-    ================================= */
+/* ================================
+   CHECK LOGIN
+================================ */
 
-    async function checkLogin() {
+async function checkLogin() {
 
-      if (!supabaseClient) {
+  if (!supabaseClient) {
 
-        showLogin();
+    showLogin();
 
-        showLoginMessage(
-          "Supabase connection is not configured.",
-          "error"
+    showLoginMessage(
+      "Supabase connection is not configured.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const result =
+    await supabaseClient.auth.getSession();
+
+  if (result.data.session) {
+
+    showDashboard();
+
+    loadStories();
+
+  } else {
+
+    showLogin();
+
+  }
+
+}
+
+
+/* ================================
+   SHOW LOGIN
+================================ */
+
+function showLogin() {
+
+  document.getElementById(
+    "loginBox"
+  ).style.display = "block";
+
+  document.getElementById(
+    "dashboard"
+  ).style.display = "none";
+
+}
+
+
+/* ================================
+   SHOW DASHBOARD
+================================ */
+
+function showDashboard() {
+
+  document.getElementById(
+    "loginBox"
+  ).style.display = "none";
+
+  document.getElementById(
+    "dashboard"
+  ).style.display = "block";
+
+}
+
+
+/* ================================
+   LOGIN
+================================ */
+
+async function loginAdmin() {
+
+  const email =
+    document.getElementById(
+      "email"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "password"
+    ).value;
+
+  if (!email || !password) {
+
+    showLoginMessage(
+      "Enter your email and password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const result =
+    await supabaseClient.auth
+      .signInWithPassword({
+
+        email: email,
+
+        password: password
+
+      });
+
+  if (result.error) {
+
+    showLoginMessage(
+      result.error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+  showDashboard();
+
+  loadStories();
+
+}
+
+
+/* ================================
+   LOGOUT
+================================ */
+
+async function logoutAdmin() {
+
+  await supabaseClient.auth.signOut();
+
+  editingId = null;
+
+  showLogin();
+
+}
+
+
+/* ================================
+   LOGIN MESSAGE
+================================ */
+
+function showLoginMessage(
+  text,
+  type
+) {
+
+  const box =
+    document.getElementById(
+      "loginMessage"
+    );
+
+  box.textContent = text;
+
+  box.className =
+    "login-message " + type;
+
+}
+
+
+/* ================================
+   LOAD STORIES
+================================ */
+
+async function loadStories() {
+
+  const container =
+    document.getElementById(
+      "articles"
+    );
+
+  container.innerHTML = `
+
+    <div class="message">
+      🔄 Loading stories...
+    </div>
+
+  `;
+
+
+  const result =
+    await supabaseClient
+
+      .from("article")
+
+      .select("*")
+
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (result.error) {
+
+    console.error(
+      result.error
+    );
+
+    container.innerHTML = `
+
+      <div class="message">
+
+        ⚠️ Unable to load stories.<br><br>
+
+        ${escapeHTML(
+          result.error.message
+        )}
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  allArticles =
+    result.data || [];
+
+
+  updateStats();
+
+  renderArticles();
+
+}
+
+
+/* ================================
+   UPDATE STATS
+================================ */
+
+function updateStats() {
+
+  document.getElementById(
+    "totalStories"
+  ).textContent =
+    allArticles.length;
+
+
+  document.getElementById(
+    "totalNews"
+  ).textContent =
+    allArticles.filter(
+      article =>
+        article.category === "news"
+    ).length;
+
+
+  document.getElementById(
+    "totalTrending"
+  ).textContent =
+    allArticles.filter(
+      article =>
+        article.category === "trending"
+    ).length;
+
+
+  document.getElementById(
+    "totalEntertainment"
+  ).textContent =
+    allArticles.filter(
+      article =>
+        article.category === "entertainment"
+    ).length;
+
+
+  document.getElementById(
+    "totalSports"
+  ).textContent =
+    allArticles.filter(
+      article =>
+        article.category === "sports"
+    ).length;
+
+
+  document.getElementById(
+    "totalPolitics"
+  ).textContent =
+    allArticles.filter(
+      article =>
+        article.category === "politics"
+    ).length;
+
+}
+
+
+/* ================================
+   RENDER ARTICLES
+================================ */
+
+function renderArticles() {
+
+  const container =
+    document.getElementById(
+      "articles"
+    );
+
+
+  const search =
+    document.getElementById(
+      "search"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  const category =
+    document.getElementById(
+      "categoryFilter"
+    ).value;
+
+
+  const filtered =
+    allArticles.filter(
+      article => {
+
+        const title =
+          String(
+            article.title || ""
+          ).toLowerCase();
+
+
+        const description =
+          String(
+            article.description || ""
+          ).toLowerCase();
+
+
+        const story =
+          String(
+            article.story || ""
+          ).toLowerCase();
+
+
+        const matchesSearch =
+          !search ||
+          title.includes(search) ||
+          description.includes(search) ||
+          story.includes(search);
+
+
+        const matchesCategory =
+          category === "all" ||
+          article.category === category;
+
+
+        return (
+          matchesSearch &&
+          matchesCategory
         );
 
-        return;
-
       }
-
-      const result =
-        await supabaseClient.auth.getSession();
-
-      if (
-        result.data.session
-      ) {
-
-        showDashboard();
-
-        loadStories();
-
-      } else {
-
-        showLogin();
-
-      }
-
-    }
+    );
 
 
-    function showLogin() {
+  if (!filtered.length) {
 
-      document.getElementById(
-        "loginBox"
-      ).style.display = "block";
+    container.innerHTML = `
 
-      document.getElementById(
-        "dashboard"
-      ).style.display = "none";
+      <div class="message">
+        No stories found.
+      </div>
 
-    }
+    `;
 
+    return;
 
-    function showDashboard() {
-
-      document.getElementById(
-        "loginBox"
-      ).style.display = "none";
-
-      document.getElementById(
-        "dashboard"
-      ).style.display = "block";
-
-    }
+  }
 
 
-    /* ================================
-       LOGIN
-    ================================= */
+  container.innerHTML =
+    filtered.map(
+      article => {
 
-    async function loginAdmin() {
-
-      const email =
-        document.getElementById(
-          "email"
-        ).value.trim();
-
-      const password =
-        document.getElementById(
-          "password"
-        ).value;
-
-      if (!email || !password) {
-
-        showLoginMessage(
-          "Enter your email and password.",
-          "error"
-        );
-
-        return;
-
-      }
-
-      const result =
-        await supabaseClient.auth
-          .signInWithPassword({
-
-            email: email,
-
-            password: password
-
-          });
-
-      if (result.error) {
-
-        showLoginMessage(
-          result.error.message,
-          "error"
-        );
-
-        return;
-
-      }
-
-      showDashboard();
-
-      loadStories();
-
-    }
+        const date =
+          article.created_at
+            ? new Date(
+                article.created_at
+              ).toLocaleDateString(
+                "en-GB"
+              )
+            : "";
 
 
-    /* ================================
-       LOGOUT
-    ================================= */
-
-    async function logoutAdmin() {
-
-      await supabaseClient.auth.signOut();
-
-      editingId = null;
-
-      showLogin();
-
-    }
+        const slug =
+          article.slug || "";
 
 
-    /* ================================
-       LOGIN MESSAGE
-    ================================= */
-
-    function showLoginMessage(
-      text,
-      type
-    ) {
-
-      const box =
-        document.getElementById(
-          "loginMessage"
-        );
-
-      box.textContent = text;
-
-      box.className =
-        "login-message " + type;
-
-    }
-
-
-    /* ================================
-       LOAD STORIES
-    ================================= */
-
-    async function loadStories() {
-
-      const result =
-        await supabaseClient
-
-          .from("article")
-
-          .select("*")
-
-          .order(
-            "created_at",
-            {
-              ascending: false
-            }
+        const link =
+          "article.html?slug=" +
+          encodeURIComponent(
+            slug
           );
 
-      if (result.error) {
 
-        console.error(
-          result.error
-        );
+        const image =
+          article.image_url
+            ? `
 
-        document.getElementById(
-          "articles"
-        ).innerHTML = `
+              <img
+                class="article-image"
+                src="${escapeAttribute(
+                  article.image_url
+                )}"
+                alt="Story image"
+                onerror="this.style.display='none'"
+              >
 
-          <div class="message">
-
-            ⚠️ Unable to load stories.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-      allArticles =
-        result.data || [];
-
-      updateStats();
-
-      renderArticles();
-
-    }
+            `
+            : "";
 
 
-    /* ================================
-       STATS
-    ================================= */
-
-    function updateStats() {
-
-      document.getElementById(
-        "totalStories"
-      ).textContent =
-        allArticles.length;
-
-      document.getElementById(
-        "totalTrending"
-      ).textContent =
-        allArticles.filter(
-          article =>
-            article.category === "trending"
-        ).length;
-
-      document.getElementById(
-        "totalEntertainment"
-      ).textContent =
-        allArticles.filter(
-          article =>
-            article.category === "entertainment"
-        ).length;
-
-    }
+        const featured =
+          article.featured === true;
 
 
-    /* ================================
-       RENDER STORIES
-    ================================= */
+        return `
 
-    function renderArticles() {
+          <article class="article">
 
-      const container =
-        document.getElementById(
-          "articles"
-        );
+            <div class="article-top">
 
-      const search =
-        document.getElementById(
-          "search"
-        ).value
-          .trim()
-          .toLowerCase();
-
-      const category =
-        document.getElementById(
-          "categoryFilter"
-        ).value;
-
-      const filtered =
-        allArticles.filter(
-          article => {
-
-            const title =
-              String(
-                article.title || ""
-              ).toLowerCase();
-
-            const description =
-              String(
-                article.description || ""
-              ).toLowerCase();
-
-            const story =
-              String(
-                article.story || ""
-              ).toLowerCase();
-
-            const matchesSearch =
-              !search ||
-              title.includes(search) ||
-              description.includes(search) ||
-              story.includes(search);
-
-            const matchesCategory =
-              category === "all" ||
-              article.category === category;
-
-            return (
-              matchesSearch &&
-              matchesCategory
-            );
-
-          }
-        );
-
-
-      if (
-        filtered.length === 0
-      ) {
-
-        container.innerHTML = `
-
-          <div class="message">
-
-            No stories found.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      container.innerHTML =
-        filtered
-          .map(article => {
-
-            const date =
-              article.created_at
-
-                ? new Date(
-                    article.created_at
-                  ).toLocaleDateString(
-                    "en-GB"
-                  )
-
-                : "";
-
-            const slug =
-              article.slug || "";
-
-            const link =
-              "article.html?slug=" +
-              encodeURIComponent(slug);
-
-            return `
-
-              <article class="article">
+              <div class="article-content">
 
                 <span class="category">
 
@@ -1097,6 +1298,17 @@
                   )}
 
                 </span>
+
+
+                ${
+                  featured
+                    ? `
+                      <span class="featured-badge">
+                        ⭐ FEATURED
+                      </span>
+                    `
+                    : ""
+                }
 
 
                 <h2>
@@ -1112,7 +1324,9 @@
                 <div class="date">
 
                   Published:
-                  ${escapeHTML(date)}
+                  ${escapeHTML(
+                    date
+                  )}
 
                 </div>
 
@@ -1126,444 +1340,684 @@
 
                 </p>
 
-
-                <div class="actions">
-
-                  <a
-                    class="view"
-                    href="${link}"
-                    target="_blank"
-                  >
-                    👁️ View
-                  </a>
+              </div>
 
 
-                  <button
-                    class="edit"
-                    onclick="editStory('${article.id}')"
-                  >
-                    ✏️ Edit
-                  </button>
+              ${image}
+
+            </div>
 
 
-                  <button
-                    class="delete"
-                    onclick="deleteStory('${article.id}')"
-                  >
-                    🗑️ Delete
-                  </button>
+            <div class="actions">
 
-                </div>
-
-              </article>
-
-            `;
-
-          })
-          .join("");
-
-    }
+              <a
+                class="view"
+                href="${link}"
+                target="_blank"
+              >
+                👁️ View
+              </a>
 
 
-    /* ================================
-       EDIT STORY
-    ================================= */
+              <button
+                class="edit"
+                onclick="editStory('${escapeAttribute(article.id)}')"
+              >
+                ✏️ Edit
+              </button>
 
-    function editStory(id) {
 
-      const article =
-        allArticles.find(
-          item =>
-            String(item.id) ===
-            String(id)
-        );
+              <button
+                class="${
+                  featured
+                    ? "unfeature"
+                    : "feature"
+                }"
+                onclick="toggleFeatured('${escapeAttribute(article.id)}', ${featured})"
+              >
 
-      if (!article) {
+                ${
+                  featured
+                    ? "⭐ Unfeature"
+                    : "⭐ Feature"
+                }
 
-        alert(
-          "Story not found."
-        );
+              </button>
 
-        return;
+
+              <button
+                class="delete"
+                onclick="deleteStory('${escapeAttribute(article.id)}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          </article>
+
+        `;
 
       }
+    ).join("");
 
-      editingId = id;
-
-
-      document.getElementById(
-        "editTitle"
-      ).value =
-        article.title || "";
+}
 
 
-      document.getElementById(
-        "editCategory"
-      ).value =
-        article.category || "news";
+/* ================================
+   FEATURE / UNFEATURE
+================================ */
+
+async function toggleFeatured(
+  id,
+  currentlyFeatured
+) {
+
+  if (!supabaseClient) {
+
+    alert(
+      "Supabase is not connected."
+    );
+
+    return;
+
+  }
 
 
-      document.getElementById(
-        "editDescription"
-      ).value =
-        article.description || "";
+  if (currentlyFeatured) {
 
+    const result =
+      await supabaseClient
 
-      document.getElementById(
-        "editImage"
-      ).value =
-        article.image_url || "";
+        .from("article")
 
+        .update({
+          featured: false
+        })
 
-      document.getElementById(
-        "editStory"
-      ).value =
-        article.story || "";
-
-
-      document.getElementById(
-        "editAuthor"
-      ).value =
-        article.author ||
-        "Benue24/7 Trending Gists";
-
-
-      document.getElementById(
-        "editMessage"
-      ).style.display = "none";
-
-
-      const editor =
-        document.getElementById(
-          "editor"
-        );
-
-      editor.style.display =
-        "block";
-
-
-      editor.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-    }
-
-
-    /* ================================
-       SAVE EDITED STORY
-    ================================= */
-
-    async function saveEditedStory() {
-
-      if (!editingId) {
-
-        alert(
-          "No story selected."
-        );
-
-        return;
-
-      }
-
-
-      const title =
-        document.getElementById(
-          "editTitle"
-        ).value.trim();
-
-
-      const category =
-        document.getElementById(
-          "editCategory"
-        ).value;
-
-
-      const description =
-        document.getElementById(
-          "editDescription"
-        ).value.trim();
-
-
-      const image_url =
-        document.getElementById(
-          "editImage"
-        ).value.trim();
-
-
-      const story =
-        document.getElementById(
-          "editStory"
-        ).value.trim();
-
-
-      const author =
-        document.getElementById(
-          "editAuthor"
-        ).value.trim();
-
-
-      if (!title) {
-
-        alert(
-          "Please enter a story title."
-        );
-
-        return;
-
-      }
-
-
-      if (!story) {
-
-        alert(
-          "Please enter the full story."
-        );
-
-        return;
-
-      }
-
-
-      const button =
-        document.getElementById(
-          "saveButton"
+        .eq(
+          "id",
+          id
         );
 
 
-      button.disabled = true;
-
-      button.textContent =
-        "Saving...";
-
-
-      const result =
-        await supabaseClient
-
-          .from("article")
-
-          .update({
-
-            title:
-              title,
-
-            category:
-              category,
-
-            description:
-              description,
-
-            image_url:
-              image_url || null,
-
-            story:
-              story,
-
-            author:
-              author ||
-              "Benue24/7 Trending Gists"
-
-          })
-
-          .eq(
-            "id",
-            editingId
-          );
-
-
-      if (result.error) {
-
-        console.error(
-          result.error
-        );
-
-        alert(
-          "Update failed: " +
-          result.error.message
-        );
-
-        button.disabled = false;
-
-        button.textContent =
-          "💾 Save Changes";
-
-        return;
-
-      }
-
-
-      const message =
-        document.getElementById(
-          "editMessage"
-        );
-
-      message.textContent =
-        "✅ Story updated successfully!";
-
-      message.style.display =
-        "block";
-
-
-      button.disabled = false;
-
-      button.textContent =
-        "💾 Save Changes";
-
-
-      await loadStories();
-
-
-      setTimeout(
-        () => {
-
-          cancelEdit();
-
-        },
-        1200
-      );
-
-    }
-
-
-    /* ================================
-       CANCEL EDIT
-    ================================= */
-
-    function cancelEdit() {
-
-      editingId = null;
-
-
-      document.getElementById(
-        "editor"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "editMessage"
-      ).style.display =
-        "none";
-
-    }
-
-
-    /* ================================
-       DELETE STORY
-    ================================= */
-
-    async function deleteStory(id) {
-
-      const article =
-        allArticles.find(
-          item =>
-            String(item.id) ===
-            String(id)
-        );
-
-      if (!article) return;
-
-
-      const confirmed =
-        confirm(
-
-          "Are you sure you want to delete this story?\n\n" +
-          article.title
-
-        );
-
-
-      if (!confirmed) return;
-
-
-      const result =
-        await supabaseClient
-
-          .from("article")
-
-          .delete()
-
-          .eq(
-            "id",
-            id
-          );
-
-
-      if (result.error) {
-
-        alert(
-          "Delete failed: " +
-          result.error.message
-        );
-
-        return;
-
-      }
-
+    if (result.error) {
 
       alert(
-        "✅ Story deleted successfully."
+        "Unable to remove featured status: " +
+        result.error.message
+      );
+
+      return;
+
+    }
+
+  } else {
+
+    /*
+      First remove featured status
+      from every story.
+    */
+
+    const reset =
+      await supabaseClient
+
+        .from("article")
+
+        .update({
+          featured: false
+        })
+
+        .eq(
+          "featured",
+          true
+        );
+
+
+    if (reset.error) {
+
+      alert(
+        "Unable to update featured story: " +
+        reset.error.message
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Make selected story featured.
+    */
+
+    const result =
+      await supabaseClient
+
+        .from("article")
+
+        .update({
+          featured: true
+        })
+
+        .eq(
+          "id",
+          id
+        );
+
+
+    if (result.error) {
+
+      alert(
+        "Unable to feature story: " +
+        result.error.message
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  await loadStories();
+
+
+  alert(
+    currentlyFeatured
+      ? "⭐ Story removed from Featured Story."
+      : "⭐ Story is now the Featured Story."
+  );
+
+}
+
+
+/* ================================
+   EDIT STORY
+================================ */
+
+function editStory(id) {
+
+  const article =
+    allArticles.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if (!article) {
+
+    alert(
+      "Story not found."
+    );
+
+    return;
+
+  }
+
+
+  editingId = id;
+
+
+  document.getElementById(
+    "editTitle"
+  ).value =
+    article.title || "";
+
+
+  document.getElementById(
+    "editCategory"
+  ).value =
+    article.category || "news";
+
+
+  document.getElementById(
+    "editDescription"
+  ).value =
+    article.description || "";
+
+
+  document.getElementById(
+    "editImage"
+  ).value =
+    article.image_url || "";
+
+
+  document.getElementById(
+    "editStory"
+  ).value =
+    article.story || "";
+
+
+  document.getElementById(
+    "editAuthor"
+  ).value =
+    article.author ||
+    "Benue24/7 Trending Gists";
+
+
+  previewEditImage();
+
+
+  document.getElementById(
+    "editMessage"
+  ).style.display =
+    "none";
+
+
+  const editor =
+    document.getElementById(
+      "editor"
+    );
+
+
+  editor.style.display =
+    "block";
+
+
+  editor.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+}
+
+
+/* ================================
+   IMAGE PREVIEW
+================================ */
+
+function previewEditImage() {
+
+  const url =
+    document.getElementById(
+      "editImage"
+    ).value.trim();
+
+
+  const preview =
+    document.getElementById(
+      "editImagePreview"
+    );
+
+
+  if (!url) {
+
+    preview.style.display =
+      "none";
+
+    preview.removeAttribute(
+      "src"
+    );
+
+    return;
+
+  }
+
+
+  preview.src = url;
+
+  preview.style.display =
+    "block";
+
+}
+
+
+/* ================================
+   SAVE EDITED STORY
+================================ */
+
+async function saveEditedStory() {
+
+  if (!editingId) {
+
+    alert(
+      "No story selected."
+    );
+
+    return;
+
+  }
+
+
+  const title =
+    document.getElementById(
+      "editTitle"
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      "editCategory"
+    ).value;
+
+
+  const description =
+    document.getElementById(
+      "editDescription"
+    ).value.trim();
+
+
+  const image_url =
+    document.getElementById(
+      "editImage"
+    ).value.trim();
+
+
+  const story =
+    document.getElementById(
+      "editStory"
+    ).value.trim();
+
+
+  const author =
+    document.getElementById(
+      "editAuthor"
+    ).value.trim();
+
+
+  if (!title) {
+
+    alert(
+      "Please enter a story title."
+    );
+
+    return;
+
+  }
+
+
+  if (!story) {
+
+    alert(
+      "Please enter the full story."
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "saveButton"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Saving...";
+
+
+  const result =
+    await supabaseClient
+
+      .from("article")
+
+      .update({
+
+        title:
+          title,
+
+        category:
+          category,
+
+        description:
+          description,
+
+        image_url:
+          image_url || null,
+
+        story:
+          story,
+
+        author:
+          author ||
+          "Benue24/7 Trending Gists"
+
+      })
+
+      .eq(
+        "id",
+        editingId
       );
 
 
-      if (
-        String(editingId) ===
+  if (result.error) {
+
+    console.error(
+      result.error
+    );
+
+
+    alert(
+      "Update failed: " +
+      result.error.message
+    );
+
+
+    button.disabled = false;
+
+    button.textContent =
+      "💾 Save Changes";
+
+    return;
+
+  }
+
+
+  const message =
+    document.getElementById(
+      "editMessage"
+    );
+
+
+  message.textContent =
+    "✅ Story updated successfully!";
+
+
+  message.style.display =
+    "block";
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "💾 Save Changes";
+
+
+  await loadStories();
+
+
+  setTimeout(
+    () => {
+
+      cancelEdit();
+
+    },
+    1200
+  );
+
+}
+
+
+/* ================================
+   CANCEL EDIT
+================================ */
+
+function cancelEdit() {
+
+  editingId = null;
+
+
+  document.getElementById(
+    "editor"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "editMessage"
+  ).style.display =
+    "none";
+
+}
+
+
+/* ================================
+   DELETE STORY
+================================ */
+
+async function deleteStory(id) {
+
+  const article =
+    allArticles.find(
+      item =>
+        String(item.id) ===
         String(id)
-      ) {
-
-        cancelEdit();
-
-      }
+    );
 
 
-      loadStories();
-
-    }
+  if (!article) return;
 
 
-    /* ================================
-       ESCAPE HTML
-    ================================= */
+  const confirmed =
+    confirm(
 
-    function escapeHTML(value) {
+      "Are you sure you want to delete this story?\n\n" +
+      article.title
 
-      return String(value || "")
-
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-
-        .replace(
-          /</g,
-          "&lt;"
-        )
-
-        .replace(
-          />/g,
-          "&gt;"
-        )
-
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
+    );
 
 
-    /* ================================
-       START
-    ================================= */
+  if (!confirmed) return;
 
-    checkLogin();
 
-  </script>
+  const result =
+    await supabaseClient
+
+      .from("article")
+
+      .delete()
+
+      .eq(
+        "id",
+        id
+      );
+
+
+  if (result.error) {
+
+    alert(
+      "Delete failed: " +
+      result.error.message
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    "✅ Story deleted successfully."
+  );
+
+
+  if (
+    String(editingId) ===
+    String(id)
+  ) {
+
+    cancelEdit();
+
+  }
+
+
+  await loadStories();
+
+}
+
+
+/* ================================
+   ESCAPE HTML
+================================ */
+
+function escapeHTML(value) {
+
+  return String(value || "")
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* ================================
+   ESCAPE ATTRIBUTE
+================================ */
+
+function escapeAttribute(value) {
+
+  return String(value || "")
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    );
+
+}
+
+
+/* ================================
+   START
+================================ */
+
+checkLogin();
+
+</script>
 
 </body>
 </html>
