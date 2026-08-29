@@ -440,7 +440,6 @@
 
       </div>
 
-
       <div class="hint">
         Maximum image size: 5MB.
       </div>
@@ -472,7 +471,7 @@
       >
 
 
-      <!-- PUBLISH -->
+      <!-- PUBLISH BUTTON -->
 
       <button
         id="publishButton"
@@ -598,7 +597,10 @@
         await supabaseClient.auth.getSession();
 
 
-      if (!result.data.session) {
+      if (
+        !result.data ||
+        !result.data.session
+      ) {
 
         showMessage(
           "Please login to your admin account before publishing.",
@@ -674,24 +676,20 @@
       const file =
         event.target.files[0];
 
-
       const preview =
         document.getElementById(
           "imagePreview"
         );
-
 
       const image =
         document.getElementById(
           "previewImage"
         );
 
-
       const name =
         document.getElementById(
           "imageName"
         );
-
 
       const status =
         document.getElementById(
@@ -708,6 +706,8 @@
 
       }
 
+
+      /* CHECK IMAGE */
 
       if (
         !file.type.startsWith(
@@ -727,6 +727,8 @@
       }
 
 
+      /* MAX 5MB */
+
       if (
         file.size >
         5 * 1024 * 1024
@@ -744,23 +746,21 @@
       }
 
 
+      /* PREVIEW */
+
       const objectURL =
         URL.createObjectURL(
           file
         );
 
-
       image.src =
         objectURL;
-
 
       name.textContent =
         file.name;
 
-
       status.style.display =
         "none";
-
 
       preview.style.display =
         "block";
@@ -769,10 +769,10 @@
 
 
     /* ================================
-       UPLOAD IMAGE TO SUPABASE
+       UPLOAD IMAGE
        
-       IMPORTANT:
-       YOUR BUCKET IS NAMED "Image"
+       SUPABASE BUCKET:
+       Images
     ================================= */
 
     async function uploadStoryImage(file) {
@@ -820,14 +820,18 @@
 
 
       /*
-        YOUR SUPABASE BUCKET:
-        Image
+
+        IMPORTANT:
+        YOUR REAL BUCKET NAME IS:
+
+        Images
+
       */
 
       const result =
         await supabaseClient.storage
 
-          .from("Image")
+          .from("Images")
 
           .upload(
             filePath,
@@ -838,6 +842,8 @@
             }
           );
 
+
+      /* UPLOAD ERROR */
 
       if (result.error) {
 
@@ -854,14 +860,12 @@
       }
 
 
-      /*
-        GET PUBLIC IMAGE URL
-      */
+      /* GET PUBLIC URL */
 
       const publicResult =
         supabaseClient.storage
 
-          .from("Image")
+          .from("Images")
 
           .getPublicUrl(
             filePath
@@ -874,7 +878,7 @@
       ) {
 
         throw new Error(
-          "Unable to create image URL."
+          "Image uploaded, but the public image URL could not be created."
         );
 
       }
@@ -916,7 +920,7 @@
       }
 
 
-      /* GET VALUES */
+      /* GET FORM VALUES */
 
       const title =
         document.getElementById(
@@ -958,7 +962,7 @@
         imageInput.files[0];
 
 
-      /* REQUIRED */
+      /* CHECK TITLE */
 
       if (!title) {
 
@@ -971,6 +975,8 @@
 
       }
 
+
+      /* CHECK STORY */
 
       if (!story) {
 
@@ -1002,7 +1008,7 @@
       try {
 
         /* =========================
-           UPLOAD IMAGE
+           IMAGE URL
         ========================== */
 
         let image_url =
@@ -1064,7 +1070,7 @@
 
 
         /* =========================
-           SAVE STORY
+           SAVE TO SUPABASE
         ========================== */
 
         const result =
@@ -1076,6 +1082,8 @@
               article
             ]);
 
+
+        /* DATABASE ERROR */
 
         if (result.error) {
 
