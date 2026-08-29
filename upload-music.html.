@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Upload Music | Benue24/7 Trending Gists</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 25px 15px;
+    }
+
+    .header-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    header p {
+      color: #d1d5db;
+      margin-top: 5px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 15px 60px;
+    }
+
+    .back {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+    }
+
+    .box h2 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+      margin-top: 18px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #111;
+    }
+
+    .upload-button {
+      width: 100%;
+      margin-top: 25px;
+      border: none;
+      background: #e11d48;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .upload-button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .preview {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .preview img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .info {
+      margin-top: 15px;
+      padding: 13px;
+      background: #f3f4f6;
+      border-radius: 8px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    footer p {
+      color: #aaa;
+      margin-top: 7px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .box {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>🎵 Upload Music</h1>
+    <p>Benue24/7 Trending Gists Music Platform</p>
+  </div>
+</header>
+
+<main>
+
+  <a href="music.html" class="back">
+    ← Back to Music
+  </a>
+
+  <div class="box">
+
+    <h2>🎶 Add New Song</h2>
+
+    <form id="musicForm">
+
+      <label for="title">
+        Song Title
+      </label>
+
+      <input
+        type="text"
+        id="title"
+        placeholder="e.g. UP and Grateful"
+        required
+      >
+
+      <label for="artist">
+        Artist Name
+      </label>
+
+      <input
+        type="text"
+        id="artist"
+        placeholder="e.g. SnazzyB"
+        required
+      >
+
+      <label for="genre">
+        Genre
+      </label>
+
+      <select id="genre" required>
+
+        <option value="">
+          Select genre
+        </option>
+
+        <option value="Afrobeats">
+          Afrobeats
+        </option>
+
+        <option value="Afropop">
+          Afropop
+        </option>
+
+        <option value="Amapiano">
+          Amapiano
+        </option>
+
+        <option value="Hip Hop">
+          Hip Hop
+        </option>
+
+        <option value="Gospel">
+          Gospel
+        </option>
+
+        <option value="R&B">
+          R&B
+        </option>
+
+        <option value="Highlife">
+          Highlife
+        </option>
+
+        <option value="Other">
+          Other
+        </option>
+
+      </select>
+
+      <label for="cover">
+        Cover Artwork
+      </label>
+
+      <input
+        type="file"
+        id="cover"
+        accept="image/*"
+        required
+      >
+
+      <div
+        id="coverPreview"
+        class="preview"
+      ></div>
+
+      <label for="audio">
+        Audio File
+      </label>
+
+      <input
+        type="file"
+        id="audio"
+        accept="audio/*"
+        required
+      >
+
+      <div class="info">
+        🎧 Upload an MP3, WAV or other supported audio file.
+      </div>
+
+      <button
+        type="submit"
+        id="uploadButton"
+        class="upload-button"
+      >
+        🚀 Publish Song
+      </button>
+
+      <div
+        id="status"
+        class="status"
+      ></div>
+
+    </form>
+
+  </div>
+
+</main>
+
+<footer>
+
+  <h3>
+    BENUE24/7 TRENDING GISTS
+  </h3>
+
+  <p>
+    News • Trending Gists • Entertainment • Sports • Politics • Music
+  </p>
+
+  <p>
+    © 2026 Benue24/7 Trending Gists
+  </p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+<script>
+
+let supabaseClient = null;
+
+
+/* SUPABASE */
+
+try {
+
+  if (
+    typeof SUPABASE_URL !== "undefined" &&
+    typeof SUPABASE_ANON_KEY !== "undefined"
+  ) {
+
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+  }
+
+} catch (error) {
+
+  console.error(error);
+
+}
+
+
+/* ELEMENTS */
+
+const form =
+  document.getElementById("musicForm");
+
+const coverInput =
+  document.getElementById("cover");
+
+const audioInput =
+  document.getElementById("audio");
+
+const coverPreview =
+  document.getElementById("coverPreview");
+
+const uploadButton =
+  document.getElementById("uploadButton");
+
+const status =
+  document.getElementById("status");
+
+
+/* COVER PREVIEW */
+
+coverInput.addEventListener(
+  "change",
+  function() {
+
+    const file =
+      coverInput.files[0];
+
+    if (!file) return;
+
+    const url =
+      URL.createObjectURL(file);
+
+    coverPreview.innerHTML = `
+      <img
+        src="${url}"
+        alt="Cover preview"
+      >
+    `;
+
+  }
+);
+
+
+/* STATUS */
+
+function showStatus(
+  message,
+  type
+) {
+
+  status.textContent =
+    message;
+
+  status.className =
+    "status " + type;
+
+}
+
+
+/* SLUG */
+
+function createSlug(
+  title,
+  artist
+) {
+
+  return (
+    title +
+    "-" +
+    artist
+  )
+  .toLowerCase()
+  .trim()
+  .replace(
+    /[^a-z0-9]+/g,
+    "-"
+  )
+  .replace(
+    /^-+|-+$/g,
+    ""
+  );
+
+}
+
+
+/* UPLOAD */
+
+form.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    if (!supabaseClient) {
+
+      showStatus(
+        "Supabase is not configured.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const title =
+      document
+        .getElementById("title")
+        .value
+        .trim();
+
+    const artist =
+      document
+        .getElementById("artist")
+        .value
+        .trim();
+
+    const genre =
+      document
+        .getElementById("genre")
+        .value;
+
+    const coverFile =
+      coverInput.files[0];
+
+    const audioFile =
+      audioInput.files[0];
+
+
+    if (
+      !title ||
+      !artist ||
+      !genre ||
+      !coverFile ||
+      !audioFile
+    ) {
+
+      showStatus(
+        "Please complete all fields.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    uploadButton.disabled =
+      true;
+
+    uploadButton.textContent =
+      "⏳ Uploading...";
+
+
+    try {
+
+      /*
+        CREATE UNIQUE FILE NAMES
+      */
+
+      const timestamp =
+        Date.now();
+
+
+      const coverPath =
+        "covers/" +
+        timestamp +
+        "-" +
+        coverFile.name
+          .replace(
+            /[^a-zA-Z0-9._-]/g,
+            "-"
+          );
+
+
+      const audioPath =
+        "audio/" +
+        timestamp +
+        "-" +
+        audioFile.name
+          .replace(
+            /[^a-zA-Z0-9._-]/g,
+            "-"
+          );
+
+
+      /*
+        UPLOAD COVER
+      */
+
+      showStatus(
+        "Uploading cover artwork...",
+        "success"
+      );
+
+
+      const coverUpload =
+        await supabaseClient
+          .storage
+          .from("music")
+          .upload(
+            coverPath,
+            coverFile,
+            {
+              cacheControl: "3600",
+              upsert: false
+            }
+          );
+
+
+      if (coverUpload.error) {
+
+        throw coverUpload.error;
+
+      }
+
+
+      /*
+        GET COVER URL
+      */
+
+      const coverURL =
+        supabaseClient
+          .storage
+          .from("music")
+          .getPublicUrl(
+            coverPath
+          )
+          .data
+          .publicUrl;
+
+
+      /*
+        UPLOAD AUDIO
+      */
+
+      showStatus(
+        "Uploading audio file...",
+        "success"
+      );
+
+
+      const audioUpload =
+        await supabaseClient
+          .storage
+          .from("music")
+          .upload(
+            audioPath,
+            audioFile,
+            {
+              cacheControl: "3600",
+              upsert: false
+            }
+          );
+
+
+      if (audioUpload.error) {
+
+        throw audioUpload.error;
+
+      }
+
+
+      /*
+        GET AUDIO URL
+      */
+
+      const audioURL =
+        supabaseClient
+          .storage
+          .from("music")
+          .getPublicUrl(
+            audioPath
+          )
+          .data
+          .publicUrl;
+
+
+      /*
+        CREATE SLUG
+      */
+
+      const slug =
+        createSlug(
+          title,
+          artist
+        );
+
+
+      /*
+        SAVE TO DATABASE
+      */
+
+      showStatus(
+        "Saving song information...",
+        "success"
+      );
+
+
+      const insert =
+        await supabaseClient
+          .from("music")
+          .insert({
+
+            title:
+              title,
+
+            artist:
+              artist,
+
+            genre:
+              genre,
+
+            cover_url:
+              coverURL,
+
+            audio_url:
+              audioURL,
+
+            slug:
+              slug
+
+          });
+
+
+      if (insert.error) {
+
+        throw insert.error;
+
+      }
+
+
+      /*
+        SUCCESS
+      */
+
+      showStatus(
+        "✅ Song published successfully!",
+        "success"
+      );
+
+
+      form.reset();
+
+      coverPreview.innerHTML =
+        "";
+
+
+      uploadButton.textContent =
+        "✅ Published";
+
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "music.html";
+
+        },
+        1500
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Music upload error:",
+        error
+      );
+
+
+      showStatus(
+        "❌ Upload failed: " +
+        (
+          error.message ||
+          "Unknown error"
+        ),
+        "error"
+      );
+
+
+      uploadButton.disabled =
+        false;
+
+      uploadButton.textContent =
+        "🚀 Publish Song";
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
