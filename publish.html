@@ -1,1184 +1,963 @@
-<!DOCTYPE html>
-<html lang="en">
+<script>
 
-<head>
+let supabaseClient = null;
 
-  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+/* =========================================
+   CONNECT TO SUPABASE
+========================================= */
 
-  <title>
-    Publish Story | Benue24/7 Trending Gists
-  </title>
+try {
 
-  <style>
+  if (
+    typeof SUPABASE_URL !== "undefined" &&
+    typeof SUPABASE_ANON_KEY !== "undefined"
+  ) {
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f3f4f6;
-      color: #111827;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #111;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 26px;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      color: #d1d5db;
-      font-size: 14px;
-    }
-
-    nav {
-      background: #222;
-      color: white;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 7px 12px;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-
-    nav a:hover {
-      background: white;
-      color: #111;
-    }
-
-    main {
-      max-width: 850px;
-      margin: 30px auto;
-      padding: 0 15px;
-    }
-
-    .publish-box {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.08);
-    }
-
-    .publish-box h2 {
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
-
-    .intro {
-      color: #6b7280;
-      margin-bottom: 25px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-      margin-top: 18px;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      padding: 13px;
-      font-size: 16px;
-      font-family: inherit;
-      outline: none;
-      background: white;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #111;
-    }
-
-    textarea {
-      min-height: 180px;
-      resize: vertical;
-    }
-
-    #description {
-      min-height: 110px;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 5px;
-    }
-
-    /* IMAGE UPLOAD */
-
-    .image-upload-box {
-      border: 2px dashed #d1d5db;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      background: #f9fafb;
-      margin-top: 8px;
-    }
-
-    .image-upload-box p {
-      margin-bottom: 10px;
-      color: #6b7280;
-    }
-
-    .image-upload-box input {
-      border: none;
-      padding: 10px 0;
-      background: transparent;
-    }
-
-    .image-preview {
-      display: none;
-      margin-top: 15px;
-    }
-
-    .image-preview img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .image-name {
-      font-size: 13px;
-      color: #6b7280;
-      margin-top: 8px;
-      word-break: break-word;
-    }
-
-    .upload-status {
-      margin-top: 10px;
-      font-size: 13px;
-      font-weight: bold;
-      display: none;
-    }
-
-    .publish-button {
-      width: 100%;
-      margin-top: 25px;
-      border: none;
-      background: #111;
-      color: white;
-      padding: 15px;
-      border-radius: 9px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .publish-button:hover {
-      background: #333;
-    }
-
-    .publish-button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    .message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      display: none;
-      font-weight: bold;
-    }
-
-    .success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .error {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .preview {
-      margin-top: 25px;
-      padding: 18px;
-      background: #f9fafb;
-      border-radius: 10px;
-      display: none;
-    }
-
-    .preview h3 {
-      margin-bottom: 10px;
-    }
-
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-      margin-top: 50px;
-    }
-
-    footer p {
-      color: #bbb;
-      margin-top: 7px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-
-      .publish-box {
-        padding: 18px;
-      }
-
-      .publish-box h2 {
-        font-size: 23px;
-      }
-
-    }
-
-  </style>
-
-</head>
-
-
-<body>
-
-
-  <!-- HEADER -->
-
-  <header>
-
-    <h1>
-      BENUE24/7 TRENDING GISTS
-    </h1>
-
-    <p>
-      Publish News • Trending Gists • Entertainment • Sports • Politics
-    </p>
-
-  </header>
-
-
-  <!-- NAVIGATION -->
-
-  <nav>
-
-    <a href="index.html">
-      Home
-    </a>
-
-    <a href="index.html#news">
-      News
-    </a>
-
-    <a href="index.html#trending">
-      Trending
-    </a>
-
-    <a href="index.html#entertainment">
-      Entertainment
-    </a>
-
-    <a href="index.html#sports">
-      Sports
-    </a>
-
-    <a href="index.html#politics">
-      Politics
-    </a>
-
-    <a href="music.html">
-      🎵 Music
-    </a>
-
-    <a href="admin.html">
-      🔐 Admin
-    </a>
-
-  </nav>
-
-
-  <!-- MAIN -->
-
-  <main>
-
-    <div class="publish-box">
-
-      <h2>
-        📝 Publish New Story
-      </h2>
-
-      <p class="intro">
-        Add a new story to Benue24/7 Trending Gists.
-      </p>
-
-
-      <!-- TITLE -->
-
-      <label for="title">
-        Story Title *
-      </label>
-
-      <input
-        id="title"
-        type="text"
-        placeholder="Enter the headline of your story"
-        required
-      >
-
-
-      <!-- CATEGORY -->
-
-      <label for="category">
-        Category *
-      </label>
-
-      <select id="category">
-
-        <option value="news">
-          📰 News
-        </option>
-
-        <option value="trending">
-          🔥 Trending
-        </option>
-
-        <option value="entertainment">
-          🎬 Entertainment
-        </option>
-
-        <option value="sports">
-          ⚽ Sports
-        </option>
-
-        <option value="politics">
-          🏛️ Politics
-        </option>
-
-      </select>
-
-
-      <!-- DESCRIPTION -->
-
-      <label for="description">
-        Short Description
-      </label>
-
-      <textarea
-        id="description"
-        placeholder="Write a short summary of the story..."
-      ></textarea>
-
-
-      <!-- IMAGE -->
-
-      <label for="storyImage">
-        📷 Story Image
-      </label>
-
-      <div class="image-upload-box">
-
-        <p>
-          Choose an image directly from your phone
-        </p>
-
-        <input
-          id="storyImage"
-          type="file"
-          accept="image/*"
-          onchange="previewImage(event)"
-        >
-
-        <div
-          id="imagePreview"
-          class="image-preview"
-        >
-
-          <img
-            id="previewImage"
-            src=""
-            alt="Story image preview"
-          >
-
-          <div
-            id="imageName"
-            class="image-name"
-          ></div>
-
-        </div>
-
-        <div
-          id="uploadStatus"
-          class="upload-status"
-        ></div>
-
-      </div>
-
-      <div class="hint">
-        Maximum image size: 5MB.
-      </div>
-
-
-      <!-- FULL STORY -->
-
-      <label for="story">
-        Full Story *
-      </label>
-
-      <textarea
-        id="story"
-        placeholder="Write the complete story here..."
-        required
-      ></textarea>
-
-
-      <!-- AUTHOR -->
-
-      <label for="author">
-        Author
-      </label>
-
-      <input
-        id="author"
-        type="text"
-        value="Benue24/7 Trending Gists"
-      >
-
-
-      <!-- PUBLISH BUTTON -->
-
-      <button
-        id="publishButton"
-        class="publish-button"
-        onclick="publishStory()"
-      >
-        🚀 Publish Story
-      </button>
-
-
-      <!-- MESSAGE -->
-
-      <div
-        id="message"
-        class="message"
-      ></div>
-
-
-      <!-- SUCCESS -->
-
-      <div
-        id="preview"
-        class="preview"
-      >
-
-        <h3>
-          ✅ Story Published Successfully
-        </h3>
-
-        <p>
-          Your story has been added to the website.
-        </p>
-
-        <p style="margin-top:10px;">
-          Go to the homepage and refresh it to see the story.
-        </p>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <h3>
-      BENUE24/7 TRENDING GISTS
-    </h3>
-
-    <p>
-      News • Trending Gists • Entertainment • Sports • Politics • Music
-    </p>
-
-    <p>
-      © 2026 Benue24/7 Trending Gists
-    </p>
-
-  </footer>
-
-
-  <!-- SUPABASE -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="config.js"></script>
-
-
-  <script>
-
-    let supabaseClient = null;
-
-
-    /* ================================
-       CONNECT TO SUPABASE
-    ================================= */
-
-    try {
-
-      if (
-        typeof SUPABASE_URL !== "undefined" &&
-        typeof SUPABASE_ANON_KEY !== "undefined"
-      ) {
-
-        supabaseClient =
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          );
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "Supabase connection error:",
-        error
+    supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
       );
 
-    }
+  } else {
+
+    console.error(
+      "SUPABASE_URL or SUPABASE_ANON_KEY is missing."
+    );
+
+  }
+
+} catch (error) {
+
+  console.error(
+    "Supabase connection error:",
+    error
+  );
+
+}
 
 
-    /* ================================
-       CHECK ADMIN LOGIN
-    ================================= */
+/* =========================================
+   CHECK ADMIN LOGIN
+========================================= */
 
-    async function checkAdminLogin() {
+async function checkAdminLogin() {
 
-      if (!supabaseClient) {
+  if (!supabaseClient) {
 
-        showMessage(
-          "Supabase connection is not configured.",
-          "error"
-        );
+    showMessage(
+      "Supabase connection is not configured.",
+      "error"
+    );
 
-        return false;
+    return false;
 
-      }
+  }
 
-      const result =
-        await supabaseClient.auth.getSession();
+  try {
 
+    const result =
+      await supabaseClient.auth.getSession();
 
-      if (
-        !result.data ||
-        !result.data.session
-      ) {
-
-        showMessage(
-          "Please login to your admin account before publishing.",
-          "error"
-        );
-
-        return false;
-
-      }
-
-      return true;
-
-    }
-
-
-    /* ================================
-       CREATE SLUG
-    ================================= */
-
-    function createSlug(text) {
-
-      return text
-        .toLowerCase()
-        .trim()
-        .replace(
-          /[^a-z0-9\s-]/g,
-          ""
-        )
-        .replace(
-          /\s+/g,
-          "-"
-        )
-        .replace(
-          /-+/g,
-          "-"
-        )
-        +
-        "-" +
-        Date.now();
-
-    }
-
-
-    /* ================================
-       SHOW MESSAGE
-    ================================= */
-
-    function showMessage(
-      text,
-      type
+    if (
+      result.error ||
+      !result.data ||
+      !result.data.session
     ) {
 
-      const box =
-        document.getElementById(
-          "message"
-        );
-
-      box.textContent =
-        text;
-
-      box.className =
-        "message " + type;
-
-    }
-
-
-    /* ================================
-       IMAGE PREVIEW
-    ================================= */
-
-    function previewImage(event) {
-
-      const file =
-        event.target.files[0];
-
-      const preview =
-        document.getElementById(
-          "imagePreview"
-        );
-
-      const image =
-        document.getElementById(
-          "previewImage"
-        );
-
-      const name =
-        document.getElementById(
-          "imageName"
-        );
-
-      const status =
-        document.getElementById(
-          "uploadStatus"
-        );
-
-
-      if (!file) {
-
-        preview.style.display =
-          "none";
-
-        return;
-
-      }
-
-
-      /* CHECK IMAGE */
-
-      if (
-        !file.type.startsWith(
-          "image/"
-        )
-      ) {
-
-        showMessage(
-          "Please choose a valid image file.",
-          "error"
-        );
-
-        event.target.value = "";
-
-        return;
-
-      }
-
-
-      /* MAX 5MB */
-
-      if (
-        file.size >
-        5 * 1024 * 1024
-      ) {
-
-        showMessage(
-          "Image is too large. Maximum size is 5MB.",
-          "error"
-        );
-
-        event.target.value = "";
-
-        return;
-
-      }
-
-
-      /* PREVIEW */
-
-      const objectURL =
-        URL.createObjectURL(
-          file
-        );
-
-      image.src =
-        objectURL;
-
-      name.textContent =
-        file.name;
-
-      status.style.display =
-        "none";
-
-      preview.style.display =
-        "block";
-
-    }
-
-
-    /* ================================
-       UPLOAD IMAGE
-       
-       SUPABASE BUCKET:
-       Images
-    ================================= */
-
-    async function uploadStoryImage(file) {
-
-      if (!file) {
-
-        return null;
-
-      }
-
-
-      const extension =
-        file.name
-          .split(".")
-          .pop()
-          .toLowerCase();
-
-
-      const fileName =
-        "story-" +
-        Date.now() +
-        "-" +
-        Math.random()
-          .toString(36)
-          .substring(2, 10) +
-        "." +
-        extension;
-
-
-      const filePath =
-        fileName;
-
-
-      const status =
-        document.getElementById(
-          "uploadStatus"
-        );
-
-
-      status.textContent =
-        "Uploading image...";
-
-      status.style.display =
-        "block";
-
-
-      /*
-
-        IMPORTANT:
-        YOUR REAL BUCKET NAME IS:
-
-        Images
-
-      */
-
-      const result =
-        await supabaseClient.storage
-
-          .from("Images")
-
-          .upload(
-            filePath,
-            file,
-            {
-              cacheControl: "3600",
-              upsert: false
-            }
-          );
-
-
-      /* UPLOAD ERROR */
-
-      if (result.error) {
-
-        console.error(
-          "Image upload error:",
-          result.error
-        );
-
-        throw new Error(
-          "Image upload failed: " +
-          result.error.message
-        );
-
-      }
-
-
-      /* GET PUBLIC URL */
-
-      const publicResult =
-        supabaseClient.storage
-
-          .from("Images")
-
-          .getPublicUrl(
-            filePath
-          );
-
-
-      if (
-        !publicResult.data ||
-        !publicResult.data.publicUrl
-      ) {
-
-        throw new Error(
-          "Image uploaded, but the public image URL could not be created."
-        );
-
-      }
-
-
-      status.textContent =
-        "✅ Image uploaded successfully.";
-
-
-      return (
-        publicResult.data.publicUrl
-      );
-
-    }
-
-
-    /* ================================
-       PUBLISH STORY
-    ================================= */
-
-    async function publishStory() {
-
-      const button =
-        document.getElementById(
-          "publishButton"
-        );
-
-
-      /* CHECK LOGIN */
-
-      const loggedIn =
-        await checkAdminLogin();
-
-
-      if (!loggedIn) {
-
-        return;
-
-      }
-
-
-      /* GET FORM VALUES */
-
-      const title =
-        document.getElementById(
-          "title"
-        ).value.trim();
-
-
-      const category =
-        document.getElementById(
-          "category"
-        ).value;
-
-
-      const description =
-        document.getElementById(
-          "description"
-        ).value.trim();
-
-
-      const story =
-        document.getElementById(
-          "story"
-        ).value.trim();
-
-
-      const author =
-        document.getElementById(
-          "author"
-        ).value.trim();
-
-
-      const imageInput =
-        document.getElementById(
-          "storyImage"
-        );
-
-
-      const imageFile =
-        imageInput.files[0];
-
-
-      /* CHECK TITLE */
-
-      if (!title) {
-
-        showMessage(
-          "Please enter a story title.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      /* CHECK STORY */
-
-      if (!story) {
-
-        showMessage(
-          "Please enter the full story.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      /* DISABLE BUTTON */
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Publishing...";
-
-
       showMessage(
-        "Preparing your story...",
-        "success"
+        "Please login to your admin account before publishing.",
+        "error"
       );
 
+      return false;
 
-      try {
+    }
 
-        /* =========================
-           IMAGE URL
-        ========================== */
+    return true;
 
-        let image_url =
-          null;
+  } catch (error) {
+
+    console.error(
+      "Login check error:",
+      error
+    );
+
+    showMessage(
+      "Unable to verify your admin login.",
+      "error"
+    );
+
+    return false;
+
+  }
+
+}
 
 
-        if (imageFile) {
+/* =========================================
+   CREATE SLUG
+========================================= */
 
-          image_url =
-            await uploadStoryImage(
-              imageFile
+function createSlug(text) {
+
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(
+      /[^a-z0-9\s-]/g,
+      ""
+    )
+    .replace(
+      /\s+/g,
+      "-"
+    )
+    .replace(
+      /-+/g,
+      "-"
+    )
+    +
+    "-" +
+    Date.now();
+
+}
+
+
+/* =========================================
+   SHOW MESSAGE
+========================================= */
+
+function showMessage(
+  text,
+  type
+) {
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+  box.textContent =
+    text;
+
+  box.className =
+    "message " + type;
+
+}
+
+
+/* =========================================
+   IMAGE PREVIEW
+========================================= */
+
+function previewImage(event) {
+
+  const file =
+    event.target.files[0];
+
+  const preview =
+    document.getElementById(
+      "imagePreview"
+    );
+
+  const image =
+    document.getElementById(
+      "previewImage"
+    );
+
+  const name =
+    document.getElementById(
+      "imageName"
+    );
+
+  const status =
+    document.getElementById(
+      "uploadStatus"
+    );
+
+
+  if (!file) {
+
+    preview.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  if (
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    showMessage(
+      "Please choose a valid image file.",
+      "error"
+    );
+
+    event.target.value = "";
+
+    return;
+
+  }
+
+
+  /*
+    Allow up to 10MB before compression.
+    The image will be reduced before upload.
+  */
+
+  if (
+    file.size >
+    10 * 1024 * 1024
+  ) {
+
+    showMessage(
+      "Image is too large. Maximum size is 10MB.",
+      "error"
+    );
+
+    event.target.value = "";
+
+    return;
+
+  }
+
+
+  const objectURL =
+    URL.createObjectURL(
+      file
+    );
+
+
+  image.src =
+    objectURL;
+
+
+  name.textContent =
+    file.name +
+    " (" +
+    formatFileSize(file.size) +
+    ")";
+
+
+  status.style.display =
+    "none";
+
+
+  preview.style.display =
+    "block";
+
+
+  showMessage(
+    "",
+    ""
+  );
+
+}
+
+
+/* =========================================
+   FILE SIZE
+========================================= */
+
+function formatFileSize(bytes) {
+
+  if (bytes < 1024) {
+
+    return bytes + " B";
+
+  }
+
+  if (bytes < 1024 * 1024) {
+
+    return (
+      (bytes / 1024).toFixed(1) +
+      " KB"
+    );
+
+  }
+
+  return (
+    (bytes / (1024 * 1024)).toFixed(1) +
+    " MB"
+  );
+
+}
+
+
+/* =========================================
+   COMPRESS IMAGE
+========================================= */
+
+async function compressImage(file) {
+
+  /*
+    If image is already small, use it directly.
+  */
+
+  if (
+    file.size <=
+    1.5 * 1024 * 1024 &&
+    file.type === "image/jpeg"
+  ) {
+
+    return file;
+
+  }
+
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload = function(event) {
+
+        const img =
+          new Image();
+
+
+        img.onload = function() {
+
+          const maxWidth =
+            1600;
+
+          const maxHeight =
+            1600;
+
+
+          let width =
+            img.width;
+
+          let height =
+            img.height;
+
+
+          /*
+            Resize large phone photos.
+          */
+
+          if (
+            width > maxWidth ||
+            height > maxHeight
+          ) {
+
+            const ratio =
+              Math.min(
+                maxWidth / width,
+                maxHeight / height
+              );
+
+            width =
+              Math.round(
+                width * ratio
+              );
+
+            height =
+              Math.round(
+                height * ratio
+              );
+
+          }
+
+
+          const canvas =
+            document.createElement(
+              "canvas"
             );
 
-        }
+
+          canvas.width =
+            width;
+
+          canvas.height =
+            height;
 
 
-        /* =========================
-           CREATE SLUG
-        ========================== */
+          const ctx =
+            canvas.getContext(
+              "2d"
+            );
 
-        const slug =
-          createSlug(
-            title
+
+          ctx.drawImage(
+            img,
+            0,
+            0,
+            width,
+            height
           );
 
 
-        /* =========================
-           ARTICLE DATA
-        ========================== */
+          canvas.toBlob(
+            function(blob) {
 
-        const article = {
+              if (!blob) {
 
-          title:
-            title,
+                reject(
+                  new Error(
+                    "Image compression failed."
+                  )
+                );
 
-          slug:
-            slug,
+                return;
 
-          description:
-            description,
+              }
 
-          story:
-            story,
 
-          image_url:
-            image_url,
+              const compressedFile =
+                new File(
+                  [
+                    blob
+                  ],
+                  "story-" +
+                  Date.now() +
+                  ".jpg",
+                  {
+                    type:
+                      "image/jpeg"
+                  }
+                );
 
-          category:
-            category,
 
-          author:
-            author ||
-            "Benue24/7 Trending Gists",
+              resolve(
+                compressedFile
+              );
 
-          created_at:
-            new Date().toISOString()
+            },
+            "image/jpeg",
+            0.82
+          );
 
         };
 
 
-        /* =========================
-           SAVE TO SUPABASE
-        ========================== */
+        img.onerror =
+          function() {
 
-        const result =
-          await supabaseClient
+            reject(
+              new Error(
+                "This image format cannot be processed by your browser."
+              )
+            );
 
-            .from("article")
-
-            .insert([
-              article
-            ]);
+          };
 
 
-        /* DATABASE ERROR */
+        img.src =
+          event.target.result;
 
-        if (result.error) {
+      };
 
-          console.error(
-            "Publishing error:",
-            result.error
+
+      reader.onerror =
+        function() {
+
+          reject(
+            new Error(
+              "Unable to read the selected image."
+            )
           );
 
-          throw new Error(
-            "Publishing failed: " +
-            result.error.message
-          );
+        };
 
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   UPLOAD IMAGE TO SUPABASE
+========================================= */
+
+async function uploadStoryImage(file) {
+
+  if (!file) {
+
+    return null;
+
+  }
+
+
+  const status =
+    document.getElementById(
+      "uploadStatus"
+    );
+
+
+  status.textContent =
+    "Preparing image...";
+
+  status.style.display =
+    "block";
+
+
+  /*
+    Compress image first.
+  */
+
+  const uploadFile =
+    await compressImage(
+      file
+    );
+
+
+  status.textContent =
+    "Uploading image...";
+
+
+  /*
+    IMPORTANT:
+    Your bucket is exactly:
+
+    Images
+  */
+
+  const bucketName =
+    "Images";
+
+
+  const filePath =
+    "stories/" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2, 10) +
+    ".jpg";
+
+
+  /*
+    Upload with timeout.
+    This prevents the page from staying
+    on "Uploading image..." forever.
+  */
+
+  const uploadPromise =
+    supabaseClient.storage
+      .from(bucketName)
+      .upload(
+        filePath,
+        uploadFile,
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: "image/jpeg"
         }
+      );
 
 
-        /* =========================
-           SUCCESS
-        ========================== */
+  const timeoutPromise =
+    new Promise(
+      (_, reject) => {
 
-        showMessage(
-          "✅ Story published successfully!",
-          "success"
-        );
+        setTimeout(
+          () => {
 
+            reject(
+              new Error(
+                "Image upload timed out. Please check your internet connection and try again."
+              )
+            );
 
-        document.getElementById(
-          "preview"
-        ).style.display =
-          "block";
-
-
-        /* CLEAR FORM */
-
-        document.getElementById(
-          "title"
-        ).value = "";
-
-
-        document.getElementById(
-          "description"
-        ).value = "";
-
-
-        document.getElementById(
-          "story"
-        ).value = "";
-
-
-        document.getElementById(
-          "storyImage"
-        ).value = "";
-
-
-        document.getElementById(
-          "imagePreview"
-        ).style.display =
-          "none";
-
-
-        document.getElementById(
-          "uploadStatus"
-        ).style.display =
-          "none";
-
-
-      } catch (error) {
-
-        console.error(
-          "Publish error:",
-          error
-        );
-
-
-        showMessage(
-          error.message ||
-          "Something went wrong while publishing.",
-          "error"
+          },
+          60000
         );
 
       }
+    );
 
 
-      /* ENABLE BUTTON */
+  const result =
+    await Promise.race([
+      uploadPromise,
+      timeoutPromise
+    ]);
 
-      button.disabled =
-        false;
 
-      button.textContent =
-        "🚀 Publish Story";
+  if (result.error) {
+
+    console.error(
+      "Supabase image upload error:",
+      result.error
+    );
+
+
+    throw new Error(
+      "Image upload failed: " +
+      result.error.message
+    );
+
+  }
+
+
+  status.textContent =
+    "Creating image URL...";
+
+
+  /*
+    Get public URL.
+  */
+
+  const publicResult =
+    supabaseClient.storage
+      .from(bucketName)
+      .getPublicUrl(
+        filePath
+      );
+
+
+  const publicUrl =
+    publicResult.data &&
+    publicResult.data.publicUrl;
+
+
+  if (!publicUrl) {
+
+    throw new Error(
+      "Image uploaded, but Supabase could not create the public image URL."
+    );
+
+  }
+
+
+  status.textContent =
+    "✅ Image uploaded successfully.";
+
+
+  return publicUrl;
+
+}
+
+
+/* =========================================
+   PUBLISH STORY
+========================================= */
+
+async function publishStory() {
+
+  const button =
+    document.getElementById(
+      "publishButton"
+    );
+
+
+  /*
+    Prevent double clicking.
+  */
+
+  if (button.disabled) {
+
+    return;
+
+  }
+
+
+  /*
+    CHECK LOGIN
+  */
+
+  const loggedIn =
+    await checkAdminLogin();
+
+
+  if (!loggedIn) {
+
+    return;
+
+  }
+
+
+  /*
+    GET FORM DATA
+  */
+
+  const title =
+    document.getElementById(
+      "title"
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      "category"
+    ).value;
+
+
+  const description =
+    document.getElementById(
+      "description"
+    ).value.trim();
+
+
+  const story =
+    document.getElementById(
+      "story"
+    ).value.trim();
+
+
+  const author =
+    document.getElementById(
+      "author"
+    ).value.trim();
+
+
+  const imageInput =
+    document.getElementById(
+      "storyImage"
+    );
+
+
+  const imageFile =
+    imageInput.files[0];
+
+
+  /*
+    VALIDATE TITLE
+  */
+
+  if (!title) {
+
+    showMessage(
+      "Please enter a story title.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    VALIDATE STORY
+  */
+
+  if (!story) {
+
+    showMessage(
+      "Please enter the full story.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    DISABLE BUTTON
+  */
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "Publishing...";
+
+
+  try {
+
+    /*
+      STEP 1
+      Upload image.
+    */
+
+    let image_url =
+      null;
+
+
+    if (imageFile) {
+
+      showMessage(
+        "Preparing your image...",
+        "success"
+      );
+
+
+      image_url =
+        await uploadStoryImage(
+          imageFile
+        );
 
     }
 
-  </script>
+
+    /*
+      STEP 2
+      Create slug.
+    */
+
+    const slug =
+      createSlug(
+        title
+      );
+
+
+    /*
+      STEP 3
+      Prepare article.
+    */
+
+    const article = {
+
+      title:
+        title,
+
+      slug:
+        slug,
+
+      description:
+        description,
+
+      story:
+        story,
+
+      image_url:
+        image_url,
+
+      category:
+        category,
+
+      author:
+        author ||
+        "Benue24/7 Trending Gists"
+
+    };
+
+
+    /*
+      STEP 4
+      Save story.
+    */
+
+    showMessage(
+      "Saving your story...",
+      "success"
+    );
+
+
+    const result =
+      await supabaseClient
+        .from("article")
+        .insert([
+          article
+        ])
+        .select();
+
+
+    if (result.error) {
+
+      console.error(
+        "Database publishing error:",
+        result.error
+      );
+
+
+      throw new Error(
+        "Publishing failed: " +
+        result.error.message
+      );
+
+    }
+
+
+    /*
+      SUCCESS
+    */
+
+    showMessage(
+      "✅ Story published successfully!",
+      "success"
+    );
+
+
+    document.getElementById(
+      "preview"
+    ).style.display =
+      "block";
+
+
+    /*
+      CLEAR FORM
+    */
+
+    document.getElementById(
+      "title"
+    ).value = "";
+
+
+    document.getElementById(
+      "description"
+    ).value = "";
+
+
+    document.getElementById(
+      "story"
+    ).value = "";
+
+
+    document.getElementById(
+      "storyImage"
+    ).value = "";
+
+
+    document.getElementById(
+      "imagePreview"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "uploadStatus"
+    ).style.display =
+      "none";
+
+
+  } catch (error) {
+
+    console.error(
+      "Publish error:",
+      error
+    );
+
+
+    showMessage(
+      "❌ " +
+      (
+        error.message ||
+        "Something went wrong while publishing."
+      ),
+      "error"
+    );
+
+  }
+
+
+  /*
+    ENABLE BUTTON
+  */
+
+  button.disabled =
+    false;
+
+  button.textContent =
+    "🚀 Publish Story";
+
+}
+
+</script>
 
 </body>
-
 </html>
