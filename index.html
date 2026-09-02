@@ -66,13 +66,38 @@
       margin-top: 4px;
     }
 
-    .publish-button {
-      background: #e11d48;
+    .publish-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .publish-button,
+    .music-upload-button {
       color: white;
-      padding: 11px 17px;
-      border-radius: 7px;
+      padding: 13px 18px;
+      border-radius: 8px;
       font-weight: bold;
       white-space: nowrap;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .publish-button {
+      background: #e11d48;
+    }
+
+    .music-upload-button {
+      background: #16a34a;
+    }
+
+    .publish-button:hover {
+      background: #be123c;
+    }
+
+    .music-upload-button:hover {
+      background: #15803d;
     }
 
     /* NAVIGATION */
@@ -409,10 +434,26 @@
       margin-bottom: 18px;
     }
 
+    .music-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .music-button {
       display: inline-block;
       background: white;
       color: #111;
+      padding: 11px 20px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .music-upload-small {
+      display: inline-block;
+      background: #16a34a;
+      color: white;
       padding: 11px 20px;
       border-radius: 7px;
       font-weight: bold;
@@ -490,6 +531,20 @@
         font-size: 24px;
       }
 
+      .brand p {
+        font-size: 14px;
+      }
+
+      .publish-buttons {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .publish-button,
+      .music-upload-button {
+        width: 100%;
+      }
+
       nav {
         justify-content: flex-start;
       }
@@ -527,6 +582,15 @@
       .placeholder-image {
         height: 210px;
       }
+
+      .music-buttons {
+        flex-direction: column;
+      }
+
+      .music-button,
+      .music-upload-small {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -549,12 +613,23 @@
 
       </div>
 
-      <a
-        href="publish.html"
-        class="publish-button"
-      >
-        ✍️ Publish Story
-      </a>
+      <div class="publish-buttons">
+
+        <a
+          href="publish.html"
+          class="publish-button"
+        >
+          ✍️ Publish Story
+        </a>
+
+        <a
+          href="upload-music.html"
+          class="music-upload-button"
+        >
+          🎵 Upload Music
+        </a>
+
+      </div>
 
     </div>
 
@@ -903,12 +978,23 @@
         Listen to the latest music from Benue artists and beyond.
       </p>
 
-      <a
-        href="music.html"
-        class="music-button"
-      >
-        Open Music →
-      </a>
+      <div class="music-buttons">
+
+        <a
+          href="music.html"
+          class="music-button"
+        >
+          🎧 Open Music →
+        </a>
+
+        <a
+          href="upload-music.html"
+          class="music-upload-small"
+        >
+          🎵 Upload Music
+        </a>
+
+      </div>
 
     </section>
 
@@ -960,767 +1046,473 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script src="config.js"></script>
- <script>
 
-let supabaseClient = null;
-let allArticles = [];
+  <script>
 
+    let supabaseClient = null;
+    let allArticles = [];
 
-/* ================================
-   SUPABASE CONNECTION
-================================ */
 
-try {
+    /* ================================
+       SUPABASE CONNECTION
+    ================================= */
 
-  if (
-    typeof SUPABASE_URL !== "undefined" &&
-    typeof SUPABASE_ANON_KEY !== "undefined"
-  ) {
+    try {
 
-    supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
+      if (
+        typeof SUPABASE_URL !== "undefined" &&
+        typeof SUPABASE_ANON_KEY !== "undefined"
+      ) {
 
-  }
-
-} catch (error) {
-
-  console.error(
-    "Supabase connection error:",
-    error
-  );
-
-}
-
-
-/* ================================
-   ESCAPE HTML
-================================ */
-
-function escapeHTML(value) {
-
-  return String(value || "")
-
-    .replace(/&/g, "&amp;")
-
-    .replace(/</g, "&lt;")
-
-    .replace(/>/g, "&gt;")
-
-    .replace(/"/g, "&quot;")
-
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* ================================
-   SHOW MESSAGE
-================================ */
-
-function showMessage(
-  elementId,
-  message
-) {
-
-  const container =
-    document.getElementById(
-      elementId
-    );
-
-  if (!container) return;
-
-  container.innerHTML = `
-    <div class="message">
-      ${message}
-    </div>
-  `;
-
-}
-
-
-/* ================================
-   DISPLAY ARTICLES
-================================ */
-
-function displayArticles(
-  elementId,
-  articles
-) {
-
-  const container =
-    document.getElementById(
-      elementId
-    );
-
-  if (!container) return;
-
-
-  container.innerHTML = "";
-
-
-  articles.forEach(function(article) {
-
-    const title =
-      article.title ||
-      article.headline ||
-      "Untitled story";
-
-
-    const description =
-      article.description ||
-      article.excerpt ||
-      "";
-
-
-    const image =
-      article.image_url ||
-      article.cover_url ||
-      article.image ||
-      "";
-
-
-    const category =
-      article.category ||
-      "news";
-
-
-    const date =
-      article.created_at
-
-        ? new Date(
-            article.created_at
-          ).toLocaleDateString(
-            "en-GB",
-            {
-              day: "numeric",
-              month: "long",
-              year: "numeric"
-            }
-          )
-
-        : "";
-
-
-    const slug =
-      article.slug || "";
-
-
-    const link =
-      slug
-
-        ? "article.html?slug=" +
-          encodeURIComponent(slug)
-
-        : "article.html";
-
-
-    const imageHTML =
-      image
-
-        ? `
-          <img
-            class="card-image"
-            src="${escapeHTML(image)}"
-            alt="${escapeHTML(title)}"
-          >
-        `
-
-        : `
-          <div
-            class="card-image"
-            style="
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              font-size:45px;
-            "
-          >
-            📰
-          </div>
-        `;
-
-
-    container.innerHTML += `
-
-      <article class="card">
-
-        ${imageHTML}
-
-        <div class="card-body">
-
-          <span class="tag">
-            ${escapeHTML(category)}
-          </span>
-
-          <h3>
-
-            <a href="${link}">
-              ${escapeHTML(title)}
-            </a>
-
-          </h3>
-
-          ${
-            description
-
-              ? `
-                <p>
-                  ${escapeHTML(
-                    description
-                  )}
-                </p>
-              `
-
-              : ""
-          }
-
-          ${
-            date
-
-              ? `
-                <div class="date">
-                  ${escapeHTML(date)}
-                </div>
-              `
-
-              : ""
-          }
-
-        </div>
-
-      </article>
-
-    `;
-
-  });
-
-}
-
-
-/* ================================
-   LOAD ARTICLES
-================================ */
-
-async function loadArticles() {
-
-  if (!supabaseClient) {
-
-    showMessage(
-      "latestNews",
-      "Supabase connection is not configured."
-    );
-
-    showMessage(
-      "trendingNews",
-      "Supabase connection is not configured."
-    );
-
-    showMessage(
-      "entertainmentNews",
-      "Supabase connection is not configured."
-    );
-
-    showMessage(
-      "sportsNews",
-      "Supabase connection is not configured."
-    );
-
-    showMessage(
-      "politicsNews",
-      "Supabase connection is not configured."
-    );
-
-    return;
-
-  }
-
-
-  try {
-
-    const result =
-      await supabaseClient
-
-        .from("article")
-
-        .select("*")
-
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        )
-
-        .limit(50);
-
-
-    if (result.error) {
-
-      console.error(
-        "Article loading error:",
-        result.error
-      );
-
-
-      showMessage(
-        "latestNews",
-        "Unable to load latest news."
-      );
-
-      showMessage(
-        "trendingNews",
-        "Unable to load trending stories."
-      );
-
-      showMessage(
-        "entertainmentNews",
-        "Unable to load entertainment."
-      );
-
-      showMessage(
-        "sportsNews",
-        "Unable to load sports."
-      );
-
-      showMessage(
-        "politicsNews",
-        "Unable to load politics."
-      );
-
-      return;
-
-    }
-
-
-    allArticles =
-      result.data || [];
-
-
-    if (
-      allArticles.length === 0
-    ) {
-
-      showMessage(
-        "latestNews",
-        "No news published yet."
-      );
-
-      showMessage(
-        "trendingNews",
-        "No trending stories published yet."
-      );
-
-      showMessage(
-        "entertainmentNews",
-        "No entertainment stories published yet."
-      );
-
-      showMessage(
-        "sportsNews",
-        "No sports stories published yet."
-      );
-
-      showMessage(
-        "politicsNews",
-        "No politics stories published yet."
-      );
-
-      return;
-
-    }
-
-
-    /* LATEST NEWS */
-
-    displayArticles(
-      "latestNews",
-      allArticles.slice(0, 6)
-    );
-
-
-    /* TRENDING */
-
-    displayCategory(
-      "trendingNews",
-      "trending"
-    );
-
-
-    /* ENTERTAINMENT */
-
-    displayCategory(
-      "entertainmentNews",
-      "entertainment"
-    );
-
-
-    /* SPORTS */
-
-    displayCategory(
-      "sportsNews",
-      "sports"
-    );
-
-
-    /* POLITICS */
-
-    displayCategory(
-      "politicsNews",
-      "politics"
-    );
-
-
-    /* FEATURED */
-
-    loadFeaturedStory();
-
-  } catch (error) {
-
-    console.error(
-      "Unexpected article error:",
-      error
-    );
-
-
-    showMessage(
-      "latestNews",
-      "Something went wrong while loading news."
-    );
-
-  }
-
-}
-
-
-/* ================================
-   CATEGORY FILTER
-================================ */
-
-function displayCategory(
-  elementId,
-  category
-) {
-
-  const filtered =
-    allArticles.filter(
-      function(article) {
-
-        return String(
-          article.category || ""
-        ).toLowerCase() ===
-        category.toLowerCase();
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+          );
 
       }
-    );
+
+    } catch (error) {
+
+      console.error(
+        "Supabase connection error:",
+        error
+      );
+
+    }
 
 
-  if (
-    filtered.length === 0
-  ) {
+    /* ================================
+       ESCAPE HTML
+    ================================= */
 
-    showMessage(
+    function escapeHTML(value) {
+
+      return String(value || "")
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* ================================
+       SHOW MESSAGE
+    ================================= */
+
+    function showMessage(
       elementId,
-      "No " +
-      category +
-      " stories published yet."
-    );
+      message
+    ) {
 
-    return;
+      const container =
+        document.getElementById(
+          elementId
+        );
 
-  }
+      if (!container) return;
 
-
-  displayArticles(
-    elementId,
-    filtered.slice(0, 3)
-  );
-
-}
-
-
-/* ================================
-   FEATURED STORY
-================================ */
-
-function loadFeaturedStory() {
-
-  const container =
-    document.getElementById(
-      "featuredStory"
-    );
-
-
-  if (!container) return;
-
-
-  if (
-    !allArticles.length
-  ) {
-
-    container.innerHTML = `
-
-      <div class="message">
-        No featured story yet.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  const article =
-    allArticles[0];
-
-
-  const title =
-    article.title ||
-    "Untitled story";
-
-
-  const description =
-    article.description ||
-    "";
-
-
-  const image =
-    article.image_url ||
-    "";
-
-
-  const category =
-    article.category ||
-    "news";
-
-
-  const slug =
-    article.slug || "";
-
-
-  const link =
-    slug
-
-      ? "article.html?slug=" +
-        encodeURIComponent(slug)
-
-      : "article.html";
-
-
-  const imageHTML =
-    image
-
-      ? `
-        <img
-          class="card-image"
-          src="${escapeHTML(image)}"
-          alt="${escapeHTML(title)}"
-        >
-      `
-
-      : `
-        <div
-          class="card-image"
-          style="
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:50px;
-          "
-        >
-          📰
+      container.innerHTML = `
+        <div class="message">
+          ${message}
         </div>
       `;
 
+    }
 
-  container.innerHTML = `
 
-    <article class="card">
+    /* ================================
+       DISPLAY ARTICLES
+    ================================= */
 
-      ${imageHTML}
+    function displayArticles(
+      elementId,
+      articles
+    ) {
 
-      <div class="card-body">
+      const container =
+        document.getElementById(
+          elementId
+        );
 
-        <span class="tag">
-          ${escapeHTML(category)}
-        </span>
+      if (!container) return;
 
-        <h3>
-          ${escapeHTML(title)}
-        </h3>
 
-        ${
-          description
+      container.innerHTML = "";
+
+
+      articles.forEach(function(article) {
+
+        const title =
+          article.title ||
+          article.headline ||
+          "Untitled story";
+
+
+        const description =
+          article.description ||
+          article.excerpt ||
+          "";
+
+
+        const image =
+          article.image_url ||
+          article.cover_url ||
+          article.image ||
+          "";
+
+
+        const category =
+          article.category ||
+          "news";
+
+
+        const date =
+          article.created_at
+
+            ? new Date(
+                article.created_at
+              ).toLocaleDateString(
+                "en-GB",
+                {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric"
+                }
+              )
+
+            : "";
+
+
+        const slug =
+          article.slug || "";
+
+
+        const link =
+          slug
+
+            ? "article.html?slug=" +
+              encodeURIComponent(slug)
+
+            : "article.html";
+
+
+        const imageHTML =
+          image
 
             ? `
-              <p>
-                ${escapeHTML(
-                  description
-                )}
-              </p>
+              <img
+                class="card-image"
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(title)}"
+              >
             `
 
-            : ""
-        }
-
-        <div style="margin-top:15px;">
-
-          <a
-            href="${link}"
-            style="
-              display:inline-block;
-              background:#111;
-              color:white;
-              padding:10px 15px;
-              border-radius:7px;
-              font-weight:bold;
-            "
-          >
-            Read Full Story →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-  `;
-
-}
+            : `
+              <div
+                class="card-image"
+                style="
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:45px;
+                "
+              >
+                📰
+              </div>
+            `;
 
 
-/* ================================
-   SEARCH
-================================ */
+        container.innerHTML += `
 
-const searchForm =
-  document.getElementById(
-    "searchForm"
-  );
+          <article class="card">
+
+            ${imageHTML}
+
+            <div class="card-body">
+
+              <span class="tag">
+                ${escapeHTML(category)}
+              </span>
+
+              <h3>
+
+                <a href="${link}">
+                  ${escapeHTML(title)}
+                </a>
+
+              </h3>
+
+              ${
+                description
+
+                  ? `
+                    <p>
+                      ${escapeHTML(
+                        description
+                      )}
+                    </p>
+                  `
+
+                  : ""
+              }
+
+              ${
+                date
+
+                  ? `
+                    <div class="date">
+                      ${escapeHTML(date)}
+                    </div>
+                  `
+
+                  : ""
+              }
+
+            </div>
+
+          </article>
+
+        `;
+
+      });
+
+    }
 
 
-const searchInput =
-  document.getElementById(
-    "searchInput"
-  );
+    /* ================================
+       LOAD ARTICLES
+    ================================= */
 
+    async function loadArticles() {
 
-const searchResults =
-  document.getElementById(
-    "searchResults"
-  );
+      if (!supabaseClient) {
 
+        showMessage(
+          "latestNews",
+          "Supabase connection is not configured."
+        );
 
-if (searchForm) {
+        showMessage(
+          "trendingNews",
+          "Supabase connection is not configured."
+        );
 
-  searchForm.addEventListener(
-    "submit",
-    function(event) {
+        showMessage(
+          "entertainmentNews",
+          "Supabase connection is not configured."
+        );
 
-      event.preventDefault();
+        showMessage(
+          "sportsNews",
+          "Supabase connection is not configured."
+        );
 
-
-      const searchTerm =
-        searchInput.value
-          .trim()
-          .toLowerCase();
-
-
-      if (!searchTerm) {
-
-        if (searchResults) {
-
-          searchResults.style.display =
-            "none";
-
-        }
+        showMessage(
+          "politicsNews",
+          "Supabase connection is not configured."
+        );
 
         return;
 
       }
 
 
-      if (searchResults) {
+      try {
 
-        searchResults.style.display =
-          "block";
+        const result =
+          await supabaseClient
+
+            .from("article")
+
+            .select("*")
+
+            .order(
+              "created_at",
+              {
+                ascending: false
+              }
+            )
+
+            .limit(50);
+
+
+        if (result.error) {
+
+          console.error(
+            "Article loading error:",
+            result.error
+          );
+
+
+          showMessage(
+            "latestNews",
+            "Unable to load latest news."
+          );
+
+          showMessage(
+            "trendingNews",
+            "Unable to load trending stories."
+          );
+
+          showMessage(
+            "entertainmentNews",
+            "Unable to load entertainment."
+          );
+
+          showMessage(
+            "sportsNews",
+            "Unable to load sports."
+          );
+
+          showMessage(
+            "politicsNews",
+            "Unable to load politics."
+          );
+
+          return;
+
+        }
+
+
+        allArticles =
+          result.data || [];
+
+
+        if (
+          allArticles.length === 0
+        ) {
+
+          showMessage(
+            "latestNews",
+            "No news published yet."
+          );
+
+          showMessage(
+            "trendingNews",
+            "No trending stories published yet."
+          );
+
+          showMessage(
+            "entertainmentNews",
+            "No entertainment stories published yet."
+          );
+
+          showMessage(
+            "sportsNews",
+            "No sports stories published yet."
+          );
+
+          showMessage(
+            "politicsNews",
+            "No politics stories published yet."
+          );
+
+          return;
+
+        }
+
+
+        /* LATEST NEWS */
+
+        displayArticles(
+          "latestNews",
+          allArticles.slice(0, 6)
+        );
+
+
+        /* TRENDING */
+
+        displayCategory(
+          "trendingNews",
+          "trending"
+        );
+
+
+        /* ENTERTAINMENT */
+
+        displayCategory(
+          "entertainmentNews",
+          "entertainment"
+        );
+
+
+        /* SPORTS */
+
+        displayCategory(
+          "sportsNews",
+          "sports"
+        );
+
+
+        /* POLITICS */
+
+        displayCategory(
+          "politicsNews",
+          "politics"
+        );
+
+
+        /* FEATURED */
+
+        loadFeaturedStory();
+
+      } catch (error) {
+
+        console.error(
+          "Unexpected article error:",
+          error
+        );
+
+
+        showMessage(
+          "latestNews",
+          "Something went wrong while loading news."
+        );
 
       }
 
+    }
 
-      const matches =
+
+    /* ================================
+       CATEGORY FILTER
+    ================================= */
+
+    function displayCategory(
+      elementId,
+      category
+    ) {
+
+      const filtered =
         allArticles.filter(
           function(article) {
 
-            const title =
-              String(
-                article.title || ""
-              ).toLowerCase();
-
-
-            const description =
-              String(
-                article.description || ""
-              ).toLowerCase();
-
-
-            const story =
-              String(
-                article.story || ""
-              ).toLowerCase();
-
-
-            const category =
-              String(
-                article.category || ""
-              ).toLowerCase();
-
-
-            return (
-
-              title.includes(
-                searchTerm
-              )
-
-              ||
-
-              description.includes(
-                searchTerm
-              )
-
-              ||
-
-              story.includes(
-                searchTerm
-              )
-
-              ||
-
-              category.includes(
-                searchTerm
-              )
-
-            );
+            return String(
+              article.category || ""
+            ).toLowerCase() ===
+            category.toLowerCase();
 
           }
         );
 
 
       if (
-        matches.length === 0
+        filtered.length === 0
       ) {
 
         showMessage(
-          "searchArticles",
-          'No stories found for "' +
-          escapeHTML(
-            searchInput.value.trim()
-          ) +
-          '".'
+          elementId,
+          "No " +
+          category +
+          " stories published yet."
         );
 
         return;
@@ -1729,22 +1521,318 @@ if (searchForm) {
 
 
       displayArticles(
-        "searchArticles",
-        matches
+        elementId,
+        filtered.slice(0, 3)
       );
 
     }
-  );
-
-}
 
 
-/* ================================
-   START WEBSITE
-================================ */
+    /* ================================
+       FEATURED STORY
+    ================================= */
 
-loadArticles();
+    function loadFeaturedStory() {
 
-</script>
+      const container =
+        document.getElementById(
+          "featuredStory"
+        );
+
+
+      if (!container) return;
+
+
+      if (
+        !allArticles.length
+      ) {
+
+        container.innerHTML = `
+
+          <div class="message">
+            No featured story yet.
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      const article =
+        allArticles[0];
+
+
+      const title =
+        article.title ||
+        "Untitled story";
+
+
+      const description =
+        article.description ||
+        "";
+
+
+      const image =
+        article.image_url ||
+        "";
+
+
+      const category =
+        article.category ||
+        "news";
+
+
+      const slug =
+        article.slug || "";
+
+
+      const link =
+        slug
+
+          ? "article.html?slug=" +
+            encodeURIComponent(slug)
+
+          : "article.html";
+
+
+      const imageHTML =
+        image
+
+          ? `
+            <img
+              class="card-image"
+              src="${escapeHTML(image)}"
+              alt="${escapeHTML(title)}"
+            >
+          `
+
+          : `
+            <div
+              class="card-image"
+              style="
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:50px;
+              "
+            >
+              📰
+            </div>
+          `;
+
+
+      container.innerHTML = `
+
+        <article class="card">
+
+          ${imageHTML}
+
+          <div class="card-body">
+
+            <span class="tag">
+              ${escapeHTML(category)}
+            </span>
+
+            <h3>
+              ${escapeHTML(title)}
+            </h3>
+
+            ${
+              description
+
+                ? `
+                  <p>
+                    ${escapeHTML(
+                      description
+                    )}
+                  </p>
+                `
+
+                : ""
+            }
+
+            <div style="margin-top:15px;">
+
+              <a
+                href="${link}"
+                style="
+                  display:inline-block;
+                  background:#111;
+                  color:white;
+                  padding:10px 15px;
+                  border-radius:7px;
+                  font-weight:bold;
+                "
+              >
+                Read Full Story →
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    /* ================================
+       SEARCH
+    ================================= */
+
+    const searchForm =
+      document.getElementById(
+        "searchForm"
+      );
+
+
+    const searchInput =
+      document.getElementById(
+        "searchInput"
+      );
+
+
+    const searchResults =
+      document.getElementById(
+        "searchResults"
+      );
+
+
+    if (searchForm) {
+
+      searchForm.addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+
+          const searchTerm =
+            searchInput.value
+              .trim()
+              .toLowerCase();
+
+
+          if (!searchTerm) {
+
+            if (searchResults) {
+
+              searchResults.style.display =
+                "none";
+
+            }
+
+            return;
+
+          }
+
+
+          if (searchResults) {
+
+            searchResults.style.display =
+              "block";
+
+          }
+
+
+          const matches =
+            allArticles.filter(
+              function(article) {
+
+                const title =
+                  String(
+                    article.title || ""
+                  ).toLowerCase();
+
+
+                const description =
+                  String(
+                    article.description || ""
+                  ).toLowerCase();
+
+
+                const story =
+                  String(
+                    article.story || ""
+                  ).toLowerCase();
+
+
+                const category =
+                  String(
+                    article.category || ""
+                  ).toLowerCase();
+
+
+                return (
+
+                  title.includes(
+                    searchTerm
+                  )
+
+                  ||
+
+                  description.includes(
+                    searchTerm
+                  )
+
+                  ||
+
+                  story.includes(
+                    searchTerm
+                  )
+
+                  ||
+
+                  category.includes(
+                    searchTerm
+                  )
+
+                );
+
+              }
+            );
+
+
+          if (
+            matches.length === 0
+          ) {
+
+            showMessage(
+              "searchArticles",
+              'No stories found for "' +
+              escapeHTML(
+                searchInput.value.trim()
+              ) +
+              '".'
+            );
+
+            return;
+
+          }
+
+
+          displayArticles(
+            "searchArticles",
+            matches
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ================================
+       START WEBSITE
+    ================================= */
+
+    loadArticles();
+
+  </script>
+
 </body>
 </html>
