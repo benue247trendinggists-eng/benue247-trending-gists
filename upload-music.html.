@@ -6,6 +6,11 @@
 
   <title>Upload Music | Benue24/7 Trending Gists</title>
 
+  <meta
+    name="description"
+    content="Upload music to Benue24/7 Trending Gists"
+  >
+
   <style>
     * {
       box-sizing: border-box;
@@ -17,159 +22,115 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f3f4f6;
       color: #111827;
-      line-height: 1.6;
     }
 
     header {
       background: #111;
       color: white;
-      padding: 25px 15px;
+      padding: 30px 15px;
+      text-align: center;
     }
 
-    .header-inner {
-      max-width: 850px;
-      margin: auto;
-    }
-
-    h1 {
+    header h1 {
       font-size: 28px;
-      font-weight: 900;
+      margin-bottom: 8px;
     }
 
     header p {
       color: #d1d5db;
-      margin-top: 5px;
     }
 
-    main {
-      max-width: 850px;
+    .container {
+      max-width: 650px;
       margin: 30px auto;
-      padding: 0 15px 60px;
-    }
-
-    .back {
-      display: inline-block;
-      background: #111;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-bottom: 20px;
+      padding: 0 15px;
     }
 
     .box {
       background: white;
-      padding: 30px;
+      padding: 25px;
       border-radius: 15px;
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
-    .box h2 {
+    h2 {
       margin-bottom: 20px;
+      text-align: center;
     }
 
     label {
       display: block;
       font-weight: bold;
+      margin-top: 16px;
       margin-bottom: 7px;
-      margin-top: 18px;
     }
 
     input,
+    textarea,
     select {
       width: 100%;
       padding: 13px;
       border: 1px solid #d1d5db;
-      border-radius: 7px;
+      border-radius: 8px;
       font-size: 15px;
     }
 
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: #111;
+    textarea {
+      min-height: 110px;
+      resize: vertical;
     }
 
-    .upload-button {
+    button {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 22px;
+      padding: 15px;
       border: none;
-      background: #e11d48;
-      color: white;
-      padding: 14px;
       border-radius: 8px;
-      font-size: 16px;
+      background: #16a34a;
+      color: white;
+      font-size: 17px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .upload-button:disabled {
+    button:disabled {
       background: #9ca3af;
       cursor: not-allowed;
     }
 
-    .preview {
-      margin-top: 15px;
+    .back {
+      display: block;
       text-align: center;
+      margin-top: 18px;
+      color: #111;
+      font-weight: bold;
     }
 
-    .preview img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-
-    .status {
+    #status {
       margin-top: 20px;
       padding: 14px;
       border-radius: 8px;
+      text-align: center;
       display: none;
+      font-weight: bold;
     }
 
     .success {
-      display: block;
+      display: block !important;
       background: #dcfce7;
       color: #166534;
     }
 
     .error {
-      display: block;
+      display: block !important;
       background: #fee2e2;
       color: #991b1b;
     }
 
     .info {
-      margin-top: 15px;
-      padding: 13px;
-      background: #f3f4f6;
-      border-radius: 8px;
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-    }
-
-    footer p {
-      color: #aaa;
-      margin-top: 7px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-      .box {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
+      display: block !important;
+      background: #e0f2fe;
+      color: #075985;
     }
   </style>
 </head>
@@ -177,21 +138,15 @@
 <body>
 
 <header>
-  <div class="header-inner">
-    <h1>🎵 Upload Music</h1>
-    <p>Benue24/7 Trending Gists Music Platform</p>
-  </div>
+  <h1>🎵 BENUE24/7 TRENDING GISTS</h1>
+  <p>Upload Music</p>
 </header>
 
-<main>
-
-  <a href="music.html" class="back">
-    ← Back to Music
-  </a>
+<div class="container">
 
   <div class="box">
 
-    <h2>🎶 Add New Song</h2>
+    <h2>🎵 Upload New Music</h2>
 
     <form id="musicForm">
 
@@ -202,7 +157,7 @@
       <input
         type="text"
         id="title"
-        placeholder="e.g. UP and Grateful"
+        placeholder="Enter song title"
         required
       >
 
@@ -213,7 +168,7 @@
       <input
         type="text"
         id="artist"
-        placeholder="e.g. SnazzyB"
+        placeholder="Enter artist name"
         required
       >
 
@@ -229,10 +184,6 @@
 
         <option value="Afrobeats">
           Afrobeats
-        </option>
-
-        <option value="Afropop">
-          Afropop
         </option>
 
         <option value="Amapiano">
@@ -251,8 +202,8 @@
           R&B
         </option>
 
-        <option value="Highlife">
-          Highlife
+        <option value="Pop">
+          Pop
         </option>
 
         <option value="Other">
@@ -260,6 +211,15 @@
         </option>
 
       </select>
+
+      <label for="description">
+        Song Description
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Write something about the song..."
+      ></textarea>
 
       <label for="cover">
         Cover Artwork
@@ -272,11 +232,6 @@
         required
       >
 
-      <div
-        id="coverPreview"
-        class="preview"
-      ></div>
-
       <label for="audio">
         Audio File
       </label>
@@ -288,44 +243,30 @@
         required
       >
 
-      <div class="info">
-        🎧 Upload an MP3, WAV or other supported audio file.
-      </div>
-
       <button
         type="submit"
         id="uploadButton"
-        class="upload-button"
       >
-        🚀 Publish Song
+        🎵 Upload & Publish Music
       </button>
-
-      <div
-        id="status"
-        class="status"
-      ></div>
 
     </form>
 
+    <div id="status"></div>
+
+    <a
+      href="music.html"
+      class="back"
+    >
+      ← Back to Music
+    </a>
+
   </div>
 
-</main>
+</div>
 
-<footer>
 
-  <h3>
-    BENUE24/7 TRENDING GISTS
-  </h3>
-
-  <p>
-    News • Trending Gists • Entertainment • Sports • Politics • Music
-  </p>
-
-  <p>
-    © 2026 Benue24/7 Trending Gists
-  </p>
-
-</footer>
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -336,7 +277,7 @@
 let supabaseClient = null;
 
 
-/* SUPABASE */
+/* SUPABASE CONNECTION */
 
 try {
 
@@ -360,106 +301,54 @@ try {
 }
 
 
-/* ELEMENTS */
-
-const form =
-  document.getElementById("musicForm");
-
-const coverInput =
-  document.getElementById("cover");
-
-const audioInput =
-  document.getElementById("audio");
-
-const coverPreview =
-  document.getElementById("coverPreview");
-
-const uploadButton =
-  document.getElementById("uploadButton");
-
-const status =
-  document.getElementById("status");
-
-
-/* COVER PREVIEW */
-
-coverInput.addEventListener(
-  "change",
-  function() {
-
-    const file =
-      coverInput.files[0];
-
-    if (!file) return;
-
-    const url =
-      URL.createObjectURL(file);
-
-    coverPreview.innerHTML = `
-      <img
-        src="${url}"
-        alt="Cover preview"
-      >
-    `;
-
-  }
-);
-
-
 /* STATUS */
 
-function showStatus(
-  message,
-  type
-) {
+function showStatus(message, type) {
 
-  status.textContent =
-    message;
+  const status =
+    document.getElementById("status");
 
-  status.className =
-    "status " + type;
+  status.textContent = message;
+
+  status.className = type;
 
 }
 
 
 /* SLUG */
 
-function createSlug(
-  title,
-  artist
-) {
+function createSlug(title, artist) {
 
   return (
     title +
     "-" +
     artist
   )
-  .toLowerCase()
-  .trim()
-  .replace(
-    /[^a-z0-9]+/g,
-    "-"
-  )
-  .replace(
-    /^-+|-+$/g,
-    ""
-  );
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 
 }
 
 
 /* UPLOAD */
 
-form.addEventListener(
-  "submit",
-  async function(event) {
+document
+  .getElementById("musicForm")
+  .addEventListener("submit", async function(event) {
 
     event.preventDefault();
+
+
+    const button =
+      document.getElementById("uploadButton");
+
 
     if (!supabaseClient) {
 
       showStatus(
-        "Supabase is not configured.",
+        "❌ Supabase is not configured. Check config.js.",
         "error"
       );
 
@@ -474,22 +363,37 @@ form.addEventListener(
         .value
         .trim();
 
+
     const artist =
       document
         .getElementById("artist")
         .value
         .trim();
 
+
     const genre =
       document
         .getElementById("genre")
         .value;
 
+
+    const description =
+      document
+        .getElementById("description")
+        .value
+        .trim();
+
+
     const coverFile =
-      coverInput.files[0];
+      document
+        .getElementById("cover")
+        .files[0];
+
 
     const audioFile =
-      audioInput.files[0];
+      document
+        .getElementById("audio")
+        .files[0];
 
 
     if (
@@ -501,7 +405,7 @@ form.addEventListener(
     ) {
 
       showStatus(
-        "Please complete all fields.",
+        "❌ Please complete all required fields.",
         "error"
       );
 
@@ -510,53 +414,37 @@ form.addEventListener(
     }
 
 
-    uploadButton.disabled =
-      true;
-
-    uploadButton.textContent =
-      "⏳ Uploading...";
-
-
     try {
 
-      /*
-        CREATE UNIQUE FILE NAMES
-      */
+      button.disabled = true;
 
-      const timestamp =
-        Date.now();
+      button.textContent =
+        "Uploading...";
 
 
-      const coverPath =
-        "covers/" +
-        timestamp +
-        "-" +
-        coverFile.name
-          .replace(
-            /[^a-zA-Z0-9._-]/g,
-            "-"
-          );
-
-
-      const audioPath =
-        "audio/" +
-        timestamp +
-        "-" +
-        audioFile.name
-          .replace(
-            /[^a-zA-Z0-9._-]/g,
-            "-"
-          );
+      const slug =
+        createSlug(
+          title,
+          artist
+        );
 
 
       /*
-        UPLOAD COVER
+       COVER UPLOAD
       */
 
       showStatus(
         "Uploading cover artwork...",
-        "success"
+        "info"
       );
+
+
+      const coverPath =
+        "covers/" +
+        Date.now() +
+        "-" +
+        coverFile.name
+          .replace(/[^a-zA-Z0-9._-]/g, "-");
 
 
       const coverUpload =
@@ -580,10 +468,6 @@ form.addEventListener(
       }
 
 
-      /*
-        GET COVER URL
-      */
-
       const coverURL =
         supabaseClient
           .storage
@@ -596,13 +480,21 @@ form.addEventListener(
 
 
       /*
-        UPLOAD AUDIO
+       AUDIO UPLOAD
       */
 
       showStatus(
         "Uploading audio file...",
-        "success"
+        "info"
       );
+
+
+      const audioPath =
+        "audio/" +
+        Date.now() +
+        "-" +
+        audioFile.name
+          .replace(/[^a-zA-Z0-9._-]/g, "-");
 
 
       const audioUpload =
@@ -626,10 +518,6 @@ form.addEventListener(
       }
 
 
-      /*
-        GET AUDIO URL
-      */
-
       const audioURL =
         supabaseClient
           .storage
@@ -642,62 +530,43 @@ form.addEventListener(
 
 
       /*
-        CREATE SLUG
-      */
-
-      const slug =
-        createSlug(
-          title,
-          artist
-        );
-
-
-      /*
-        SAVE TO DATABASE
+       SAVE MUSIC INFORMATION
       */
 
       showStatus(
         "Saving song information...",
-        "success"
+        "info"
       );
 
 
-      const insert =
+      const insertResult =
         await supabaseClient
           .from("music")
           .insert({
 
-            title:
-              title,
+            title: title,
 
-            artist:
-              artist,
+            artist: artist,
 
-            genre:
-              genre,
+            slug: slug,
 
-            cover_url:
-              coverURL,
+            description: description,
 
-            audio_url:
-              audioURL,
+            cover_url: coverURL,
 
-            slug:
-              slug
+            audio_url: audioURL,
+
+            genre: genre
 
           });
 
 
-      if (insert.error) {
+      if (insertResult.error) {
 
-        throw insert.error;
+        throw insertResult.error;
 
       }
 
-
-      /*
-        SUCCESS
-      */
 
       showStatus(
         "✅ Song published successfully!",
@@ -705,25 +574,23 @@ form.addEventListener(
       );
 
 
-      form.reset();
-
-      coverPreview.innerHTML =
-        "";
-
-
-      uploadButton.textContent =
-        "✅ Published";
+      document
+        .getElementById("musicForm")
+        .reset();
 
 
-      setTimeout(
-        function() {
+      button.disabled = false;
 
-          window.location.href =
-            "music.html";
+      button.textContent =
+        "🎵 Upload & Publish Music";
 
-        },
-        1500
-      );
+
+      setTimeout(function() {
+
+        window.location.href =
+          "music.html";
+
+      }, 2000);
 
 
     } catch (error) {
@@ -736,24 +603,19 @@ form.addEventListener(
 
       showStatus(
         "❌ Upload failed: " +
-        (
-          error.message ||
-          "Unknown error"
-        ),
+        (error.message || "Unknown error"),
         "error"
       );
 
 
-      uploadButton.disabled =
-        false;
+      button.disabled = false;
 
-      uploadButton.textContent =
-        "🚀 Publish Song";
+      button.textContent =
+        "🎵 Upload & Publish Music";
 
     }
 
-  }
-);
+  });
 
 </script>
 
