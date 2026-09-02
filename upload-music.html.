@@ -6,11 +6,6 @@
 
   <title>Upload Music | Benue24/7 Trending Gists</title>
 
-  <meta
-    name="description"
-    content="Upload music to Benue24/7 Trending Gists"
-  >
-
   <style>
     * {
       box-sizing: border-box;
@@ -22,6 +17,7 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f3f4f6;
       color: #111827;
+      line-height: 1.6;
     }
 
     header {
@@ -40,29 +36,52 @@
       color: #d1d5db;
     }
 
-    .container {
-      max-width: 650px;
-      margin: 30px auto;
-      padding: 0 15px;
+    nav {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      background: white;
+      color: #111;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 0 15px 60px;
     }
 
     .box {
       background: white;
-      padding: 25px;
       border-radius: 15px;
+      padding: 25px;
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
     }
 
     h2 {
       margin-bottom: 20px;
-      text-align: center;
+      font-size: 26px;
     }
 
     label {
       display: block;
       font-weight: bold;
-      margin-top: 16px;
       margin-bottom: 7px;
+      margin-top: 18px;
     }
 
     input,
@@ -73,16 +92,23 @@
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 15px;
+      outline: none;
     }
 
     textarea {
-      min-height: 110px;
+      min-height: 120px;
       resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #111;
     }
 
     button {
       width: 100%;
-      margin-top: 22px;
+      margin-top: 25px;
       padding: 15px;
       border: none;
       border-radius: 8px;
@@ -104,14 +130,15 @@
       margin-top: 18px;
       color: #111;
       font-weight: bold;
+      text-decoration: none;
     }
 
     #status {
       margin-top: 20px;
       padding: 14px;
       border-radius: 8px;
-      text-align: center;
       display: none;
+      text-align: center;
       font-weight: bold;
     }
 
@@ -132,21 +159,58 @@
       background: #e0f2fe;
       color: #075985;
     }
+
+    .note {
+      margin-top: 15px;
+      padding: 12px;
+      background: #f3f4f6;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    footer p {
+      color: #bbb;
+      margin-top: 7px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 23px;
+      }
+
+      .box {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <h1>🎵 BENUE24/7 TRENDING GISTS</h1>
-  <p>Upload Music</p>
+  <h1>BENUE24/7 TRENDING GISTS</h1>
+  <p>Upload Music • Benue Music Hub</p>
 </header>
 
-<div class="container">
+<nav>
+  <a href="index.html">Home</a>
+  <a href="music.html">Music</a>
+  <a href="publish.html">Publish Story</a>
+</nav>
+
+<main>
 
   <div class="box">
 
-    <h2>🎵 Upload New Music</h2>
+    <h2>🎵 Upload Music</h2>
 
     <form id="musicForm">
 
@@ -177,39 +241,15 @@
       </label>
 
       <select id="genre" required>
-
-        <option value="">
-          Select genre
-        </option>
-
-        <option value="Afrobeats">
-          Afrobeats
-        </option>
-
-        <option value="Amapiano">
-          Amapiano
-        </option>
-
-        <option value="Hip Hop">
-          Hip Hop
-        </option>
-
-        <option value="Gospel">
-          Gospel
-        </option>
-
-        <option value="R&B">
-          R&B
-        </option>
-
-        <option value="Pop">
-          Pop
-        </option>
-
-        <option value="Other">
-          Other
-        </option>
-
+        <option value="">Select genre</option>
+        <option value="Afrobeats">Afrobeats</option>
+        <option value="Amapiano">Amapiano</option>
+        <option value="Afropop">Afropop</option>
+        <option value="Hip Hop">Hip Hop</option>
+        <option value="Gospel">Gospel</option>
+        <option value="R&B">R&B</option>
+        <option value="Highlife">Highlife</option>
+        <option value="Other">Other</option>
       </select>
 
       <label for="description">
@@ -218,7 +258,7 @@
 
       <textarea
         id="description"
-        placeholder="Write something about the song..."
+        placeholder="Write a short description about the song..."
       ></textarea>
 
       <label for="cover">
@@ -254,16 +294,24 @@
 
     <div id="status"></div>
 
-    <a
-      href="music.html"
-      class="back"
-    >
-      ← Back to Music
+    <div class="note">
+      Your cover artwork and audio will be uploaded to the existing
+      <strong>music</strong> Supabase storage bucket.
+    </div>
+
+    <a href="music.html" class="back">
+      ← Back to Music Hub
     </a>
 
   </div>
 
-</div>
+</main>
+
+<footer>
+  <h3>BENUE24/7 TRENDING GISTS</h3>
+  <p>News • Entertainment • Sports • Politics • Music</p>
+  <p>© 2026 Benue24/7 Trending Gists</p>
+</footer>
 
 
 <!-- SUPABASE -->
@@ -276,8 +324,14 @@
 
 let supabaseClient = null;
 
+const form = document.getElementById("musicForm");
+const button = document.getElementById("uploadButton");
+const statusBox = document.getElementById("status");
 
-/* SUPABASE CONNECTION */
+
+/* =========================
+   SUPABASE CONNECTION
+========================= */
 
 try {
 
@@ -292,63 +346,76 @@ try {
         SUPABASE_ANON_KEY
       );
 
+  } else {
+
+    showStatus(
+      "Supabase configuration is missing. Check config.js.",
+      "error"
+    );
+
   }
 
 } catch (error) {
 
   console.error(error);
 
+  showStatus(
+    "Unable to connect to Supabase.",
+    "error"
+  );
+
 }
 
 
-/* STATUS */
+/* =========================
+   STATUS
+========================= */
 
 function showStatus(message, type) {
 
-  const status =
-    document.getElementById("status");
+  statusBox.textContent = message;
 
-  status.textContent = message;
-
-  status.className = type;
+  statusBox.className = type;
 
 }
 
 
-/* SLUG */
+/* =========================
+   CREATE SLUG
+========================= */
 
-function createSlug(title, artist) {
+function createSlug(text) {
 
-  return (
-    title +
-    "-" +
-    artist
-  )
+  return text
+
+    .toString()
+
     .toLowerCase()
+
     .trim()
+
     .replace(/[^a-z0-9]+/g, "-")
+
     .replace(/^-+|-+$/g, "");
 
 }
 
 
-/* UPLOAD */
+/* =========================
+   FORM SUBMIT
+========================= */
 
-document
-  .getElementById("musicForm")
-  .addEventListener("submit", async function(event) {
+form.addEventListener(
+  "submit",
+  async function(event) {
 
     event.preventDefault();
-
-
-    const button =
-      document.getElementById("uploadButton");
 
 
     if (!supabaseClient) {
 
       showStatus(
-        "❌ Supabase is not configured. Check config.js.",
+        "Supabase is not connected.",
         "error"
       );
 
@@ -358,42 +425,27 @@ document
 
 
     const title =
-      document
-        .getElementById("title")
-        .value
-        .trim();
+      document.getElementById("title").value.trim();
 
 
     const artist =
-      document
-        .getElementById("artist")
-        .value
-        .trim();
+      document.getElementById("artist").value.trim();
 
 
     const genre =
-      document
-        .getElementById("genre")
-        .value;
+      document.getElementById("genre").value;
 
 
     const description =
-      document
-        .getElementById("description")
-        .value
-        .trim();
+      document.getElementById("description").value.trim();
 
 
     const coverFile =
-      document
-        .getElementById("cover")
-        .files[0];
+      document.getElementById("cover").files[0];
 
 
     const audioFile =
-      document
-        .getElementById("audio")
-        .files[0];
+      document.getElementById("audio").files[0];
 
 
     if (
@@ -405,7 +457,7 @@ document
     ) {
 
       showStatus(
-        "❌ Please complete all required fields.",
+        "Please complete all required fields.",
         "error"
       );
 
@@ -422,15 +474,10 @@ document
         "Uploading...";
 
 
-      const slug =
-        createSlug(
-          title,
-          artist
-        );
-
-
       /*
-       COVER UPLOAD
+        =========================
+        COVER UPLOAD
+        =========================
       */
 
       showStatus(
@@ -439,18 +486,28 @@ document
       );
 
 
+      const coverExtension =
+        coverFile.name
+          .split(".")
+          .pop();
+
+
       const coverPath =
         "covers/" +
         Date.now() +
         "-" +
-        coverFile.name
-          .replace(/[^a-zA-Z0-9._-]/g, "-");
+        createSlug(title) +
+        "." +
+        coverExtension;
 
 
       const coverUpload =
         await supabaseClient
+
           .storage
+
           .from("music")
+
           .upload(
             coverPath,
             coverFile,
@@ -463,15 +520,21 @@ document
 
       if (coverUpload.error) {
 
-        throw coverUpload.error;
+        throw new Error(
+          "Cover upload failed: " +
+          coverUpload.error.message
+        );
 
       }
 
 
       const coverURL =
         supabaseClient
+
           .storage
+
           .from("music")
+
           .getPublicUrl(
             coverPath
           )
@@ -480,7 +543,9 @@ document
 
 
       /*
-       AUDIO UPLOAD
+        =========================
+        AUDIO UPLOAD
+        =========================
       */
 
       showStatus(
@@ -489,18 +554,28 @@ document
       );
 
 
+      const audioExtension =
+        audioFile.name
+          .split(".")
+          .pop();
+
+
       const audioPath =
         "audio/" +
         Date.now() +
         "-" +
-        audioFile.name
-          .replace(/[^a-zA-Z0-9._-]/g, "-");
+        createSlug(title) +
+        "." +
+        audioExtension;
 
 
       const audioUpload =
         await supabaseClient
+
           .storage
+
           .from("music")
+
           .upload(
             audioPath,
             audioFile,
@@ -513,15 +588,21 @@ document
 
       if (audioUpload.error) {
 
-        throw audioUpload.error;
+        throw new Error(
+          "Audio upload failed: " +
+          audioUpload.error.message
+        );
 
       }
 
 
       const audioURL =
         supabaseClient
+
           .storage
+
           .from("music")
+
           .getPublicUrl(
             audioPath
           )
@@ -530,7 +611,9 @@ document
 
 
       /*
-       SAVE MUSIC INFORMATION
+        =========================
+        SAVE MUSIC INFORMATION
+        =========================
       */
 
       showStatus(
@@ -539,16 +622,24 @@ document
       );
 
 
+      const slug =
+        createSlug(
+          title + "-" + artist
+        );
+
+
       const insertResult =
         await supabaseClient
+
           .from("music")
+
           .insert({
 
             title: title,
 
             artist: artist,
 
-            slug: slug,
+            genre: genre,
 
             description: description,
 
@@ -556,41 +647,46 @@ document
 
             audio_url: audioURL,
 
-            genre: genre
+            slug: slug
 
           });
 
 
       if (insertResult.error) {
 
-        throw insertResult.error;
+        throw new Error(
+          "Database error: " +
+          insertResult.error.message
+        );
 
       }
 
 
+      /*
+        =========================
+        SUCCESS
+        =========================
+      */
+
       showStatus(
-        "✅ Song published successfully!",
+        "✅ Music uploaded successfully!",
         "success"
       );
 
 
-      document
-        .getElementById("musicForm")
-        .reset();
-
-
-      button.disabled = false;
-
       button.textContent =
-        "🎵 Upload & Publish Music";
+        "✅ Published Successfully";
 
 
-      setTimeout(function() {
+      setTimeout(
+        function() {
 
-        window.location.href =
-          "music.html";
+          window.location.href =
+            "music.html";
 
-      }, 2000);
+        },
+        1500
+      );
 
 
     } catch (error) {
@@ -602,8 +698,7 @@ document
 
 
       showStatus(
-        "❌ Upload failed: " +
-        (error.message || "Unknown error"),
+        "❌ " + error.message,
         "error"
       );
 
@@ -615,7 +710,8 @@ document
 
     }
 
-  });
+  }
+);
 
 </script>
 
