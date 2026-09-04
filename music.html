@@ -222,8 +222,11 @@
       height: 40px;
     }
 
+    /* SONG ACTIONS */
+
     .song-actions {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin-top: 13px;
     }
@@ -235,6 +238,12 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 13px;
+      display: inline-block;
+    }
+
+    .download-button {
+      background: #16a34a;
+      color: white;
     }
 
     .share-button {
@@ -719,6 +728,26 @@
                 `;
 
 
+            const downloadHTML =
+              audio
+
+                ? `
+
+                  <a
+                    class="song-button download-button"
+                    href="${escapeHTML(audio)}"
+                    download
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    ⬇️ Download
+                  </a>
+
+                `
+
+                : "";
+
+
             container.innerHTML += `
 
               <article class="song-card">
@@ -742,6 +771,8 @@
                   ${audioHTML}
 
                   <div class="song-actions">
+
+                    ${downloadHTML}
 
                     <button
                       class="song-button share-button"
