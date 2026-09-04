@@ -810,15 +810,50 @@ async function loadArticle() {
 
 
     displayArticle(
-      article
+  article
+);
+
+
+/* =========================
+   COUNT ARTICLE VIEW
+========================= */
+
+try {
+
+  const newViews =
+    (Number(article.views) || 0) + 1;
+
+  const viewResult =
+    await supabaseClient
+      .from("article")
+      .update({
+        views: newViews
+      })
+      .eq("id", article.id);
+
+  if (viewResult.error) {
+
+    console.error(
+      "View count error:",
+      viewResult.error
     );
 
+  }
 
-    loadRelatedArticles(
-      article.category,
-      article.id
-    );
+} catch (viewError) {
 
+  console.error(
+    "View count failed:",
+    viewError
+  );
+
+}
+
+
+loadRelatedArticles(
+  article.category,
+  article.id
+);
 
   } catch (error) {
 
