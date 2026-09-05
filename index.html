@@ -1428,12 +1428,22 @@
         );
 
 
-        /* TRENDING */
+        /* TRENDING — MOST VIEWED STORIES */
 
-        displayCategory(
-          "trendingNews",
-          "trending"
-        );
+const trendingArticles =
+  [...allArticles]
+    .sort(function(a, b) {
+      return (
+        (Number(b.views) || 0) -
+        (Number(a.views) || 0)
+      );
+    })
+    .slice(0, 6);
+
+displayArticles(
+  "trendingNews",
+  trendingArticles
+);
 
 
         /* ENTERTAINMENT */
