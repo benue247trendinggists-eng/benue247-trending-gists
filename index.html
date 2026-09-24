@@ -1,1639 +1,1500 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Benue24/7 Trending Gists</title>
 
   <meta
+
     name="description"
+
     content="Benue24/7 Trending Gists — latest news, trending stories, entertainment, sports, politics and music from Benue and beyond."
+
   >
 
   <style>
+
     * {
+
       box-sizing: border-box;
+
       margin: 0;
+
       padding: 0;
+
     }
 
     html {
+
       scroll-behavior: smooth;
+
     }
 
     body {
+
       font-family: Arial, Helvetica, sans-serif;
+
       background: #f3f4f6;
+
       color: #111827;
+
       line-height: 1.6;
+
     }
 
     a {
+
       text-decoration: none;
+
       color: inherit;
+
     }
 
     img {
+
       max-width: 100%;
+
     }
 
-    /* HEADER */
-
     header {
+
       background: #111;
+
       color: white;
+
       padding: 25px 15px;
+
     }
 
     .header-inner {
+
       max-width: 1150px;
+
       margin: auto;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 20px;
+
     }
 
     .brand h1 {
+
       font-size: 30px;
+
       font-weight: 900;
+
     }
 
     .brand p {
+
       color: #d1d5db;
+
       font-size: 14px;
+
       margin-top: 4px;
+
     }
 
     .publish-buttons {
+
       display: flex;
+
       gap: 12px;
+
       flex-wrap: wrap;
+
       justify-content: center;
+
     }
 
     .publish-button,
+
     .music-upload-button {
+
       color: white;
+
       padding: 13px 18px;
+
       border-radius: 8px;
+
       font-weight: bold;
+
       white-space: nowrap;
+
       display: inline-block;
+
       text-align: center;
+
     }
 
     .publish-button {
+
       background: #e11d48;
+
     }
 
     .music-upload-button {
+
       background: #16a34a;
+
     }
 
     .publish-button:hover {
+
       background: #be123c;
+
     }
 
     .music-upload-button:hover {
+
       background: #15803d;
+
     }
 
-    /* NAVIGATION */
-
     nav {
+
       background: #222;
+
       color: white;
+
       display: flex;
+
       justify-content: center;
+
       gap: 5px;
+
       padding: 11px;
+
       overflow-x: auto;
+
       white-space: nowrap;
+
       position: sticky;
+
       top: 0;
+
       z-index: 1000;
+
     }
 
     nav a {
+
       padding: 8px 13px;
+
       border-radius: 6px;
+
       font-weight: 600;
+
       font-size: 14px;
+
     }
 
     nav a:hover,
-    nav a.active {
-      background: white;
-      color: #111;
-    }
 
-    /* MAIN */
+    nav a.active {
+
+      background: white;
+
+      color: #111;
+
+    }
 
     main {
+
       max-width: 1150px;
+
       margin: auto;
+
       padding: 20px 15px 60px;
+
     }
 
-    /* BREAKING */
-
     .breaking {
+
       background: #d71920;
+
       color: white;
+
       padding: 12px 15px;
+
       border-radius: 8px;
+
       margin-bottom: 20px;
+
       font-weight: bold;
+
       overflow: hidden;
+
     }
 
     .breaking span {
+
       margin-right: 8px;
+
     }
 
-    /* SEARCH */
-
     .search-box {
+
       background: white;
+
       padding: 15px;
+
       border-radius: 12px;
+
       box-shadow: 0 2px 10px rgba(0,0,0,.06);
+
       margin-bottom: 25px;
+
     }
 
     .search-form {
+
       display: flex;
+
       gap: 10px;
+
     }
 
     .search-form input {
+
       flex: 1;
+
       padding: 13px 15px;
+
       border: 1px solid #d1d5db;
+
       border-radius: 7px;
+
       outline: none;
+
       font-size: 15px;
+
     }
 
     .search-form input:focus {
+
       border-color: #111;
+
     }
 
     .search-form button {
-      border: none;
-      background: #111;
-      color: white;
-      padding: 0 20px;
-      border-radius: 7px;
-      font-weight: bold;
-      cursor: pointer;
-    }
 
-    /* FEATURED */
+      border: none;
+
+      background: #111;
+
+      color: white;
+
+      padding: 0 20px;
+
+      border-radius: 7px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
 
     .featured {
+
       margin-bottom: 35px;
+
     }
 
-    .featured-heading {
+    .featured-heading,
+
+    .section-heading {
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       margin-bottom: 15px;
+
       border-bottom: 3px solid #111;
+
       padding-bottom: 8px;
+
     }
 
-    .featured-heading h2 {
+    .featured-heading h2,
+
+    .section-heading h2 {
+
       font-size: 23px;
+
     }
 
     .featured-card {
+
       display: grid;
+
       grid-template-columns: 1.4fr 1fr;
+
       background: white;
+
       border-radius: 15px;
+
       overflow: hidden;
+
       box-shadow: 0 3px 15px rgba(0,0,0,.08);
+
     }
 
     .featured-image {
-      width: 100%;
-      height: 390px;
-      object-fit: cover;
-      background: #e5e7eb;
-    }
 
-    .featured-placeholder {
+      width: 100%;
+
       height: 390px;
+
+      object-fit: cover;
+
       background: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 70px;
+
     }
 
     .featured-content {
+
       padding: 35px;
+
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
     }
 
     .tag {
+
       display: inline-block;
+
       width: fit-content;
+
       background: #111;
+
       color: white;
+
       padding: 5px 9px;
+
       border-radius: 5px;
+
       font-size: 11px;
+
       font-weight: bold;
+
       text-transform: uppercase;
+
     }
 
     .featured-content h2 {
+
       font-size: 31px;
+
       line-height: 1.25;
+
       margin: 13px 0;
+
     }
 
     .featured-content p {
+
       color: #6b7280;
+
       margin-bottom: 15px;
+
     }
 
     .read-button {
+
       display: inline-block;
+
       width: fit-content;
+
       background: #111;
+
       color: white;
+
       padding: 11px 18px;
+
       border-radius: 7px;
+
       font-weight: bold;
-    }
 
-    .meta {
-      color: #9ca3af;
-      font-size: 12px;
-      margin-bottom: 15px;
     }
-
-    /* SECTIONS */
 
     .section {
+
       margin-top: 35px;
-    }
 
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      border-bottom: 3px solid #111;
-      padding-bottom: 8px;
-    }
-
-    .section-heading h2 {
-      font-size: 23px;
     }
 
     .view-all {
+
       font-size: 13px;
+
       font-weight: bold;
+
     }
 
-    /* ARTICLES */
-
     .articles {
+
       display: grid;
+
       grid-template-columns: repeat(3, 1fr);
+
       gap: 18px;
+
     }
 
     .card {
+
       background: white;
+
       border-radius: 12px;
+
       overflow: hidden;
+
       box-shadow: 0 2px 10px rgba(0,0,0,.07);
+
       transition: .2s;
+
     }
 
     .card:hover {
+
       transform: translateY(-3px);
+
     }
 
     .card-image,
+
     .placeholder-image {
+
       width: 100%;
+
       height: 190px;
+
       object-fit: cover;
+
       background: #e5e7eb;
+
     }
 
     .placeholder-image {
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       font-size: 45px;
+
     }
 
     .card-body {
+
       padding: 16px;
+
     }
 
     .card h3 {
+
       font-size: 18px;
+
       line-height: 1.35;
+
       margin: 9px 0;
+
     }
 
     .card h3 a:hover {
+
       text-decoration: underline;
+
     }
 
     .card p {
+
       color: #6b7280;
+
       font-size: 14px;
+
     }
 
     .date {
+
       color: #9ca3af;
+
       font-size: 12px;
+
       margin-top: 9px;
+
     }
 
-    /* SEARCH RESULTS */
-
     #searchResults {
+
       margin-top: 25px;
+
     }
 
     .search-title {
+
       margin-bottom: 15px;
+
       font-size: 22px;
+
     }
 
-    /* EMPTY / ERROR */
-
     .message {
+
       background: white;
+
       padding: 30px;
+
       text-align: center;
+
       border-radius: 12px;
+
       color: #6b7280;
+
       grid-column: 1 / -1;
+
     }
 
     .error-message {
+
       color: #991b1b;
+
       background: #fee2e2;
+
     }
 
-    /* CATEGORIES */
-
     .categories {
+
       display: grid;
+
       grid-template-columns: repeat(6, 1fr);
+
       gap: 12px;
+
     }
 
     .category-box {
+
       background: white;
+
       padding: 18px 8px;
+
       text-align: center;
+
       border-radius: 10px;
+
       font-weight: bold;
+
       box-shadow: 0 2px 8px rgba(0,0,0,.06);
+
     }
 
     .category-box:hover {
+
       background: #111;
+
       color: white;
+
     }
 
-    /* MUSIC */
-
     .music-box {
+
       background: #111;
+
       color: white;
+
       border-radius: 14px;
+
       padding: 35px;
+
       margin-top: 35px;
+
       text-align: center;
+
     }
 
     .music-box h2 {
+
       margin-bottom: 8px;
+
     }
 
     .music-box p {
+
       color: #d1d5db;
+
       margin-bottom: 18px;
+
     }
 
     .music-buttons {
+
       display: flex;
+
       justify-content: center;
+
       gap: 12px;
+
       flex-wrap: wrap;
+
+    }
+
+    .music-button,
+
+    .music-upload-small {
+
+      display: inline-block;
+
+      padding: 11px 20px;
+
+      border-radius: 7px;
+
+      font-weight: bold;
+
     }
 
     .music-button {
-      display: inline-block;
+
       background: white;
+
       color: #111;
-      padding: 11px 20px;
-      border-radius: 7px;
-      font-weight: bold;
+
     }
 
     .music-upload-small {
-      display: inline-block;
-      background: #16a34a;
-      color: white;
-      padding: 11px 20px;
-      border-radius: 7px;
-      font-weight: bold;
-    }
 
-    /* ADVERTISEMENT */
+      background: #16a34a;
+
+      color: white;
+
+    }
 
     .ad-box {
+
       margin-top: 35px;
+
       background: white;
+
       border: 2px dashed #d1d5db;
+
       min-height: 120px;
+
       border-radius: 12px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       color: #9ca3af;
+
       text-align: center;
+
       padding: 20px;
+
     }
 
-    /* FOOTER */
-
     footer {
+
       background: #111;
+
       color: white;
+
       text-align: center;
+
       padding: 35px 15px;
+
     }
 
     footer p {
-      color: #bbb;
-      margin-top: 8px;
-      font-size: 14px;
-    }
 
-    /* MOBILE */
+      color: #bbb;
+
+      margin-top: 8px;
+
+      font-size: 14px;
+
+    }
 
     @media (max-width: 850px) {
 
       .header-inner {
+
         flex-direction: column;
+
         text-align: center;
+
       }
 
       .featured-card {
+
         grid-template-columns: 1fr;
+
       }
 
-      .featured-image,
-      .featured-placeholder {
+      .featured-image {
+
         height: 280px;
+
       }
 
       .featured-content h2 {
+
         font-size: 26px;
+
       }
 
       .articles {
+
         grid-template-columns: repeat(2, 1fr);
+
       }
 
       .categories {
+
         grid-template-columns: repeat(3, 1fr);
+
       }
+
     }
 
     @media (max-width: 600px) {
 
       header {
+
         padding: 22px 12px;
+
       }
 
       .brand h1 {
-        font-size: 24px;
-      }
 
-      .brand p {
-        font-size: 14px;
+        font-size: 24px;
+
       }
 
       .publish-buttons {
+
         width: 100%;
+
         flex-direction: column;
+
       }
 
       .publish-button,
+
       .music-upload-button {
+
         width: 100%;
+
       }
 
       nav {
+
         justify-content: flex-start;
+
       }
 
       .search-form {
+
         flex-direction: column;
+
       }
 
       .search-form button {
+
         height: 45px;
+
       }
 
-      .featured-image,
-      .featured-placeholder {
+      .featured-image {
+
         height: 220px;
+
       }
 
       .featured-content {
+
         padding: 22px;
+
       }
 
       .featured-content h2 {
+
         font-size: 23px;
+
       }
 
       .articles {
+
         grid-template-columns: 1fr;
+
       }
 
       .categories {
+
         grid-template-columns: repeat(2, 1fr);
+
       }
 
-      .card-image,
-      .placeholder-image {
+      .card-image {
+
         height: 210px;
+
       }
 
       .music-buttons {
+
         flex-direction: column;
+
       }
 
       .music-button,
+
       .music-upload-small {
+
         width: 100%;
+
       }
+
     }
+
   </style>
+
 </head>
 
 <body>
 
-  <!-- HEADER -->
+<header>
 
-  <header>
+  <div class="header-inner">
 
-    <div class="header-inner">
+    <div class="brand">
 
-      <div class="brand">
-
-        <h1>BENUE24/7 TRENDING GISTS</h1>
-
-        <p>
-          Your home for Benue news, entertainment, sports, politics & music
-        </p>
-
-      </div>
-
-      <div class="publish-buttons">
-
-        <a
-          href="publish.html"
-          class="publish-button"
-        >
-          ✍️ Publish Story
-        </a>
-
-        <a
-          href="upload.html"
-          class="music-upload-button"
-        >
-          🎵 Upload Music
-        </a>
-
-      </div>
-
-    </div>
-
-  </header>
-
-
-  <!-- NAVIGATION -->
-
-  <nav>
-
-    <a href="index.html" class="active">
-      Home
-    </a>
-
-    <a href="#news">
-      News
-    </a>
-
-    <a href="#trending">
-      Trending
-    </a>
-
-    <a href="#entertainment">
-      Entertainment
-    </a>
-
-    <a href="#sports">
-      Sports
-    </a>
-
-    <a href="#politics">
-      Politics
-    </a>
-
-    <a href="music.html">
-      Music
-    </a>
-
-  </nav>
-
-
-  <main>
-
-    <!-- BREAKING -->
-
-    <div class="breaking">
-
-      <span>🔴 BREAKING</span>
-
-      <span id="breakingText">
-        Welcome to Benue24/7 Trending Gists
-      </span>
-
-    </div>
-
-
-    <!-- SEARCH -->
-
-    <section class="search-box">
-
-      <form
-        class="search-form"
-        id="searchForm"
-      >
-
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="🔎 Search Benue24/7 Trending Gists..."
-          autocomplete="off"
-        >
-
-        <button type="submit">
-          Search
-        </button>
-
-      </form>
-
-    </section>
-
-
-    <!-- SEARCH RESULTS -->
-
-    <section
-      id="searchResults"
-      style="display:none;"
-    >
-
-      <h2 class="search-title">
-        🔎 Search Results
-      </h2>
-
-      <div
-        id="searchArticles"
-        class="articles"
-      ></div>
-
-    </section>
-
-
-    <!-- FEATURED -->
-
-    <section class="featured">
-
-      <div class="featured-heading">
-
-        <h2>
-          🔥 Featured Story
-        </h2>
-
-      </div>
-
-      <div id="featuredStory">
-
-        <div class="message">
-          Loading featured story...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- NEWS -->
-
-    <section
-      class="section"
-      id="news"
-    >
-
-      <div class="section-heading">
-
-        <h2>
-          📰 Latest News
-        </h2>
-
-        <a
-          href="#news"
-          class="view-all"
-        >
-          View All →
-        </a>
-
-      </div>
-
-      <div
-        id="latestNews"
-        class="articles"
-      >
-
-        <div class="message">
-          Loading latest news...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- TRENDING -->
-
-    <section
-      class="section"
-      id="trending"
-    >
-
-      <div class="section-heading">
-
-        <h2>
-          🔥 Trending Gists
-        </h2>
-
-      </div>
-
-      <div
-        id="trendingNews"
-        class="articles"
-      >
-
-        <div class="message">
-          Loading trending stories...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ENTERTAINMENT -->
-
-    <section
-      class="section"
-      id="entertainment"
-    >
-
-      <div class="section-heading">
-
-        <h2>
-          🎬 Entertainment
-        </h2>
-
-      </div>
-
-      <div
-        id="entertainmentNews"
-        class="articles"
-      >
-
-        <div class="message">
-          Loading entertainment...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SPORTS -->
-
-    <section
-      class="section"
-      id="sports"
-    >
-
-      <div class="section-heading">
-
-        <h2>
-          ⚽ Sports
-        </h2>
-
-      </div>
-
-      <div
-        id="sportsNews"
-        class="articles"
-      >
-
-        <div class="message">
-          Loading sports...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- POLITICS -->
-
-    <section
-      class="section"
-      id="politics"
-    >
-
-      <div class="section-heading">
-
-        <h2>
-          🏛️ Politics
-        </h2>
-
-      </div>
-
-      <div
-        id="politicsNews"
-        class="articles"
-      >
-
-        <div class="message">
-          Loading politics...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CATEGORIES -->
-
-    <section class="section">
-
-      <div class="section-heading">
-
-        <h2>
-          📂 Categories
-        </h2>
-
-      </div>
-
-      <div class="categories">
-
-        <a
-          href="#news"
-          class="category-box"
-        >
-          📰 News
-        </a>
-
-        <a
-          href="#trending"
-          class="category-box"
-        >
-          🔥 Trending
-        </a>
-
-        <a
-          href="#entertainment"
-          class="category-box"
-        >
-          🎬 Entertainment
-        </a>
-
-        <a
-          href="#sports"
-          class="category-box"
-        >
-          ⚽ Sports
-        </a>
-
-        <a
-          href="#politics"
-          class="category-box"
-        >
-          🏛️ Politics
-        </a>
-
-        <a
-          href="music.html"
-          class="category-box"
-        >
-          🎵 Music
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- MUSIC -->
-
-    <section class="music-box">
-
-      <h2>
-        🎵 Latest Music
-      </h2>
+      <h1>BENUE24/7 TRENDING GISTS</h1>
 
       <p>
-        Listen to the latest music from Benue artists and beyond.
+
+        Your home for Benue news, entertainment, sports, politics & music
+
       </p>
 
-      <div class="music-buttons">
+    </div>
 
-        <a
-          href="music.html"
-          class="music-button"
-        >
-          🎧 Open Music →
-        </a>
+    <div class="publish-buttons">
 
-        <a
-          href="upload-music.html"
-          class="music-upload-small"
-        >
-          🎵 Upload Music
-        </a>
+      <a href="publish.html" class="publish-button">
+
+        ✍️ Publish Story
+
+      </a>
+
+      <a href="upload.html" class="music-upload-button">
+
+        🎵 Upload Music
+
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+<nav>
+
+  <a href="index.html" class="active">Home</a>
+
+  <a href="#news">News</a>
+
+  <a href="#trending">Trending</a>
+
+  <a href="#entertainment">Entertainment</a>
+
+  <a href="#sports">Sports</a>
+
+  <a href="#politics">Politics</a>
+
+  <a href="music.html">Music</a>
+
+</nav>
+
+<main>
+
+  <div class="breaking">
+
+    <span>🔴 BREAKING</span>
+
+    <span id="breakingText">
+
+      Welcome to Benue24/7 Trending Gists
+
+    </span>
+
+  </div>
+
+  <section class="search-box">
+
+    <form class="search-form" id="searchForm">
+
+      <input
+
+        type="search"
+
+        id="searchInput"
+
+        placeholder="🔎 Search Benue24/7 Trending Gists..."
+
+        autocomplete="off"
+
+      >
+
+      <button type="submit">
+
+        Search
+
+      </button>
+
+    </form>
+
+  </section>
+
+  <section id="searchResults" style="display:none;">
+
+    <h2 class="search-title">
+
+      🔎 Search Results
+
+    </h2>
+
+    <div id="searchArticles" class="articles"></div>
+
+  </section>
+
+  <section class="featured">
+
+    <div class="featured-heading">
+
+      <h2>🔥 Featured Story</h2>
+
+    </div>
+
+    <div id="featuredStory">
+
+      <div class="message">
+
+        Loading featured story...
 
       </div>
 
-    </section>
+    </div>
 
+  </section>
 
-    <!-- ADVERTISEMENT -->
+  <section class="section" id="news">
 
-    <section class="ad-box">
+    <div class="section-heading">
 
-      <div>
+      <h2>📰 Latest News</h2>
 
-        <strong>
-          📢 Advertisement Space
-        </strong>
+      <a href="#news" class="view-all">
 
-        <br>
+        View All →
 
-        <small>
-          Your business can advertise here.
-        </small>
+      </a>
+
+    </div>
+
+    <div id="latestNews" class="articles">
+
+      <div class="message">
+
+        Loading latest news...
 
       </div>
 
-    </section>
+    </div>
 
-  </main>
+  </section>
 
+  <section class="section" id="trending">
 
-  <!-- FOOTER -->
+    <div class="section-heading">
 
-  <footer>
+      <h2>🔥 Trending Gists</h2>
 
-    <h3>
-      BENUE24/7 TRENDING GISTS
-    </h3>
+    </div>
+
+    <div id="trendingNews" class="articles">
+
+      <div class="message">
+
+        Loading trending stories...
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section" id="entertainment">
+
+    <div class="section-heading">
+
+      <h2>🎬 Entertainment</h2>
+
+    </div>
+
+    <div id="entertainmentNews" class="articles">
+
+      <div class="message">
+
+        Loading entertainment...
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section" id="sports">
+
+    <div class="section-heading">
+
+      <h2>⚽ Sports</h2>
+
+    </div>
+
+    <div id="sportsNews" class="articles">
+
+      <div class="message">
+
+        Loading sports...
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section" id="politics">
+
+    <div class="section-heading">
+
+      <h2>🏛️ Politics</h2>
+
+    </div>
+
+    <div id="politicsNews" class="articles">
+
+      <div class="message">
+
+        Loading politics...
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="section-heading">
+
+      <h2>📂 Categories</h2>
+
+    </div>
+
+    <div class="categories">
+
+      <a href="#news" class="category-box">
+
+        📰 News
+
+      </a>
+
+      <a href="#trending" class="category-box">
+
+        🔥 Trending
+
+      </a>
+
+      <a href="#entertainment" class="category-box">
+
+        🎬 Entertainment
+
+      </a>
+
+      <a href="#sports" class="category-box">
+
+        ⚽ Sports
+
+      </a>
+
+      <a href="#politics" class="category-box">
+
+        🏛️ Politics
+
+      </a>
+
+      <a href="music.html" class="category-box">
+
+        🎵 Music
+
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="music-box">
+
+    <h2>🎵 Latest Music</h2>
 
     <p>
-      News • Trending Gists • Entertainment • Sports • Politics • Music
+
+      Listen to the latest music from Benue artists and beyond.
+
     </p>
 
-    <p>
-      © 2026 Benue24/7 Trending Gists
-    </p>
+    <div class="music-buttons">
 
-  </footer>
+      <a href="music.html" class="music-button">
 
+        🎧 Open Music →
 
-  <!-- SUPABASE -->
+      </a>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <a href="upload.html" class="music-upload-small">
 
-  <script src="config.js"></script>
+        🎵 Upload Music
 
-  <script>
+      </a>
 
-    let supabaseClient = null;
-    let allArticles = [];
+    </div>
 
+  </section>
 
-    /* ================================
-       SUPABASE CONNECTION
-    ================================= */
+  <section class="ad-box">
 
-    try {
+    <div>
 
-      if (
-        typeof SUPABASE_URL !== "undefined" &&
-        typeof SUPABASE_ANON_KEY !== "undefined"
-      ) {
+      <strong>
 
-        supabaseClient =
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          );
+        📢 Advertisement Space
 
-      }
+      </strong>
 
-    } catch (error) {
+      <br>
 
-      console.error(
-        "Supabase connection error:",
-        error
-      );
+      <small>
 
-    }
+        Your business can advertise here.
 
+      </small>
 
-    /* ================================
-       ESCAPE HTML
-    ================================= */
+    </div>
 
-    function escapeHTML(value) {
+  </section>
 
-      return String(value || "")
+</main>
 
-        .replace(/&/g, "&amp;")
+<footer>
 
-        .replace(/</g, "&lt;")
+  <h3>
 
-        .replace(/>/g, "&gt;")
+    BENUE24/7 TRENDING GISTS
 
-        .replace(/"/g, "&quot;")
+  </h3>
 
-        .replace(/'/g, "&#039;");
+  <p>
 
-    }
+    News • Trending Gists • Entertainment • Sports • Politics • Music
 
+  </p>
 
-    /* ================================
-       SHOW MESSAGE
-    ================================= */
+  <p>
 
-    function showMessage(
-      elementId,
-      message
+    © 2026 Benue24/7 Trending Gists
+
+  </p>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+<script>
+
+  let supabaseClient = null;
+
+  let allArticles = [];
+
+  /* ================================
+
+     SUPABASE CONNECTION
+
+  ================================= */
+
+  try {
+
+    if (
+
+      typeof SUPABASE_URL !== "undefined" &&
+
+      typeof SUPABASE_ANON_KEY !== "undefined" &&
+
+      window.supabase
+
     ) {
 
-      const container =
-        document.getElementById(
-          elementId
+      supabaseClient =
+
+        window.supabase.createClient(
+
+          SUPABASE_URL,
+
+          SUPABASE_ANON_KEY
+
         );
-
-      if (!container) return;
-
-      container.innerHTML = `
-        <div class="message">
-          ${message}
-        </div>
-      `;
 
     }
 
+  } catch (error) {
 
-    /* ================================
-       DISPLAY ARTICLES
-    ================================= */
+    console.error(
 
-    function displayArticles(
-      elementId,
-      articles
-    ) {
+      "Supabase connection error:",
 
-      const container =
-        document.getElementById(
-          elementId
-        );
+      error
 
-      if (!container) return;
+    );
 
+  }
 
-      container.innerHTML = "";
+  /* ================================
 
+     ESCAPE HTML
 
-      articles.forEach(function(article) {
+  ================================= */
 
-        const title =
-          article.title ||
-          article.headline ||
-          "Untitled story";
+  function escapeHTML(value) {
 
+    return String(value || "")
 
-        const description =
-          article.description ||
-          article.excerpt ||
-          "";
+      .replace(/&/g, "&amp;")
 
+      .replace(/</g, "&lt;")
 
-        const image =
-          article.image_url ||
-          article.cover_url ||
-          article.image ||
-          "";
+      .replace(/>/g, "&gt;")
 
+      .replace(/"/g, "&quot;")
 
-        const category =
-          article.category ||
-          "news";
+      .replace(/'/g, "&#039;");
 
+  }
 
-        const date =
-          article.created_at
+  /* ================================
 
-            ? new Date(
-                article.created_at
-              ).toLocaleDateString(
-                "en-GB",
-                {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric"
-                }
-              )
+     SHOW MESSAGE
 
-            : "";
+  ================================= */
 
+  function showMessage(elementId, message, error = false) {
 
-        const slug =
-          article.slug || "";
+    const container =
 
+      document.getElementById(elementId);
 
-        const link =
-          slug
+    if (!container) return;
 
-            ? "article.html?slug=" +
-              encodeURIComponent(slug)
+    container.innerHTML = `
 
-            : "article.html";
+      <div class="message ${error ? "error-message" : ""}">
 
+        ${message}
 
-        const imageHTML =
-          image
+      </div>
 
-            ? `
-              <img
-                class="card-image"
-                src="${escapeHTML(image)}"
-                alt="${escapeHTML(title)}"
-              >
-            `
+    `;
 
-            : `
-              <div
-                class="card-image"
-                style="
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-size:45px;
-                "
-              >
-                📰
-              </div>
-            `;
+  }
 
+  /* ================================
 
-        container.innerHTML += `
+     DISPLAY ARTICLES
 
-          <article class="card">
+  ================================= */
 
-            ${imageHTML}
+  function displayArticles(elementId, articles) {
 
-            <div class="card-body">
+    const container =
 
-              <span class="tag">
-                ${escapeHTML(category)}
-              </span>
+      document.getElementById(elementId);
 
-              <h3>
+    if (!container) return;
 
-                <a href="${link}">
-                  ${escapeHTML(title)}
-                </a>
+    container.innerHTML = "";
 
-              </h3>
+    if (!articles || articles.length === 0) {
 
-              ${
-                description
+      showMessage(
 
-                  ? `
-                    <p>
-                      ${escapeHTML(
-                        description
-                      )}
-                    </p>
-                  `
-
-                  : ""
-              }
-
-              ${
-                date
-
-                  ? `
-                    <div class="date">
-                      ${escapeHTML(date)}
-                    </div>
-                  `
-
-                  : ""
-              }
-
-            </div>
-
-          </article>
-
-        `;
-
-      });
-
-    }
-
-
-    /* ================================
-       LOAD ARTICLES
-    ================================= */
-
-    async function loadArticles() {
-
-      if (!supabaseClient) {
-
-        showMessage(
-          "latestNews",
-          "Supabase connection is not configured."
-        );
-
-        showMessage(
-          "trendingNews",
-          "Supabase connection is not configured."
-        );
-
-        showMessage(
-          "entertainmentNews",
-          "Supabase connection is not configured."
-        );
-
-        showMessage(
-          "sportsNews",
-          "Supabase connection is not configured."
-        );
-
-        showMessage(
-          "politicsNews",
-          "Supabase connection is not configured."
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        const result =
-          await supabaseClient
-
-            .from("article")
-
-            .select("*")
-
-            .order(
-              "created_at",
-              {
-                ascending: false
-              }
-            )
-
-            .limit(50);
-
-
-        if (result.error) {
-
-          console.error(
-            "Article loading error:",
-            result.error
-          );
-
-
-          showMessage(
-            "latestNews",
-            "Unable to load latest news."
-          );
-
-          showMessage(
-            "trendingNews",
-            "Unable to load trending stories."
-          );
-
-          showMessage(
-            "entertainmentNews",
-            "Unable to load entertainment."
-          );
-
-          showMessage(
-            "sportsNews",
-            "Unable to load sports."
-          );
-
-          showMessage(
-            "politicsNews",
-            "Unable to load politics."
-          );
-
-          return;
-
-        }
-
-
-        allArticles =
-          result.data || [];
-
-
-        if (
-          allArticles.length === 0
-        ) {
-
-          showMessage(
-            "latestNews",
-            "No news published yet."
-          );
-
-          showMessage(
-            "trendingNews",
-            "No trending stories published yet."
-          );
-
-          showMessage(
-            "entertainmentNews",
-            "No entertainment stories published yet."
-          );
-
-          showMessage(
-            "sportsNews",
-            "No sports stories published yet."
-          );
-
-          showMessage(
-            "politicsNews",
-            "No politics stories published yet."
-          );
-
-          return;
-
-        }
-
-
-        /* LATEST NEWS */
-
-        displayArticles(
-          "latestNews",
-          allArticles.slice(0, 6)
-        );
-
-
-        /* TRENDING — MOST VIEWED STORIES */
-
-const trendingArticles =
-  [...allArticles]
-    .sort(function(a, b) {
-      return (
-        (Number(b.views) || 0) -
-        (Number(a.views) || 0)
-      );
-    })
-    .slice(0, 6);
-
-displayArticles(
-  "trendingNews",
-  trendingArticles
-);
-
-
-        /* ENTERTAINMENT */
-
-        displayCategory(
-          "entertainmentNews",
-          "entertainment"
-        );
-
-
-        /* SPORTS */
-
-        displayCategory(
-          "sportsNews",
-          "sports"
-        );
-
-
-        /* POLITICS */
-
-        displayCategory(
-          "politicsNews",
-          "politics"
-        );
-
-
-        /* FEATURED */
-
-        loadFeaturedStory();
-
-      } catch (error) {
-
-        console.error(
-          "Unexpected article error:",
-          error
-        );
-
-
-        showMessage(
-          "latestNews",
-          "Something went wrong while loading news."
-        );
-
-      }
-
-    }
-
-
-    /* ================================
-       CATEGORY FILTER
-    ================================= */
-
-    function displayCategory(
-      elementId,
-      category
-    ) {
-
-      const filtered =
-        allArticles.filter(
-          function(article) {
-
-            return String(
-              article.category || ""
-            ).toLowerCase() ===
-            category.toLowerCase();
-
-          }
-        );
-
-
-      if (
-        filtered.length === 0
-      ) {
-
-        showMessage(
-          elementId,
-          "No " +
-          category +
-          " stories published yet."
-        );
-
-        return;
-
-      }
-
-
-      displayArticles(
         elementId,
-        filtered.slice(0, 3)
+
+        "No stories available yet."
+
       );
+
+      return;
 
     }
 
-
-    /* ================================
-       FEATURED STORY
-    ================================= */
-
-    function loadFeaturedStory() {
-
-      const container =
-        document.getElementById(
-          "featuredStory"
-        );
-
-
-      if (!container) return;
-
-
-      if (
-        !allArticles.length
-      ) {
-
-        container.innerHTML = `
-
-          <div class="message">
-            No featured story yet.
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      const article =
-        allArticles[0];
-
+    articles.forEach(function(article) {
 
       const title =
+
         article.title ||
+
+        article.headline ||
+
         "Untitled story";
 
-
       const description =
-        article.description ||
-        "";
 
+        article.description ||
+
+        article.excerpt ||
+
+        "";
 
       const image =
+
         article.image_url ||
+
+        article.cover_url ||
+
+        article.image ||
+
         "";
 
-
       const category =
+
         article.category ||
+
         "news";
 
+      const date =
+
+        article.created_at
+
+          ? new Date(article.created_at)
+
+              .toLocaleDateString(
+
+                "en-GB",
+
+                {
+
+                  day: "numeric",
+
+                  month: "long",
+
+                  year: "numeric"
+
+                }
+
+              )
+
+          : "";
+
+      const views =
+
+        Number(article.views) || 0;
 
       const slug =
+
         article.slug || "";
 
-
       const link =
+
         slug
 
           ? "article.html?slug=" +
+
             encodeURIComponent(slug)
 
           : "article.html";
 
-
       const imageHTML =
+
         image
 
           ? `
+
             <img
+
               class="card-image"
+
               src="${escapeHTML(image)}"
+
               alt="${escapeHTML(title)}"
+
+              loading="lazy"
+
             >
+
           `
 
           : `
+
             <div
+
               class="card-image"
+
               style="
+
                 display:flex;
+
                 align-items:center;
+
                 justify-content:center;
-                font-size:50px;
+
+                font-size:45px;
+
               "
+
             >
+
               📰
+
             </div>
+
           `;
 
-
-      container.innerHTML = `
+      container.innerHTML += `
 
         <article class="card">
 
@@ -1642,44 +1503,70 @@ displayArticles(
           <div class="card-body">
 
             <span class="tag">
+
               ${escapeHTML(category)}
+
             </span>
 
             <h3>
-              ${escapeHTML(title)}
+
+              <a href="${link}">
+
+                ${escapeHTML(title)}
+
+              </a>
+
             </h3>
 
             ${
+
               description
 
                 ? `
+
                   <p>
-                    ${escapeHTML(
-                      description
-                    )}
+
+                    ${escapeHTML(description)}
+
                   </p>
+
                 `
 
                 : ""
+
             }
 
-            <div style="margin-top:15px;">
+            ${
 
-              <a
-                href="${link}"
-                style="
-                  display:inline-block;
-                  background:#111;
-                  color:white;
-                  padding:10px 15px;
-                  border-radius:7px;
-                  font-weight:bold;
-                "
-              >
-                Read Full Story →
-              </a>
+              date
 
-            </div>
+                ? `
+
+                  <div class="date">
+
+                    ${escapeHTML(date)}
+
+                    ${
+
+                      views
+
+                        ? " • 👁️ " +
+
+                          views.toLocaleString() +
+
+                          " views"
+
+                        : ""
+
+                    }
+
+                  </div>
+
+                `
+
+                : ""
+
+            }
 
           </div>
 
@@ -1687,162 +1574,838 @@ displayArticles(
 
       `;
 
+    });
+
+  }
+
+  /* ================================
+
+     FEATURED STORY
+
+  ================================= */
+
+  function loadFeaturedStory() {
+
+    const container =
+
+      document.getElementById(
+
+        "featuredStory"
+
+      );
+
+    if (!container) return;
+
+    if (!allArticles.length) {
+
+      container.innerHTML = `
+
+        <div class="message">
+
+          No featured story yet.
+
+        </div>
+
+      `;
+
+      return;
+
     }
 
+    const article =
 
-    /* ================================
-       SEARCH
-    ================================= */
+      allArticles.find(
 
-    const searchForm =
-      document.getElementById(
-        "searchForm"
-      );
+        function(item) {
 
+          return item.featured === true;
 
-    const searchInput =
-      document.getElementById(
-        "searchInput"
-      );
+        }
 
+      ) || allArticles[0];
 
-    const searchResults =
-      document.getElementById(
-        "searchResults"
-      );
+    const title =
 
+      article.title ||
 
-    if (searchForm) {
+      "Untitled story";
 
-      searchForm.addEventListener(
-        "submit",
-        function(event) {
+    const description =
 
-          event.preventDefault();
+      article.description ||
 
+      "";
 
-          const searchTerm =
-            searchInput.value
-              .trim()
-              .toLowerCase();
+    const image =
 
+      article.image_url ||
 
-          if (!searchTerm) {
+      "";
 
-            if (searchResults) {
+    const category =
 
-              searchResults.style.display =
-                "none";
+      article.category ||
 
-            }
+      "news";
 
-            return;
+    const slug =
+
+      article.slug || "";
+
+    const views =
+
+      Number(article.views) || 0;
+
+    const link =
+
+      slug
+
+        ? "article.html?slug=" +
+
+          encodeURIComponent(slug)
+
+        : "article.html";
+
+    const imageHTML =
+
+      image
+
+        ? `
+
+          <img
+
+            class="featured-image"
+
+            src="${escapeHTML(image)}"
+
+            alt="${escapeHTML(title)}"
+
+          >
+
+        `
+
+        : `
+
+          <div
+
+            class="featured-image"
+
+            style="
+
+              display:flex;
+
+              align-items:center;
+
+              justify-content:center;
+
+              font-size:60px;
+
+            "
+
+          >
+
+            📰
+
+          </div>
+
+        `;
+
+    container.innerHTML = `
+
+      <div class="featured-card">
+
+        ${imageHTML}
+
+        <div class="featured-content">
+
+          <span class="tag">
+
+            ${escapeHTML(category)}
+
+          </span>
+
+          <h2>
+
+            ${escapeHTML(title)}
+
+          </h2>
+
+          ${
+
+            description
+
+              ? `
+
+                <p>
+
+                  ${escapeHTML(description)}
+
+                </p>
+
+              `
+
+              : ""
 
           }
 
+          <div class="meta">
+
+            ${
+
+              views
+
+                ? "👁️ " +
+
+                  views.toLocaleString() +
+
+                  " views"
+
+                : ""
+
+            }
+
+          </div>
+
+          <a
+
+            href="${link}"
+
+            class="read-button"
+
+          >
+
+            Read Full Story →
+
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  /* ================================
+
+     CATEGORY FILTER
+
+  ================================= */
+
+  function displayCategory(
+
+    elementId,
+
+    category
+
+  ) {
+
+    const filtered =
+
+      allArticles.filter(
+
+        function(article) {
+
+          return String(
+
+            article.category || ""
+
+          ).toLowerCase() ===
+
+          category.toLowerCase();
+
+        }
+
+      );
+
+    if (!filtered.length) {
+
+      showMessage(
+
+        elementId,
+
+        "No " +
+
+        category +
+
+        " stories published yet."
+
+      );
+
+      return;
+
+    }
+
+    displayArticles(
+
+      elementId,
+
+      filtered.slice(0, 3)
+
+    );
+
+  }
+
+  /* ================================
+
+     LOAD ARTICLES
+
+  ================================= */
+
+  async function loadArticles() {
+
+    if (!supabaseClient) {
+
+      showMessage(
+
+        "latestNews",
+
+        "Unable to connect to the news database.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "trendingNews",
+
+        "Unable to connect to the news database.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "entertainmentNews",
+
+        "Unable to connect to the news database.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "sportsNews",
+
+        "Unable to connect to the news database.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "politicsNews",
+
+        "Unable to connect to the news database.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "featuredStory",
+
+        "Unable to connect to the news database.",
+
+        true
+
+      );
+
+      return;
+
+    }
+
+    try {
+
+      /*
+
+        Give Supabase a maximum of 12 seconds.
+
+        This prevents the homepage from staying
+
+        on Loading forever if the network/database
+
+        does not respond.
+
+      */
+
+      const timeoutPromise =
+
+        new Promise(function(_, reject) {
+
+          setTimeout(function() {
+
+            reject(
+
+              new Error(
+
+                "Database request timed out."
+
+              )
+
+            );
+
+          }, 12000);
+
+        });
+
+      const queryPromise =
+
+        supabaseClient
+
+          .from("article")
+
+          .select("*")
+
+          .order(
+
+            "created_at",
+
+            {
+
+              ascending: false
+
+            }
+
+          )
+
+          .limit(50);
+
+      const result =
+
+        await Promise.race([
+
+          queryPromise,
+
+          timeoutPromise
+
+        ]);
+
+      if (result.error) {
+
+        console.error(
+
+          "Article loading error:",
+
+          result.error
+
+        );
+
+        throw result.error;
+
+      }
+
+      allArticles =
+
+        result.data || [];
+
+      if (!allArticles.length) {
+
+        showMessage(
+
+          "latestNews",
+
+          "No news published yet."
+
+        );
+
+        showMessage(
+
+          "trendingNews",
+
+          "No trending stories published yet."
+
+        );
+
+        showMessage(
+
+          "entertainmentNews",
+
+          "No entertainment stories published yet."
+
+        );
+
+        showMessage(
+
+          "sportsNews",
+
+          "No sports stories published yet."
+
+        );
+
+        showMessage(
+
+          "politicsNews",
+
+          "No politics stories published yet."
+
+        );
+
+        loadFeaturedStory();
+
+        return;
+
+      }
+
+      /* LATEST NEWS */
+
+      displayArticles(
+
+        "latestNews",
+
+        allArticles.slice(0, 6)
+
+      );
+
+      /* TRENDING — MOST VIEWED */
+
+      const trendingArticles =
+
+        [...allArticles]
+
+          .sort(function(a, b) {
+
+            return (
+
+              (Number(b.views) || 0) -
+
+              (Number(a.views) || 0)
+
+            );
+
+          })
+
+          .slice(0, 6);
+
+      displayArticles(
+
+        "trendingNews",
+
+        trendingArticles
+
+      );
+
+      /* ENTERTAINMENT */
+
+      displayCategory(
+
+        "entertainmentNews",
+
+        "entertainment"
+
+      );
+
+      /* SPORTS */
+
+      displayCategory(
+
+        "sportsNews",
+
+        "sports"
+
+      );
+
+      /* POLITICS */
+
+      displayCategory(
+
+        "politicsNews",
+
+        "politics"
+
+      );
+
+      /* FEATURED */
+
+      loadFeaturedStory();
+
+      /* BREAKING TEXT */
+
+      if (allArticles[0]) {
+
+        const breakingTitle =
+
+          allArticles[0].title ||
+
+          "";
+
+        const breakingElement =
+
+          document.getElementById(
+
+            "breakingText"
+
+          );
+
+        if (
+
+          breakingElement &&
+
+          breakingTitle
+
+        ) {
+
+          breakingElement.textContent =
+
+            breakingTitle;
+
+        }
+
+      }
+
+    } catch (error) {
+
+      console.error(
+
+        "Unexpected article error:",
+
+        error
+
+      );
+
+      showMessage(
+
+        "latestNews",
+
+        "Unable to load news. Please refresh the page.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "trendingNews",
+
+        "Unable to load trending stories. Please refresh.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "entertainmentNews",
+
+        "Unable to load entertainment stories.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "sportsNews",
+
+        "Unable to load sports stories.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "politicsNews",
+
+        "Unable to load politics stories.",
+
+        true
+
+      );
+
+      showMessage(
+
+        "featuredStory",
+
+        "Unable to load the featured story.",
+
+        true
+
+      );
+
+    }
+
+  }
+
+  /* ================================
+
+     SEARCH
+
+  ================================= */
+
+  const searchForm =
+
+    document.getElementById(
+
+      "searchForm"
+
+    );
+
+  const searchInput =
+
+    document.getElementById(
+
+      "searchInput"
+
+    );
+
+  const searchResults =
+
+    document.getElementById(
+
+      "searchResults"
+
+    );
+
+  if (searchForm) {
+
+    searchForm.addEventListener(
+
+      "submit",
+
+      function(event) {
+
+        event.preventDefault();
+
+        const searchTerm =
+
+          searchInput.value
+
+            .trim()
+
+            .toLowerCase();
+
+        if (!searchTerm) {
 
           if (searchResults) {
 
             searchResults.style.display =
-              "block";
+
+              "none";
 
           }
 
-
-          const matches =
-            allArticles.filter(
-              function(article) {
-
-                const title =
-                  String(
-                    article.title || ""
-                  ).toLowerCase();
-
-
-                const description =
-                  String(
-                    article.description || ""
-                  ).toLowerCase();
-
-
-                const story =
-                  String(
-                    article.story || ""
-                  ).toLowerCase();
-
-
-                const category =
-                  String(
-                    article.category || ""
-                  ).toLowerCase();
-
-
-                return (
-
-                  title.includes(
-                    searchTerm
-                  )
-
-                  ||
-
-                  description.includes(
-                    searchTerm
-                  )
-
-                  ||
-
-                  story.includes(
-                    searchTerm
-                  )
-
-                  ||
-
-                  category.includes(
-                    searchTerm
-                  )
-
-                );
-
-              }
-            );
-
-
-          if (
-            matches.length === 0
-          ) {
-
-            showMessage(
-              "searchArticles",
-              'No stories found for "' +
-              escapeHTML(
-                searchInput.value.trim()
-              ) +
-              '".'
-            );
-
-            return;
-
-          }
-
-
-          displayArticles(
-            "searchArticles",
-            matches
-          );
+          return;
 
         }
-      );
 
-    }
+        if (searchResults) {
 
+          searchResults.style.display =
 
-    /* ================================
-       START WEBSITE
-    ================================= */
+            "block";
 
-    loadArticles();
+        }
 
-  </script>
+        const matches =
+
+          allArticles.filter(
+
+            function(article) {
+
+              const title =
+
+                String(
+
+                  article.title || ""
+
+                ).toLowerCase();
+
+              const description =
+
+                String(
+
+                  article.description || ""
+
+                ).toLowerCase();
+
+              const story =
+
+                String(
+
+                  article.story ||
+
+                  article.content ||
+
+                  ""
+
+                ).toLowerCase();
+
+              const category =
+
+                String(
+
+                  article.category || ""
+
+                ).toLowerCase();
+
+              return (
+
+                title.includes(searchTerm) ||
+
+                description.includes(searchTerm) ||
+
+                story.includes(searchTerm) ||
+
+                category.includes(searchTerm)
+
+              );
+
+            }
+
+          );
+
+        if (!matches.length) {
+
+          showMessage(
+
+            "searchArticles",
+
+            'No stories found for "' +
+
+            escapeHTML(
+
+              searchInput.value.trim()
+
+            ) +
+
+            '".'
+
+          );
+
+          return;
+
+        }
+
+        displayArticles(
+
+          "searchArticles",
+
+          matches
+
+        );
+
+      }
+
+    );
+
+  }
+
+  /* ================================
+
+     START WEBSITE
+
+  ================================= */
+
+  loadArticles();
+
+</script>
 
 </body>
+
 </html>
